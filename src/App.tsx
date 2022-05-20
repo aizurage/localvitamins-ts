@@ -18,8 +18,9 @@ function App() {
         <Group position="center">
           <Button
             className="app"
-            component="a"
-            href="https://forms.gle/4N7M3BcZf4k2ffQj6"
+            component={Link}
+            to="/register"
+            color="lime"
           >
           ユーザー登録</Button> {" "}
 

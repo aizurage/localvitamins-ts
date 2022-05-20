@@ -5,6 +5,7 @@ import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
+import Register from './routes/register';
 import Login from './routes/login';
 import Eventlist from './routes/eventlist';
 import Eventdetail from './routes/eventdetail';
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="eventlist" element={<Eventlist />} />
         <Route path="eventdetail/:eventNumber" element={<Eventdetail />}/>
         <Route

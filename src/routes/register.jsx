@@ -1,12 +1,12 @@
 import { TextInput, Button, Group, PasswordInput, Space, Text, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';
 import {useState} from 'react';
 
-export default function Login() {
+export default function Register() {
   const form = useForm({
     initialValues: {
       email: '',
@@ -19,14 +19,12 @@ export default function Login() {
   });
 
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const submit = async (values) => {
     try {
       setLoading(true)
-      const { error, user } = await supabase.auth.signIn( values )
+      const { error } = await supabase.auth.signUp( values )
       if (error) throw error
-      console.log(user);
-      navigate('/eventlist');
+      alert('Check your email for the login link!')
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {
