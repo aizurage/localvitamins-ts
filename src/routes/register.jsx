@@ -22,7 +22,18 @@ export default function Register() {
   const submit = async (values) => {
     try {
       setLoading(true)
-      const { error } = await supabase.auth.signUp( values )
+      const { user, session, error } = await supabase.auth.signUp(
+        {
+          email: 'example@email.com',
+          password: 'example-password',
+        },
+        {
+          data: {
+            name: 'John',
+            age: 27,
+          }
+        }
+      )
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error) {
