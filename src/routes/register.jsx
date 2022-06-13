@@ -11,6 +11,7 @@ export default function Register() {
     initialValues: {
       email: '',
       password: '',
+      username: '',
     },
 
     validate: {
@@ -18,22 +19,20 @@ export default function Register() {
     },
   });
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const submit = async (values) => {
     try {
       setLoading(true)
       const { user, session, error } = await supabase.auth.signUp(
         {
-          email: 'example@email.com',
-          password: 'example-password',
+          email: values.email,
+          password: values.password,
         },
         {
-          data: {
-            name: 'John',
-            age: 27,
-          }
+          username: values.username,
         }
       )
+      console.log(form.password);
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error) {
@@ -48,6 +47,15 @@ export default function Register() {
       <div>
         <LoadingOverlay visible={loading} />
         <form onSubmit={form.onSubmit(submit)}>
+          <TextInput
+            required
+            label="Username"
+            placeholder='ユーザーネーム'
+            margin="center"
+            style={{width: 500}}
+            {...form.getInputProps('username')}
+          />
+          <Space h="xl" />
           <TextInput
             required
             label="メールアドレス"
