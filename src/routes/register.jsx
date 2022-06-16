@@ -4,7 +4,7 @@ import { At } from 'tabler-icons-react';
 import { Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';
-import {useState} from 'react';
+import { useState } from 'react';
 
 export default function Register() {
   const form = useForm({

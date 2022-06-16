@@ -1,12 +1,10 @@
-import { Input, Card, Image, Text, TextInput, Badge, Button, Group, Spoiler, Box, Space, Container, Modal, Center, useMantineTheme } from '@mantine/core';
-import { getEventdata } from '../store/eventdata';
-import { Link, Outlet } from 'react-router-dom';
-import Eventdetail from './eventdetail';
+import { Input, Card, Image, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
+import { Link } from 'react-router-dom';
+//import Eventdetail from './eventdetail';
 import { useState, useEffect } from 'react';
 import { At } from 'tabler-icons-react';
+import { supabase } from '../supabaseClient';
 
-//const Tabletop = require('tabletop');
-const sheeturl = '11draBzsK_2k_3yUjNr1hPq2X9C3FI-BunzSS2yHeV4o';
 
 function Makingcard(row){
   const theme = useMantineTheme();
@@ -16,8 +14,10 @@ function Makingcard(row){
     ? theme.colors.dark[1]
     : theme.colors.gray[7];
 
+    console.log(row);
+
   return (
-    <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.number}>
+    <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.page_id}>
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Image src={row.picture} height={160} alt={row.title} />
@@ -40,7 +40,7 @@ function Makingcard(row){
           color="blue"
           fullWidth style={{ marginTop: 14 }}
           component={Link}
-          to={`/eventdetail/${row.number}`}
+          to={`/eventdetail/${row.page_id}`}
           >
           詳細を見る
         </Button>
@@ -85,14 +85,23 @@ function Makingcard(row){
   );
 }
 
-export default function Eventlist(){
-  const elements = getEventdata();
-  /*const [datas, setDatas] = useState([]);
-  useEffect( () => {
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/1B2qTIlcvE5_n3GUzK9jXKqLe1Nn6FFZP4W8E-1jkgWM/values/eventdatas?key=AIzaSyC_izW71G2zwyw7PXptP3jnRfv4AOzgBRg`)
-      .then(res => res.json())
-      .then(datas => setDatas(datas.values))
-  }, [])*/
+export default function Eventlist()
+{
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        let { data, error } = await supabase.from('EventTable').select()
+        setEvents(data)
+        if(error) throw error
+      } catch (error) {
+        alert(error.error_description || error.message)
+      }    
+    }
+    getData()
+  });
+
   return(
     <div>
       <h2>企画検索</h2>
@@ -117,7 +126,7 @@ export default function Eventlist(){
             padding: "1rem",
           }}
         >
-          {elements.map((row) => (Makingcard(row)))}
+          {events.map((row) => (Makingcard(row)))}
         </nav>
       </div>
     </div>
