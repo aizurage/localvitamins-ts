@@ -1,7 +1,7 @@
 import { Input, Card, Image, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 //import Eventdetail from './eventdetail';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
@@ -84,14 +84,12 @@ function Makingcard(row){
 
 export default function Eventlist()
 {
-  const [events, setEvents] = useState([]);
+  let [events, setEvents] = useState([]);
 
   useEffect(() => {
     function setallEvents(datas){
       console.log(datas);
-      setEvents((datas) => {
-        events = Object.entries(datas);
-      });
+      setEvents(Object.entries(datas))
     }
     const getData = async () => {
       let { data, error } = await supabase.from('EventTable').select()
@@ -99,7 +97,7 @@ export default function Eventlist()
     }
     getData()
     console.log(events);
-  }, []);
+  }, [events]);
 
   return(
     <div>
