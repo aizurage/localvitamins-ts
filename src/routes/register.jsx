@@ -23,7 +23,7 @@ export default function Register() {
   const submit = async (values) => {
     try {
       setLoading(true)
-      const { user, session, error } = await supabase.auth.signUp(
+      const { error } = await supabase.auth.signUp(
         {
           email: values.email,
           password: values.password,

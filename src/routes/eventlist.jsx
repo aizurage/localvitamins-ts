@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
-
 function Makingcard(row){
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
@@ -13,8 +12,6 @@ function Makingcard(row){
   const secondaryColor = theme.colorScheme === 'light'
     ? theme.colors.dark[1]
     : theme.colors.gray[7];
-
-    console.log(row);
 
   return (
     <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.page_id}>
@@ -90,20 +87,27 @@ export default function Eventlist()
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    function setallEvents(datas){
+      console.log(datas);
+      setEvents((datas) => {
+        events = Object.entries(datas);
+      });
+    }
     const getData = async () => {
-      try {
-        let { data, error } = await supabase.from('EventTable').select()
-        setEvents(data)
-        if(error) throw error
-      } catch (error) {
-        alert(error.error_description || error.message)
-      }    
+      let { data, error } = await supabase.from('EventTable').select()
+      setallEvents(data);
     }
     getData()
-  });
+    console.log(events);
+  }, []);
 
   return(
     <div>
+      <div>
+        <button className="button block" onClick={() => supabase.auth.signOut()}>
+          サインアウト
+        </button>
+      </div>
       <h2>企画検索</h2>
       <Group position="left">
         <Input
