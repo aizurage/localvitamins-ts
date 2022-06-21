@@ -5,10 +5,8 @@ import React, { useState, useEffect } from 'react';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
-function Makingcard(row){
-  const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
-
+function Makingcard(row, theme, opened, setOpened){
+  
   const secondaryColor = theme.colorScheme === 'light'
     ? theme.colors.dark[1]
     : theme.colors.gray[7];
@@ -84,20 +82,17 @@ function Makingcard(row){
 
 export default function Eventlist()
 {
-  let [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]);
+  const theme = useMantineTheme();
+  const [opened, setOpened] = useState(false);
 
   useEffect(() => {
-    function setallEvents(datas){
-      console.log(datas);
-      setEvents(Object.entries(datas))
-    }
     const getData = async () => {
       let { data, error } = await supabase.from('EventTable').select()
-      setallEvents(data);
+      setEvents(data);
     }
     getData()
-    console.log(events);
-  }, [events]);
+  }, []);
 
   return(
     <div>
@@ -128,7 +123,7 @@ export default function Eventlist()
             padding: "1rem",
           }}
         >
-          {events.map((row) => (Makingcard(row)))}
+          {events.map((row) => (Makingcard(row, theme, opened, setOpened)))}
         </nav>
       </div>
     </div>
