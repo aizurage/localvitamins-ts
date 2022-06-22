@@ -1,7 +1,5 @@
 import { TextInput, Button, Group, PasswordInput, Space, Text, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { At } from 'tabler-icons-react';
-import { Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';
 import { useState } from 'react';

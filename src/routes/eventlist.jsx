@@ -1,7 +1,6 @@
 import { Input, Card, Image, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
-//import Eventdetail from './eventdetail';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
@@ -109,9 +108,9 @@ export default function Eventlist()
         />
         <Button
           style={{width: 200}}
-          component="a"
           color="pink"
-          href="https://forms.gle/7CRJ6ANF9UX53AiL6"
+          component={Link}
+          to={`/eventmaker`}
         >
         お手伝い作成</Button>
       </Group>

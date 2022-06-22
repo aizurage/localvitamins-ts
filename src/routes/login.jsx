@@ -43,6 +43,7 @@ export default function Login() {
             required
             label="メールアドレス"
             placeholder="your@email.com"
+            icon={<At />}
             margin="center"
             style={{width: 500}}
             {...form.getInputProps('email')}
