@@ -1,10 +1,12 @@
 import { Input, Card, Image, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
-function Makingcard(row, theme, opened, setOpened){
+
+function Makingcard(row, theme, open){
   
   const secondaryColor = theme.colorScheme === 'light'
     ? theme.colors.dark[1]
@@ -43,37 +45,9 @@ function Makingcard(row, theme, opened, setOpened){
           variant="light"
           color="indigo"
           fullWidth style={{ marginTop: 14 }}
-          onClick={ () => { setOpened(true) } }
+          onClick={ () => open(row.id, row.title) }
           >参加する
         </Button>
-
-        <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          title={row.title}
-        >
-            <p>以下の情報を主催者に送信して、参加申請をします。</p>
-            <Group>
-              <TextInput style={{width:170}} label="姓" required/>
-              <TextInput style={{width:170}} label="名" required/>
-            </Group>
-            <TextInput
-              icon={<At />}
-              style={{top: 20}}
-              label="メールアドレス"
-              required
-            />
-            <Center>
-              <Button
-                type="submit"
-                color="red"
-                style={{top:20}}
-                onClick={() => setOpened(false)}
-              >送信
-              </Button>
-            </Center>
-        </Modal>
-
       </Card>
     </div>
   );
@@ -84,6 +58,39 @@ export default function Eventlist()
   const [events, setEvents] = useState([]);
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const [event, setEvent] = useState('');
+
+  const form = useForm({
+    initialValues: {
+      email: '',
+      firstname: '',
+      familyname: '',
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+    },
+  });
+
+  
+  const submit = async (values) => {
+    try {
+      const { error } = await supabase.from("Participants").insert([{
+        eventID: event.eventID,
+        eventTitle: event.eventTitle,
+        firstname: values.firstname,
+        familyname: values.familyname,
+        email: values.email,
+      }])
+      if (error) {
+        alert('Information cannot be registered!')
+        throw error
+      }
+    } catch (error) {
+      alert(error.error_description || error.message)
+    } 
+  
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -92,6 +99,11 @@ export default function Eventlist()
     }
     getData()
   }, []);
+
+  const open = (eventID, eventTitle) => {
+    setOpened(true)
+    setEvent({eventID, eventTitle})
+  }
 
   return(
     <div>
@@ -106,6 +118,12 @@ export default function Eventlist()
           placeholder="キーワードを入力して検索"
           style={{width: 500}}
         />
+        <Button
+          style={{width: 100}}
+          color="red"
+          //onClicked={Search}
+          >
+          検索</Button>
         <Button
           style={{width: 200}}
           color="pink"
@@ -122,9 +140,38 @@ export default function Eventlist()
             padding: "1rem",
           }}
         >
-          {events.map((row) => (Makingcard(row, theme, opened, setOpened)))}
+          {events.map((row) => (Makingcard(row, theme, open)))}
         </nav>
       </div>
+      <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title={event.eventTitle}
+          >
+        <form onSubmit={form.onSubmit(submit)}>
+          <p>以下の情報を主催者に送信して、参加申請をします。</p>
+          <Group>
+            <TextInput style={{width:170}} label="姓" required {...form.getInputProps('familyname')}/>
+            <TextInput style={{width:170}} label="名" required {...form.getInputProps('firstname')}/>
+          </Group>
+          <TextInput
+            icon={<At />}
+            style={{top: 20}}
+            label="メールアドレス"
+            required
+            {...form.getInputProps('email')}
+          />
+          <Center>
+            <Button
+              type="submit"
+              color="red"
+              style={{top:20}}
+              onClick={() => {console.log(event.eventTitle); setOpened(false)}}
+            >送信
+            </Button>
+          </Center>
+        </form>
+      </Modal>
     </div>
   );
 }

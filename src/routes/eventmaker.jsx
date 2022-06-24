@@ -6,7 +6,7 @@ import { Calendar, TimeInput } from '@mantine/dates';
 import { At, Clock } from 'tabler-icons-react';
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Eventmaker(){
   const [date, setDate] = useState(null);
@@ -14,7 +14,7 @@ export default function Eventmaker(){
 
   useEffect(() => {
     const getData = async () => {
-      let { data, error } = await supabase.from('EventTable').select()
+      let { data } = await supabase.from('EventTable').select()
       setNumOfevents(data.length)
     }
     getData()
@@ -42,7 +42,7 @@ export default function Eventmaker(){
     try {
       setLoading(true)
       const jsdate = dayjs(date);
-      const { data, error } = await supabase.from("EventTable").insert([{
+      const { error } = await supabase.from("EventTable").insert([{
         page_id: numOfevents+1000,
         title: values.title,
         region: "会津若松市　永和地区",
@@ -57,8 +57,10 @@ export default function Eventmaker(){
         picture: "https://prtimes.jp/i/11000/54/resize/d11000-54-428998-1.jpg",
       }])
       navigate('/eventlist');
-      if (error) throw error
-      alert('Please go back and visit again!')
+      if (error) {
+        alert('Please go back and visit again!')
+        throw error
+      }
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {
@@ -88,9 +90,10 @@ export default function Eventmaker(){
           required
           label="開始時刻"
           placeholder="開始時刻を入力"
+          value={date}
           onChange={setDate}
           icon={<Clock size={20} />}
-          defaultValue={date}
+          //defaultValue={dayjs(date)}
         />
         <p>お手伝い内容</p>
         <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
