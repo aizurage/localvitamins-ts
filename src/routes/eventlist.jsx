@@ -7,10 +7,6 @@ import { supabase } from '../supabaseClient';
 
 
 function Makingcard(row, theme, open){
-  
-  const secondaryColor = theme.colorScheme === 'light'
-    ? theme.colors.dark[1]
-    : theme.colors.gray[7];
 
   return (
     <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.page_id}>
@@ -60,7 +56,7 @@ export default function Eventlist()
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
 
-  const form = useForm({
+  const join_event_form = useForm({
     initialValues: {
       email: '',
       firstname: '',
@@ -72,8 +68,14 @@ export default function Eventlist()
     },
   });
 
+  const search_keywords_form = useForm({
+    initialValues: {
+      keywords: '',
+    }
+  });
+
   
-  const submit = async (values) => {
+  const join_event = async (values) => {
     try {
       const { error } = await supabase.from("Participants").insert([{
         eventID: event.eventID,
@@ -89,8 +91,15 @@ export default function Eventlist()
     } catch (error) {
       alert(error.error_description || error.message)
     } 
-  
   }
+
+  
+  const search_event = async (keywords) => {
+    console.log(keywords['keywords']);
+    const { data1 } = await supabase.from('EventTable').select().textSearch('title', keywords['keywords'])
+    console.log(data1);
+  }
+  
 
   useEffect(() => {
     const getData = async () => {
@@ -113,26 +122,31 @@ export default function Eventlist()
         </button>
       </div>
       <h2>企画検索</h2>
-      <Group position="left">
-        <Input
-          placeholder="キーワードを入力して検索"
-          style={{width: 500}}
-        />
-        <Button
-          style={{width: 100}}
-          color="red"
-          //onClicked={Search}
+        <Group position="left">
+          <form onSubmit={search_keywords_form.onSubmit(search_event)}>
+            <Group position="left">
+              <Input
+                placeholder="キーワードを入力して検索"
+                style={{width: 500}}
+                {...search_keywords_form.getInputProps('keywords')}
+              />
+              <Button
+                style={{width: 100}}
+                color="red"
+                type="submit" 
+              >
+                検索</Button>
+            </Group>
+          </form>
+          <Button
+            style={{width: 200}}
+            color="pink"
+            component={Link}
+            to={`/eventmaker`}
           >
-          検索</Button>
-        <Button
-          style={{width: 200}}
-          color="pink"
-          component={Link}
-          to={`/eventmaker`}
-        >
-        お手伝い作成</Button>
-      </Group>
-
+          お手伝い作成</Button>
+        </Group>
+    
       <div>
         <nav
           style={{
@@ -148,18 +162,18 @@ export default function Eventlist()
           onClose={() => setOpened(false)}
           title={event.eventTitle}
           >
-        <form onSubmit={form.onSubmit(submit)}>
+        <form onSubmit={join_event_form.onSubmit(join_event)}>
           <p>以下の情報を主催者に送信して、参加申請をします。</p>
           <Group>
-            <TextInput style={{width:170}} label="姓" required {...form.getInputProps('familyname')}/>
-            <TextInput style={{width:170}} label="名" required {...form.getInputProps('firstname')}/>
+            <TextInput style={{width:170}} label="姓" required {...join_event_form.getInputProps('familyname')}/>
+            <TextInput style={{width:170}} label="名" required {...join_event_form.getInputProps('firstname')}/>
           </Group>
           <TextInput
             icon={<At />}
             style={{top: 20}}
             label="メールアドレス"
             required
-            {...form.getInputProps('email')}
+            {...join_event_form.getInputProps('email')}
           />
           <Center>
             <Button
