@@ -9,7 +9,7 @@ import { supabase } from '../supabaseClient';
 function Makingcard(row, theme, open){
 
   return (
-    <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.page_id}>
+    <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.id}>
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Image src={row.picture} height={160} alt={row.title} />
@@ -32,7 +32,7 @@ function Makingcard(row, theme, open){
           color="blue"
           fullWidth style={{ marginTop: 14 }}
           component={Link}
-          to={`/eventdetail/${row.page_id}`}
+          to={`/eventdetail/${row.id}`}
           >
           詳細を見る
         </Button>
@@ -55,6 +55,7 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
+  
 
   const join_event_form = useForm({
     initialValues: {
@@ -93,13 +94,35 @@ export default function Eventlist()
     } 
   }
 
+  //const deleteDuplicateEvent = ([...array]) => {
+    //return array.filter( (value, index, self) => self.indexOf(value.id) === index);
+  //}
+
   
-  const search_event = async (keywords) => {
-    console.log(keywords['keywords']);
-    const { data1 } = await supabase.from('EventTable').select().textSearch('title', keywords['keywords'])
-    console.log(data1);
+  const search_event = async ({keywords}) => {
+    if(keywords.length == 0) {
+      let { data } = await supabase.from('EventTable').select()
+      console.log(data);
+      setEvents(data);
+      return;
+    }
+    console.log(keywords);
+    keywords = keywords.split('　');
+    console.log(keywords);
+    for(let i = 0; i < keywords.length; i++) {
+      keywords[i] = '%' + keywords[i] + '%';
+    } 
+
+    let searching_events = [];
+    for (let i = 0; i < keywords.length; i++) {
+      const { data } = await supabase.from("EventTable").select().like("title", keywords[i])
+      console.log(data);
+      searching_events = [...searching_events, data];
+    }
+
+    //console.log(deleteDuplicateEvent(searching_events.flat(2)));
+    setEvents(searching_events.flat(2));
   }
-  
 
   useEffect(() => {
     const getData = async () => {
@@ -115,13 +138,10 @@ export default function Eventlist()
   }
 
   return(
-    <div>
-      <div>
-        <button className="button block" onClick={() => supabase.auth.signOut()}>
-          サインアウト
-        </button>
-      </div>
-      <h2>企画検索</h2>
+    <>
+      <h2>企画タイトル検索</h2>
+      <Text>キーワードは最大３つまで入力できます。</Text>
+      <Text>複数のキーワードで検索をかけるときは、スペースで区切ってください。</Text>
         <Group position="left">
           <form onSubmit={search_keywords_form.onSubmit(search_event)}>
             <Group position="left">
@@ -186,6 +206,6 @@ export default function Eventlist()
           </Center>
         </form>
       </Modal>
-    </div>
+    </>
   );
 }
