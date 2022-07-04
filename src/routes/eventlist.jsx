@@ -106,9 +106,13 @@ export default function Eventlist()
       setEvents(data);
       return;
     }
-    console.log(keywords);
+    
+    //キーワードを配列に格納する。（主に複数の場合）
+    //全角スペースで区切った場合
     keywords = keywords.split('　');
-    console.log(keywords);
+    //半角スペースで区切った場合
+    if(keywords.length === 1) keywords.split(' ');
+    
     for(let i = 0; i < keywords.length; i++) {
       keywords[i] = '%' + keywords[i] + '%';
     } 
