@@ -94,15 +94,25 @@ export default function Eventlist()
     } 
   }
 
-  //const deleteDuplicateEvent = ([...array]) => {
-    //return array.filter( (value, index, self) => self.indexOf(value.id) === index);
-  //}
+
+
+  const merge_event = (array1, array2) => {
+    for(let i = 0; i < array1.length; i++){
+      for (let j = 0; j < array2.length; j++) {
+        if (array1[i].id === array2[j].id) {
+          array2.splice(j,1);
+        }
+      }
+    }
+
+    return [...array1, array2].flat(2);
+  }
+
 
   
   const search_event = async ({keywords}) => {
     if(keywords.length == 0) {
       let { data } = await supabase.from('EventTable').select()
-      console.log(data);
       setEvents(data);
       return;
     }
@@ -110,22 +120,17 @@ export default function Eventlist()
     //キーワードを配列に格納する。（主に複数の場合）
     //全角スペースで区切った場合
     keywords = keywords.split('　');
-    //半角スペースで区切った場合
-    if(keywords.length === 1) keywords.split(' ');
-    
-    for(let i = 0; i < keywords.length; i++) {
-      keywords[i] = '%' + keywords[i] + '%';
-    } 
 
     let searching_events = [];
     for (let i = 0; i < keywords.length; i++) {
-      const { data } = await supabase.from("EventTable").select().like("title", keywords[i])
-      console.log(data);
-      searching_events = [...searching_events, data];
+      keywords[i] = '%' + keywords[i] + '%';
+      const { data } = await supabase.from("EventTable").select().like("title", keywords[i]);
+
+      if(i) searching_events = merge_event(searching_events, data);
+      else searching_events = [...searching_events, data].flat(2);
     }
 
-    //console.log(deleteDuplicateEvent(searching_events.flat(2)));
-    setEvents(searching_events.flat(2));
+    setEvents(searching_events);
   }
 
   useEffect(() => {
