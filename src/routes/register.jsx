@@ -1,4 +1,4 @@
-import { TextInput, Button, Group, PasswordInput, Space, Text, LoadingOverlay } from '@mantine/core';
+import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';

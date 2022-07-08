@@ -8,11 +8,19 @@ import { supabase } from '../supabaseClient';
 
 function Makingcard(row, theme, open){
 
+  const getImage = async (imageUrl) => {
+    console.log(imageUrl);
+    const { data } = await supabase.storage.from("event-images").download(imageUrl);
+    console.log(data);
+    //メモリ解法処理をどこかに記述しなければならない。
+    return URL.createObjectURL(data.stream());
+  }
+
   return (
     <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.id}>
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image src={row.picture} height={160} alt={row.title} />
+          <Image src={getImage(row.picture)} height={160} alt={row.title} />
         </Card.Section>
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
@@ -111,7 +119,7 @@ export default function Eventlist()
 
   
   const search_event = async ({keywords}) => {
-    if(keywords.length == 0) {
+    if(keywords.length === 0) {
       let { data } = await supabase.from('EventTable').select()
       setEvents(data);
       return;
@@ -135,7 +143,7 @@ export default function Eventlist()
 
   useEffect(() => {
     const getData = async () => {
-      let { data, error } = await supabase.from('EventTable').select()
+      let { data } = await supabase.from('EventTable').select()
       setEvents(data);
     }
     getData()

@@ -1,7 +1,7 @@
-import { TextInput, Button, Group, PasswordInput, Space, Text, LoadingOverlay } from '@mantine/core';
+import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';
 import { useState } from 'react';
@@ -25,7 +25,6 @@ export default function Login() {
       setLoading(true)
       const { error, user } = await supabase.auth.signIn( values )
       if (error) throw error
-      console.log(user);
       navigate('/eventlist');
     } catch (error) {
       alert(error.error_description || error.message)
