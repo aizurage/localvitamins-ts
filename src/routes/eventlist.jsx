@@ -9,11 +9,9 @@ import { supabase } from '../supabaseClient';
 function Makingcard(row, theme, open){
 
   const getImage = async (imageUrl) => {
-    console.log(imageUrl);
     const { data } = await supabase.storage.from("event-images").download(imageUrl);
-    console.log(data);
     //メモリ解法処理をどこかに記述しなければならない。
-    return URL.createObjectURL(data.stream());
+    return URL.createObjectURL(data);
   }
 
   return (
