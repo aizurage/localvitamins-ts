@@ -5,22 +5,32 @@ import { supabase } from '../supabaseClient';
 
 export default function Eventdetail(){
   let params = useParams();
-  const [element, setEvents] = useState([]);
-  //const [pictureUrl, setPictureUrl] = useState('');
+  const [element, setEvent] = useState([]);
+  const [pictureUrl, setPictureUrl] = useState('');
 
   useEffect(() => {
     const getData = async () => {
-      console.log(params.id);
-      let { data } = await supabase.from('EventTable').select("id").eq("id", params.id);
-      console.log(data);
-      setEvents(data);
+      let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber);
+      setEvent(data[0]);
     }
     getData()
   }, []);
 
+  const getImage = async (imageUrl) => {
+    try {
+      const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
+      if(error) throw error;
+      //メモリ解法処理をどこかに記述しなければならない。
+      setPictureUrl(URL.createObjectURL(data));
+    } catch (error) {
+      console.log('Error downloading image: ', error.message)
+      alert(error.error_description || error.message)
+    }
+  }
+
   return (
     <Container>
-      <Image src={element.picture} height={700} alt={element.title} />
+      <Image src={pictureUrl} onChanged={getImage(element.picture)} height={700} alt={element.title} />
       <Title order={1}>{element.title}</Title>
       <h2>開催場所</h2>
       <Text size="lg">{element.region}</Text>

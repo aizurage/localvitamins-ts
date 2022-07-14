@@ -8,14 +8,16 @@ import { supabase } from '../supabaseClient';
 
 function Makingcard(row, theme, open, pictureurl, setPictureUrl){
 
+  const revokeImageURL = () => {
+    URL.revokeObjectURL(pictureurl);
+  }
+
   const getImage = async (imageUrl) => {
     try {
       const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
       if(error) throw error;
       //メモリ解法処理をどこかに記述しなければならない。
-      //const url = URL.createObjectURL(data);
       setPictureUrl(URL.createObjectURL(data));
-      //return url;
     } catch (error) {
       console.log('Error downloading image: ', error.message)
       alert(error.error_description || error.message)
@@ -59,6 +61,7 @@ function Makingcard(row, theme, open, pictureurl, setPictureUrl){
           >参加する
         </Button>
       </Card>
+      
     </div>
   );
 }
@@ -72,6 +75,7 @@ export default function Eventlist()
   const [url, setUrl] = useState('');
   
 
+
   const join_event_form = useForm({
     initialValues: {
       email: '',
@@ -84,11 +88,13 @@ export default function Eventlist()
     },
   });
 
+
   const search_keywords_form = useForm({
     initialValues: {
       keywords: '',
     }
   });
+
 
   
   const join_event = async (values) => {
@@ -148,6 +154,8 @@ export default function Eventlist()
     setEvents(searching_events);
   }
 
+
+
   useEffect(() => {
     const getData = async () => {
       let { data } = await supabase.from('EventTable').select()
@@ -156,10 +164,14 @@ export default function Eventlist()
     getData()
   }, []);
 
+
+
   const open = (eventID, eventTitle) => {
     setOpened(true)
     setEvent({eventID, eventTitle})
   }
+
+
 
   return(
     <>
@@ -224,7 +236,7 @@ export default function Eventlist()
               type="submit"
               color="red"
               style={{top:20}}
-              onClick={() => {console.log(event.eventTitle); setOpened(false)}}
+              onClick={() => {setOpened(false)}}
             >送信
             </Button>
           </Center>
