@@ -6,11 +6,14 @@ import { supabase } from '../supabaseClient';
 export default function Eventdetail(){
   let params = useParams();
   const [element, setEvents] = useState([]);
+  //const [pictureUrl, setPictureUrl] = useState('');
 
   useEffect(() => {
     const getData = async () => {
-      let { data } = await supabase.from('EventTable').select()
-      setEvents(data[params.eventNumber - 1000]);
+      console.log(params.id);
+      let { data } = await supabase.from('EventTable').select("id").eq("id", params.id);
+      console.log(data);
+      setEvents(data);
     }
     getData()
   }, []);

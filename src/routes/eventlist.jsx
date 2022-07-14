@@ -6,16 +6,16 @@ import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
 
 
-function Makingcard(row, theme, open){
+function Makingcard(row, theme, open, pictureurl, setPictureUrl){
 
   const getImage = async (imageUrl) => {
     try {
       const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
       if(error) throw error;
       //メモリ解法処理をどこかに記述しなければならない。
-      const url = URL.createObjectURL(data);
-      console.log(url);
-      return url;
+      //const url = URL.createObjectURL(data);
+      setPictureUrl(URL.createObjectURL(data));
+      //return url;
     } catch (error) {
       console.log('Error downloading image: ', error.message)
       alert(error.error_description || error.message)
@@ -26,7 +26,7 @@ function Makingcard(row, theme, open){
     <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.id}>
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image src={getImage(row.picture)} height={160} alt={row.title} />
+          <Image src={pictureurl} onChanged={getImage(row.picture)} height={160} alt={row.title} />
         </Card.Section>
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
@@ -69,6 +69,7 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
+  const [url, setUrl] = useState('');
   
 
   const join_event_form = useForm({
@@ -197,7 +198,7 @@ export default function Eventlist()
             padding: "1rem",
           }}
         >
-          {events.map((row) => (Makingcard(row, theme, open)))}
+          {events.map((row) => (Makingcard(row, theme, open, url, setUrl)))}
         </nav>
       </div>
       <Modal

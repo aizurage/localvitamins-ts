@@ -2,38 +2,19 @@ import { Input, Center, TextInput, Button, Group, Space, LoadingOverlay, ThemeIc
 import { supabase } from '../supabaseClient';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
-import { Calendar, TimeInput } from '@mantine/dates';
+import { Calendar } from '@mantine/dates';
 import { At, Clock, Photo } from 'tabler-icons-react';
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import VisuallyHidden from '@reach/visually-hidden';
 
-/*import { useCallback, useMemo } from 'react';
-import { useDropzone } from 'react-dropzone';
-
-
-const basicstyle = {
-  height: 100,
-  border: "1px dotted #888"
-};
-
-const borderNormalStyle = {
-  border: "1px dotted #888"
-};
-
-const borderDragStyle = {
-  border: "1px solid #00f",
-  transition: 'border .5s ease-in-out'
-};*/
-
 export default function Eventmaker(){
   const [date, setDate] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
-
-  //const [photo_uploaded, setPhoto_uploaded] = useState(false);
-  //const [picture, setPicture] = useState(null);
+  const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
 
   const form = useForm({
     initialValues: {
@@ -60,7 +41,7 @@ export default function Eventmaker(){
         title: values.title,
         region: "会津若松市　永和地区",
         date: jsdate.format('YYYY-MM-DD'),
-        time: jsdate.format('HH:mm:ss'),
+        time: hour + ":" + minute + ":00",
         catchcopy: values.catchcopy,
         content: values.content,
         target: values.target,
@@ -80,24 +61,6 @@ export default function Eventmaker(){
       setLoading(false)
     }
   }
-
-  /*const onDrop = useCallback( (acceptedFiles) => {
-    console.log('acceptedFiles:', acceptedFiles);
-    setPhoto_uploaded(true);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({ onDrop });
-
-  const style = useMemo( () => (
-      {...basicstyle, ...(isDragActive ? borderNormalStyle : borderDragStyle)}
-  ), [isDragActive]);
-
-  const files = useMemo( () => acceptedFiles.map(file => (
-    setPicture(file),
-    <h4>{file.path}</h4>,
-    <Image src={file.path} alt={file.path} />
-  )), [acceptedFiles]);
-  */
 
   const uploadImage = async (picture) => {
     try {
@@ -121,14 +84,15 @@ export default function Eventmaker(){
       }
 
       setPictureUrl(filepath);
-      //onUpload(filepath);
-
+      
     } catch (error) {
       alert(error.message);
     } finally {
       setUploading(false);
     }
   }
+
+  
   const navigate = useNavigate();
   return(
     <Center>
@@ -147,15 +111,21 @@ export default function Eventmaker(){
         <p>日時</p>
         <Calendar required value={date} onChange={setDate} firstDayOfWeek="sunday" locale="ja"/>
         <Space h="xl" />
-        <TimeInput
-          required
-          label="開始時刻"
-          placeholder="開始時刻を入力"
-          value={date}
-          onChange={setDate}
-          icon={<Clock size={20} />}
-          //defaultValue={dayjs(date)}
-        />
+        <p>開始時刻</p>
+        <Group>
+          <Input 
+            value={hour} 
+            icon={<Clock/>}
+            onChange={(e) => setHour(e.target.value)}
+          />
+          <p>時</p>
+          <Input
+            value={minute}
+            icon={<Clock/>}
+            onChange={(e) => setMinute(e.target.value)}
+          />
+          <p>分</p>
+        </Group>
         <p>お手伝い内容</p>
         <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
         <p>お礼</p>
