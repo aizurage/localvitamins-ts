@@ -1,70 +1,11 @@
-import { Input, Card, Image, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
+import { Input, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
 import { supabase } from '../supabaseClient';
+import Makingcard from './makingcard';
 
-
-function Makingcard(row, theme, open, pictureurl, setPictureUrl){
-
-  const revokeImageURL = () => {
-    URL.revokeObjectURL(pictureurl);
-  }
-
-  const getImage = async (imageUrl) => {
-    try {
-      const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
-      if(error) throw error;
-      //メモリ解法処理をどこかに記述しなければならない。
-      setPictureUrl(URL.createObjectURL(data));
-    } catch (error) {
-      console.log('Error downloading image: ', error.message)
-      alert(error.error_description || error.message)
-    }
-  }
-
-  return (
-    <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block",}} key={row.id}>
-      <Card shadow="sm" p="lg">
-        <Card.Section>
-          <Image src={pictureurl} onChanged={getImage(row.picture)} height={160} alt={row.title} />
-        </Card.Section>
-
-        <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-          <Text weight={500}>{row.title}</Text>
-        </Group>
-
-        <Text size="sm" style={{ lineHeight: 1.5 }}>
-        日付：{row.date}
-        </Text>
-
-        <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
-          {row.content}
-        </Spoiler>
-
-        <Button
-          variant="light"
-          color="blue"
-          fullWidth style={{ marginTop: 14 }}
-          component={Link}
-          to={`/eventdetail/${row.id}`}
-          >
-          詳細を見る
-        </Button>
-
-        <Button
-          variant="light"
-          color="indigo"
-          fullWidth style={{ marginTop: 14 }}
-          onClick={ () => open(row.id, row.title) }
-          >参加する
-        </Button>
-      </Card>
-      
-    </div>
-  );
-}
 
 export default function Eventlist()
 {
@@ -72,7 +13,6 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
-  const [url, setUrl] = useState('');
   
 
 
@@ -210,7 +150,7 @@ export default function Eventlist()
             padding: "1rem",
           }}
         >
-          {events.map((row) => (Makingcard(row, theme, open, url, setUrl)))}
+          {events.map((row) => <Makingcard row={row} theme={theme} open={open} key={row.id}/>)}
         </nav>
       </div>
       <Modal
