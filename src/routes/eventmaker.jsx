@@ -1,6 +1,6 @@
 import { Input, Center, TextInput, Button, Group, Space, LoadingOverlay, ThemeIcon } from '@mantine/core';
 import { supabase } from '../supabaseClient';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from '@mantine/form';
 import { Calendar } from '@mantine/dates';
 import { At, Clock, Photo } from 'tabler-icons-react';
@@ -15,6 +15,9 @@ export default function Eventmaker(){
   const [uploading, setUploading] = useState(false);
   const [hour, setHour] = useState('');
   const [minute, setMinute] = useState('');
+  const [tags, setTags] = useState([]);
+
+  const inputRef = useRef();
 
   const form = useForm({
     initialValues: {
@@ -28,6 +31,7 @@ export default function Eventmaker(){
       site: '',
       reward: '',
       inquiry: '',
+      tags:'',
       picture: '',
     }
   });
@@ -48,6 +52,7 @@ export default function Eventmaker(){
         site: values.site,
         reward: values.reward,
         inquiry: values.inquiry,
+        tags: JSON.stringify(tags),
         picture: pictureUrl,
       }])
       navigate('/eventlist');
@@ -92,13 +97,17 @@ export default function Eventmaker(){
     }
   }
 
-  
+ 
+  const clear_inputtag = () => {
+    inputRef.current.value = '';
+  }
+
   const navigate = useNavigate();
   return(
     <Center>
       <LoadingOverlay visible={loading} />
       <form onSubmit={form.onSubmit(submit)}>
-        <h2>企画作成、編集</h2>
+        <h2>お手伝い作成、編集</h2>
         <Space h="l" />
         <p>企画名</p>
         <Input required style={{width: 500}} placeholder="企画名を入力してください。" {...form.getInputProps('title')}/>
@@ -132,16 +141,36 @@ export default function Eventmaker(){
         <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
         <p>メールアドレス</p>
         <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
+        <p>タグの設定</p>
+        <Group>
+          <Input ref={inputRef} onBlur={ (e) => setTags([...tags, e.target.value])} placeholder='タグ名'/>
+          <Button
+            color='pink'
+            onClick={ 
+              () => {clear_inputtag(); console.log(tags)} 
+            }>
+            タグ追加
+          </Button>
+        </Group>
+        
+        <p>追加されたタグ</p>
+        <ul>
+          {
+            tags.map((tag) => (
+              <li>{tag}</li>
+            ))
+          }
+        </ul>
         <p>イメージ画像の選択</p>
         <div style={{height: 100}}>
-          {uploading ? "Uploading..." : (
+          {uploading ? "アップロードしています..." : (
             <>
               <>
                 <ThemeIcon color="lime">
                   <Photo />
                 </ThemeIcon>
                 <label className="button primary block" htmlFor="single">
-                  ここをクリックして、写真をアップロードしてください。
+                  {pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
                 </label>
               </>
               <VisuallyHidden>
