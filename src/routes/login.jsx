@@ -23,7 +23,7 @@ export default function Login() {
   const submit = async (values) => {
     try {
       setLoading(true)
-      const { error, user } = await supabase.auth.signIn( values )
+      const { error } = await supabase.auth.signIn( values )
       if (error) throw error
       navigate('/eventlist');
     } catch (error) {
@@ -49,9 +49,9 @@ export default function Login() {
           />
           <Space h="xl" />
           <PasswordInput
-            placeholder="Password"
-            label="Password"
-            description="Password must include at least one letter, number and special character"
+            placeholder="パスワード"
+            label="パスワード"
+            description="パスワードには、文字、数字、そして特殊文字を含めてください。"
             style={{width: 500}}
             required
             {...form.getInputProps('password')}

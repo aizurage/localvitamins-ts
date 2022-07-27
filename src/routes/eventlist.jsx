@@ -1,10 +1,10 @@
-import { Input, Text, TextInput, Button, Group, Spoiler, Modal, Center, useMantineTheme } from '@mantine/core';
+import { Input, Text, TextInput, Button, Badge, Group, Modal, Center, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useForm } from '@mantine/form';
-import { At } from 'tabler-icons-react';
-import { supabase } from '../supabaseClient';
-import Makingcard from './makingcard';
+import { useForm }  from '@mantine/form';
+import { At }  from 'tabler-icons-react';
+import { supabase }  from '../supabaseClient';
+import { Makingcard } from './makingcard';
 
 
 export default function Eventlist()
@@ -85,13 +85,21 @@ export default function Eventlist()
     let searching_events = [];
     for (let i = 0; i < keywords.length; i++) {
       keywords[i] = '%' + keywords[i] + '%';
-      const { data } = await supabase.from("EventTable").select().like("title", keywords[i]);
-
+      const {data} = await supabase.from("EventTable").select().like("search_tags", keywords[i]);
       if(i) searching_events = merge_event(searching_events, data);
       else searching_events = [...searching_events, data].flat(2);
     }
 
     setEvents(searching_events);
+  }
+
+
+
+  const show_myEvent = async () => {
+    const user = supabase.auth.user();
+    const { data }  = await supabase.from("EventTable").select().eq("inquiry", user.email);
+    if(data == null) return;
+    setEvents(data);
   }
 
 
@@ -141,8 +149,14 @@ export default function Eventlist()
             to={`/eventmaker`}
           >
           お手伝い作成</Button>
+          <Badge 
+            variant="gradient" 
+            gradient={{ from: 'teal', to: 'lime', deg: 105 }} 
+            onClick={show_myEvent} 
+            style={{width:200, height:50}}
+          >
+          自分のイベントを表示</Badge>
         </Group>
-    
       <div>
         <nav
           style={{

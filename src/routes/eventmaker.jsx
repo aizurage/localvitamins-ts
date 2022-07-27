@@ -31,7 +31,7 @@ export default function Eventmaker(){
       site: '',
       reward: '',
       inquiry: '',
-      tags:'',
+      search_tags:'',
       picture: '',
     }
   });
@@ -52,7 +52,7 @@ export default function Eventmaker(){
         site: values.site,
         reward: values.reward,
         inquiry: values.inquiry,
-        tags: JSON.stringify(tags),
+        search_tags: tags,
         picture: pictureUrl,
       }])
       navigate('/eventlist');
@@ -147,7 +147,7 @@ export default function Eventmaker(){
           <Button
             color='pink'
             onClick={ 
-              () => {clear_inputtag(); console.log(tags)} 
+              () => {clear_inputtag()} 
             }>
             タグ追加
           </Button>
