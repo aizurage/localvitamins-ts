@@ -34,7 +34,11 @@ export default function Login() {
   }
 
   return (
-    <Center>
+    <>
+      <Center>
+      <h1>ログイン</h1>
+      </Center>
+      <Center>
       <div>
         <LoadingOverlay visible={loading} />
         <form onSubmit={form.onSubmit(submit)}>
@@ -61,11 +65,11 @@ export default function Login() {
             <Button
               type="submit"
               color="orange"
-            >Submit</Button>
+            >ログイン</Button>
           </Group>
         </form>
       </div>
     </Center>
-
+  </>
   );
 }

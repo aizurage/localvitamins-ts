@@ -20,7 +20,6 @@ export default function Eventdetail(){
     try {
       const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
       if(error) throw error;
-      //メモリ解法処理をどこかに記述しなければならない。
       setPictureUrl(URL.createObjectURL(data));
     } catch (error) {
       console.log('Error downloading image: ', error.message)

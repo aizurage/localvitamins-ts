@@ -1,9 +1,9 @@
-import { Input, Center, TextInput, Button, Group, Space, LoadingOverlay, ThemeIcon } from '@mantine/core';
+import { Input, Center, TextInput, Button, Group, Space, LoadingOverlay, Paper } from '@mantine/core';
 import { supabase } from '../supabaseClient';
 import { useState, useRef } from 'react';
 import { useForm } from '@mantine/form';
 import { Calendar } from '@mantine/dates';
-import { At, Clock, Photo } from 'tabler-icons-react';
+import { At, Clock } from 'tabler-icons-react';
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
@@ -33,6 +33,7 @@ export default function Eventmaker(){
       inquiry: '',
       search_tags:'',
       picture: '',
+      planner_uniqueID: '',
     }
   });
 
@@ -54,6 +55,7 @@ export default function Eventmaker(){
         inquiry: values.inquiry,
         search_tags: tags,
         picture: pictureUrl,
+        planner_uniqueID: supabase.auth.user().id,
       }])
       navigate('/eventlist');
       if (error) {
@@ -139,7 +141,7 @@ export default function Eventmaker(){
         <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
         <p>お礼</p>
         <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
-        <p>メールアドレス</p>
+        <p>お問い合わせ先（メールアドレス）</p>
         <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
         <p>タグの設定</p>
         <Group>
@@ -166,12 +168,11 @@ export default function Eventmaker(){
           {uploading ? "アップロードしています..." : (
             <>
               <>
-                <ThemeIcon color="lime">
-                  <Photo />
-                </ThemeIcon>
-                <label className="button primary block" htmlFor="single">
-                  {pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
-                </label>
+                <Paper shadow="sm" radius="xl" p="xl" withBorder>
+                  <label className="button primary block" htmlFor="single">
+                    {pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                  </label>
+                </Paper>
               </>
               <VisuallyHidden>
                 <input 

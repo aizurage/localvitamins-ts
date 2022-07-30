@@ -1,15 +1,16 @@
-import { Card, Image, Text, Button, Group, Spoiler, Space } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Card, Image, Text, Button, Group, Spoiler, Space, Modal } from '@mantine/core';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
-//import { EventMembersList } from './eventmemberslist';
 
 export function Makingcard(props)
 {
     const [pictureurl, setPictureUrl] = useState('');
+    const [opened, setOpened] = useState('');
+    const navigate = useNavigate();
 
     const checkMyEvent = () => {
-      return (supabase.auth.user().email === props.row.inquiry) ? true : false;
+      return (supabase.auth.user().id === props.row.planner_uniqueID) ? true : false;
     }
 
     useEffect(() => {
@@ -24,6 +25,57 @@ export function Makingcard(props)
         console.log('Error downloading image: ', error.message)
         alert(error.error_description || error.message)
       }
+    }
+
+    const event_delete = async() => {
+      try {
+        const { error } = await supabase.from("EventTable").delete().match({uniqueID: props.row.uniqueID});
+        if (error) throw error;
+        const {data} = await supabase.from('EventTable').select()
+        props.setEvents(data);
+        navigate('/eventlist');
+      } catch (error) {
+        console.log('Error downloading image: ', error.message)
+        alert(error.error_description || error.message)
+      }
+    }
+
+    const ownerOption = () => {
+      return(
+        <>
+          <Button
+            variant="gradient" 
+            gradient={{ from: 'orange', to: 'red' }}
+            component={Link}
+            to={`/eventmemberslist/${props.row.id}`}
+          >
+            参加者リスト表示
+          </Button> 
+          <Button
+            color="dark"
+            radius={'xl'}
+            className='deleteevent'
+            onClick={() => setOpened(true)}
+          >
+            消去
+          </Button>
+          <Modal
+            opened={opened}
+            onClose={() => setOpened(false)}
+            title="イベントを消去します。"
+          >
+            {
+              <>
+                <p>{props.row.title}を消去します。よろしいですか？</p>
+                <Group>
+                  <Button color='red' onClick={() => {event_delete(); setOpened(false)}}>消去する</Button>
+                  <Button color='teal' onClick={() => setOpened(false)}>キャンセル</Button>
+                </Group>
+              </>
+            }
+          </Modal>
+        </>
+      );
     }
   
     return (
@@ -64,16 +116,7 @@ export function Makingcard(props)
           </Button>
           <Space h="md" />
           <div>
-            {checkMyEvent() ? 
-              <Button
-                variant="gradient" 
-                gradient={{ from: 'orange', to: 'red' }}
-                component={Link}
-                to={`/eventmemberslist/${props.row.id}`}
-              >
-                参加者リスト表示
-              </Button> : ""
-            }
+            {checkMyEvent() ? ownerOption() : ""}
           </div>
         </Card>
       </div>

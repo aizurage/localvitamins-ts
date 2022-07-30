@@ -1,6 +1,5 @@
-import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
+import { Center, TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Center } from '@mantine/core';
 import { supabase } from '../supabaseClient';
 import { useState } from 'react';
 
@@ -10,6 +9,8 @@ export default function Register() {
       email: '',
       password: '',
       username: '',
+      firstname: '',
+      familyname: '',
     },
 
     validate: {
@@ -27,10 +28,14 @@ export default function Register() {
           password: values.password,
         },
         {
-          username: values.username,
+          data:{
+            username: values.username,
+            firstname: values.firstname,
+            familyname: values.familyname,
+          }
         }
       )
-      console.log(form.password);
+      //console.log(form.password);
       if (error) throw error
       alert('Check your email for the login link!')
     } catch (error) {
@@ -41,13 +46,35 @@ export default function Register() {
   }
 
   return (
+    <>
+    <Center>
+      <h1>アカウント登録</h1>
+    </Center>
     <Center>
       <div>
         <LoadingOverlay visible={loading} />
         <form onSubmit={form.onSubmit(submit)}>
           <TextInput
             required
-            label="Username"
+            label="名字"
+            placeholder='名字'
+            margin="center"
+            style={{width: 500}}
+            {...form.getInputProps('familyname')}
+          />
+          <Space h="xl" />
+          <TextInput
+            required
+            label="名"
+            placeholder="名"
+            margin="center"
+            style={{width: 500}}
+            {...form.getInputProps('firstname')}
+          />
+          <Space h="xl" />
+          <TextInput
+            required
+            label="ユーザーネーム"
             placeholder='ユーザーネーム'
             margin="center"
             style={{width: 500}}
@@ -64,9 +91,9 @@ export default function Register() {
           />
           <Space h="xl" />
           <PasswordInput
-            placeholder="Password"
-            label="Password"
-            description="Password must include at least one letter, number and special character"
+            placeholder="パスワード"
+            label="パスワード"
+            description="パスワードには、文字、数字、そして特殊文字を含めてください。"
             style={{width: 500}}
             required
             {...form.getInputProps('password')}
@@ -81,6 +108,6 @@ export default function Register() {
         </form>
       </div>
     </Center>
-
+    </>
   );
 }

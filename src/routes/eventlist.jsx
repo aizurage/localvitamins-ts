@@ -1,8 +1,7 @@
-import { Input, Text, TextInput, Button, Badge, Group, Modal, Center, useMantineTheme } from '@mantine/core';
+import { Input, Text, Button, Group, Modal, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useForm }  from '@mantine/form';
-import { At }  from 'tabler-icons-react';
 import { supabase }  from '../supabaseClient';
 import { Makingcard } from './makingcard';
 
@@ -13,6 +12,7 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
+  const [userInfo, setUserInfo] = useState([]);
   
 
 
@@ -37,14 +37,14 @@ export default function Eventlist()
 
 
   
-  const join_event = async (values) => {
+  const join_event = async () => {
     try {
       const { error } = await supabase.from("Participants").insert([{
         eventID: event.eventID,
         eventTitle: event.eventTitle,
-        firstname: values.firstname,
-        familyname: values.familyname,
-        email: values.email,
+        firstname: userInfo.firstname,
+        familyname: userInfo.familyname,
+        email: userInfo.email,
       }])
       if (error) {
         alert('Information cannot be registered!')
@@ -96,8 +96,7 @@ export default function Eventlist()
 
 
   const show_myEvent = async () => {
-    const user = supabase.auth.user();
-    const { data }  = await supabase.from("EventTable").select().eq("inquiry", user.email);
+    const { data }  = await supabase.from("EventTable").select().eq("planner_uniqueID", userInfo.id);
     if(data == null) return;
     setEvents(data);
   }
@@ -108,6 +107,9 @@ export default function Eventlist()
     const getData = async () => {
       let { data } = await supabase.from('EventTable').select()
       setEvents(data);
+      const {user} = supabase.auth.user();
+      setUserInfo(user);
+      //console.log({userInfo});
     }
     getData()
   }, []);
@@ -149,13 +151,13 @@ export default function Eventlist()
             to={`/eventmaker`}
           >
           お手伝い作成</Button>
-          <Badge 
+          <Button 
             variant="gradient" 
             gradient={{ from: 'teal', to: 'lime', deg: 105 }} 
             onClick={show_myEvent} 
             style={{width:200, height:50}}
           >
-          自分のイベントを表示</Badge>
+          自分のイベントを表示</Button>
         </Group>
       <div>
         <nav
@@ -164,7 +166,7 @@ export default function Eventlist()
             padding: "1rem",
           }}
         >
-          {events.map((row) => <Makingcard row={row} theme={theme} open={open} key={row.id}/>)}
+          {events.map((row) => <Makingcard row={row} theme={theme} open={open} key={row.id} setEvents={setEvents}/>)}
         </nav>
       </div>
       <Modal
@@ -174,26 +176,18 @@ export default function Eventlist()
           >
         <form onSubmit={join_event_form.onSubmit(join_event)}>
           <p>以下の情報を主催者に送信して、参加申請をします。</p>
-          <Group>
-            <TextInput style={{width:170}} label="姓" required {...join_event_form.getInputProps('familyname')}/>
-            <TextInput style={{width:170}} label="名" required {...join_event_form.getInputProps('firstname')}/>
-          </Group>
-          <TextInput
-            icon={<At />}
-            style={{top: 20}}
-            label="メールアドレス"
-            required
-            {...join_event_form.getInputProps('email')}
-          />
-          <Center>
-            <Button
-              type="submit"
-              color="red"
-              style={{top:20}}
-              onClick={() => {setOpened(false)}}
-            >送信
-            </Button>
-          </Center>
+          <h3>名前</h3>
+          <p>{userInfo.firstname}</p>
+          <h3>メールアドレス</h3>
+          <p>{userInfo.email}</p>
+          <Button
+            type="submit"
+            color="red"
+            margin="center"
+            style={{top:20}}
+            onClick={() => {setOpened(false)}}
+          >送信
+          </Button>
         </form>
       </Modal>
     </>
