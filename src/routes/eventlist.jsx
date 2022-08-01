@@ -12,21 +12,8 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
-  const [userInfo, setUserInfo] = useState([]);
-  
-
-
-  const join_event_form = useForm({
-    initialValues: {
-      email: '',
-      firstname: '',
-      familyname: '',
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    },
-  });
+  const [userInfo, setUserInfo] = useState('');
+ 
 
 
   const search_keywords_form = useForm({
@@ -42,8 +29,8 @@ export default function Eventlist()
       const { error } = await supabase.from("Participants").insert([{
         eventID: event.eventID,
         eventTitle: event.eventTitle,
-        firstname: userInfo.firstname,
-        familyname: userInfo.familyname,
+        firstname: userInfo.user_metadata.firstname,
+        familyname: userInfo.user_metadata.familyname,
         email: userInfo.email,
       }])
       if (error) {
@@ -107,11 +94,9 @@ export default function Eventlist()
     const getData = async () => {
       let { data } = await supabase.from('EventTable').select()
       setEvents(data);
-      const {user} = supabase.auth.user();
-      setUserInfo(user);
-      //console.log({userInfo});
     }
     getData()
+    setUserInfo(supabase.auth.user());
   }, []);
 
 
@@ -139,7 +124,8 @@ export default function Eventlist()
               <Button
                 style={{width: 100}}
                 color="red"
-                type="submit" 
+                type="submit"
+                onClick={console.log(userInfo)}
               >
                 検索</Button>
             </Group>
@@ -170,25 +156,23 @@ export default function Eventlist()
         </nav>
       </div>
       <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          title={event.eventTitle}
-          >
-        <form onSubmit={join_event_form.onSubmit(join_event)}>
-          <p>以下の情報を主催者に送信して、参加申請をします。</p>
-          <h3>名前</h3>
-          <p>{userInfo.firstname}</p>
-          <h3>メールアドレス</h3>
-          <p>{userInfo.email}</p>
-          <Button
-            type="submit"
-            color="red"
-            margin="center"
-            style={{top:20}}
-            onClick={() => {setOpened(false)}}
-          >送信
-          </Button>
-        </form>
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title={event.eventTitle}
+        >
+        <p>以下の情報を主催者に送信して、参加申請をします。</p>
+        <h3>メールアドレス</h3>
+        <p>{userInfo.email}</p>
+        <h3>名前</h3>
+        <p>{userInfo.user_metadata.familyname + " " + userInfo.user_metadata.firstname}</p>
+        <Button
+          type="submit"
+          color="red"
+          margin="center"
+          style={{top:20}}
+          onClick={() => {join_event(); setOpened(false)}}
+        >送信
+        </Button>
       </Modal>
     </>
   );
