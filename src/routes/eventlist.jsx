@@ -1,8 +1,9 @@
-import { Input, Text, Button, Group, Modal, useMantineTheme } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Input, Text, Button, Group, Modal, useMantineTheme, TextInput } from '@mantine/core';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useForm }  from '@mantine/form';
 import { supabase }  from '../supabaseClient';
+import { At } from 'tabler-icons-react';
 import { Makingcard } from './makingcard';
 
 
@@ -12,9 +13,7 @@ export default function Eventlist()
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   const [event, setEvent] = useState('');
-  const [userInfo, setUserInfo] = useState([]);
   
-
 
   const join_event_form = useForm({
     initialValues: {
@@ -37,14 +36,14 @@ export default function Eventlist()
 
 
   
-  const join_event = async () => {
+  const join_event = async (values) => {
     try {
       const { error } = await supabase.from("Participants").insert([{
         eventID: event.eventID,
         eventTitle: event.eventTitle,
-        firstname: userInfo.firstname,
-        familyname: userInfo.familyname,
-        email: userInfo.email,
+        firstname: values.firstname,
+        familyname: values.familyname,
+        email: values.email,
       }])
       if (error) {
         alert('Information cannot be registered!')
@@ -96,7 +95,7 @@ export default function Eventlist()
 
 
   const show_myEvent = async () => {
-    const { data }  = await supabase.from("EventTable").select().eq("planner_uniqueID", userInfo.id);
+    const { data }  = await supabase.from("EventTable").select().eq("planner_uniqueID", supabase.auth.user().id);
     if(data == null) return;
     setEvents(data);
   }
@@ -107,9 +106,6 @@ export default function Eventlist()
     const getData = async () => {
       let { data } = await supabase.from('EventTable').select()
       setEvents(data);
-      const {user} = supabase.auth.user();
-      setUserInfo(user);
-      //console.log({userInfo});
     }
     getData()
   }, []);
@@ -121,13 +117,33 @@ export default function Eventlist()
     setEvent({eventID, eventTitle})
   }
 
+  const navigate = useNavigate();
+
+  const log_out = async() => {
+    try {
+      const { error } = await supabase.auth.signOut()
+      navigate("/")
+      if (error) {
+        alert('ログアウトに失敗しました。')
+        throw error
+      }
+    } catch (error) {
+      alert(error.error_description || error.message)
+    } 
+  }
+
 
 
   return(
     <>
+      <Button
+        size='xs'
+        onClick={log_out}
+        className="logoutButton"
+        >ログアウト</Button>
       <h2>企画タイトル検索</h2>
       <Text>キーワードは最大３つまで入力できます。</Text>
-      <Text>複数のキーワードで検索をかけるときは、スペースで区切ってください。</Text>
+      <Text>複数のキーワードで検索をかけるときは、全角スペースで区切ってください。</Text>
         <Group position="left">
           <form onSubmit={search_keywords_form.onSubmit(search_event)}>
             <Group position="left">
@@ -177,9 +193,18 @@ export default function Eventlist()
         <form onSubmit={join_event_form.onSubmit(join_event)}>
           <p>以下の情報を主催者に送信して、参加申請をします。</p>
           <h3>名前</h3>
-          <p>{userInfo.firstname}</p>
+          <Group>
+            <TextInput style={{width:170}} label="姓" required {...join_event_form.getInputProps('familyname')}/>
+            <TextInput style={{width:170}} label="名" required {...join_event_form.getInputProps('firstname')}/>
+          </Group>
           <h3>メールアドレス</h3>
-          <p>{userInfo.email}</p>
+          <TextInput
+            icon={<At />}
+            style={{top: 20}}
+            label="メールアドレス"
+            required
+            {...join_event_form.getInputProps('email')}
+          />
           <Button
             type="submit"
             color="red"

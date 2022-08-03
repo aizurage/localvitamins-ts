@@ -9,8 +9,8 @@ export default function Register() {
       email: '',
       password: '',
       username: '',
-      firstname: '',
-      familyname: '',
+      //firstname: '',
+      //familyname: '',
     },
 
     validate: {
@@ -30,8 +30,8 @@ export default function Register() {
         {
           data:{
             username: values.username,
-            firstname: values.firstname,
-            familyname: values.familyname,
+            //firstname: values.firstname,
+            //familyname: values.familyname,
           }
         }
       )
@@ -54,24 +54,6 @@ export default function Register() {
       <div>
         <LoadingOverlay visible={loading} />
         <form onSubmit={form.onSubmit(submit)}>
-          <TextInput
-            required
-            label="名字"
-            placeholder='名字'
-            margin="center"
-            style={{width: 500}}
-            {...form.getInputProps('familyname')}
-          />
-          <Space h="xl" />
-          <TextInput
-            required
-            label="名"
-            placeholder="名"
-            margin="center"
-            style={{width: 500}}
-            {...form.getInputProps('firstname')}
-          />
-          <Space h="xl" />
           <TextInput
             required
             label="ユーザーネーム"

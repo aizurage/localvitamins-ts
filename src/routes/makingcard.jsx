@@ -27,6 +27,16 @@ export function Makingcard(props)
       }
     }
 
+    const event_participants_delete = async() => {
+      try {
+        const { error } = await supabase.from("Participants").delete().match({eventID: props.row.eventID});
+        if (error) throw error;
+      } catch (error) {
+        console.log('Error downloading image: ', error.message)
+        alert(error.error_description || error.message)
+      }
+    }
+
     const event_delete = async() => {
       try {
         const { error } = await supabase.from("EventTable").delete().match({uniqueID: props.row.uniqueID});
@@ -68,7 +78,7 @@ export function Makingcard(props)
               <>
                 <p>{props.row.title}を消去します。よろしいですか？</p>
                 <Group>
-                  <Button color='red' onClick={() => {event_delete(); setOpened(false)}}>消去する</Button>
+                  <Button color='red' onClick={() => {event_delete(); event_participants_delete(); setOpened(false)}}>消去する</Button>
                   <Button color='teal' onClick={() => setOpened(false)}>キャンセル</Button>
                 </Group>
               </>

@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
@@ -9,6 +8,8 @@ import Register from './routes/register';
 import Login from './routes/login';
 import Eventlist from './routes/eventlist';
 import Eventdetail from './routes/eventdetail';
+import Eventmaker from './routes/eventmaker';
+import { EventMembersList } from './routes/eventmemberslist';
 
 
 ReactDOM.render(
@@ -26,7 +27,9 @@ ReactDOM.render(
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="eventlist" element={<Eventlist />} />
+          <Route path="eventmaker" element={<Eventmaker />} />
           <Route path="eventdetail/:eventNumber" element={<Eventdetail />}/>
+          <Route path="eventmemberslist/:eventNumber" element={ <EventMembersList/>}/>
           <Route
             path="*"
             element={
