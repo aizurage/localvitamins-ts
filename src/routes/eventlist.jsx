@@ -108,6 +108,7 @@ export default function Eventlist()
       setEvents(data);
     }
     getData()
+    setUserInfo(supabase.auth.user());
   }, []);
 
 
@@ -155,7 +156,8 @@ export default function Eventlist()
               <Button
                 style={{width: 100}}
                 color="red"
-                type="submit" 
+                type="submit"
+                onClick={console.log(userInfo)}
               >
                 検索</Button>
             </Group>
