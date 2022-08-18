@@ -1,9 +1,0 @@
-<TextInput
-            required
-            label="ユーザー名"
-            placeholder="Your usename"
-            margin="center"
-            style={{width: 500}}
-            value={username || ''}
-            onChange={(e) => setUsername(e.target.value)}
-          />

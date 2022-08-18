@@ -1,7 +1,0 @@
-let actualresults = [
-  {
-    title:
-    date:
-    
-  }
-]
