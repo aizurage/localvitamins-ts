@@ -44,7 +44,7 @@ export default function Eventmaker(){
       const jsdate = dayjs(date);
       const { error } = await supabase.from("EventTable").insert([{
         title: values.title,
-        region: "会津若松市　永和地区",
+        region: values.region,
         date: jsdate.format('YYYY-MM-DD'),
         time: hour + ":" + minute + ":00",
         catchcopy: values.catchcopy,
@@ -109,20 +109,20 @@ export default function Eventmaker(){
     <Center>
       <LoadingOverlay visible={loading} />
       <form onSubmit={form.onSubmit(submit)}>
-        <h2>お手伝い作成、編集</h2>
+        <h1>お手伝い作成、編集</h1>
         <Space h="l" />
-        <p>企画名</p>
-        <Input required style={{width: 500}} placeholder="企画名を入力してください。" {...form.getInputProps('title')}/>
-        <p>開催場所</p>
-        <Input required placeholder="開催場所を入力してください。" {...form.getInputProps('site')}/>
-        <p>キャッチコピー</p>
-        <Input required placeholder="キャッチコピーを入力してください。" {...form.getInputProps('catchcopy')}/>
-        <p>ターゲット</p>
-        <Input required placeholder="ターゲットを入力してください。" {...form.getInputProps('target')}/>
-        <p>日時</p>
+        <h3>企画名</h3>
+        <Input required style={{width: 500}} placeholder="企画名" {...form.getInputProps('title')}/>
+        <h3>開催場所</h3>
+        <Input required placeholder="開催場所の住所" {...form.getInputProps('region')}/>
+        <h3>キャッチコピー</h3>
+        <Input required placeholder="キャッチコピー" {...form.getInputProps('catchcopy')}/>
+        <h3>ターゲット</h3>
+        <Input required placeholder="ターゲット" {...form.getInputProps('target')}/>
+        <h3>日時</h3>
         <Calendar required value={date} onChange={setDate} firstDayOfWeek="sunday" locale="ja"/>
         <Space h="xl" />
-        <p>開始時刻</p>
+        <h3>開始時刻</h3>
         <Group>
           <Input 
             value={hour} 
@@ -137,13 +137,15 @@ export default function Eventmaker(){
           />
           <p>分</p>
         </Group>
-        <p>お手伝い内容</p>
+        <h3>お手伝い内容</h3>
         <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
-        <p>お礼</p>
+        <h3>お礼</h3>
         <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
-        <p>お問い合わせ先（メールアドレス）</p>
+        <h3>集合場所</h3>
+        <Input required placeholder="集合場所" {...form.getInputProps('site')}/>
+        <h3>お問い合わせ先（メールアドレス）</h3>
         <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
-        <p>タグの設定</p>
+        <h3>タグの設定</h3>
         <Group>
           <Input ref={inputRef} onBlur={ (e) => setTags([...tags, e.target.value])} placeholder='タグ名'/>
           <Button
@@ -163,12 +165,12 @@ export default function Eventmaker(){
             ))
           }
         </ul>
-        <p>イメージ画像の選択</p>
+        <h3>イメージ画像の選択</h3>
         <div style={{height: 100}}>
           {uploading ? "アップロードしています..." : (
             <>
               <>
-                <Paper shadow="sm" radius="xl" p="xl" withBorder>
+                <Paper shadow="xl" radius="xl" p="xl" withBorder>
                   <label className="button primary block" htmlFor="single">
                     {pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
                   </label>
