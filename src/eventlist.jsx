@@ -2,7 +2,7 @@ import { Input, Text, Button, Group, Modal, useMantineTheme, TextInput } from '@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useForm }  from '@mantine/form';
-import { supabase }  from '../supabaseClient';
+import { supabase }  from './supabaseClient';
 import { At } from 'tabler-icons-react';
 import { Makingcard } from './makingcard';
 

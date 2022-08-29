@@ -4,12 +4,12 @@ import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
-import Register from './routes/register';
-import Login from './routes/login';
-import Eventlist from './routes/eventlist';
-import Eventdetail from './routes/eventdetail';
-import Eventmaker from './routes/eventmaker';
-import { EventMembersList } from './routes/eventmemberslist';
+import Register from './register';
+import Login from './login';
+import Eventlist from './eventlist';
+import Eventdetail from './eventdetail';
+import Eventmaker from './eventmaker';
+import { EventMembersList } from './eventmemberslist';
 
 
 ReactDOM.render(

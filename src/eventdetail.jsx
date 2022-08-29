@@ -1,7 +1,7 @@
 import { Image, Text, Title, Container, Space } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 export default function Eventdetail(){
   let params = useParams();

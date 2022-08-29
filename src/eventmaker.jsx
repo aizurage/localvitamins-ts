@@ -1,5 +1,5 @@
 import { Input, Center, TextInput, Button, Group, Space, LoadingOverlay, Paper } from '@mantine/core';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 import { useState, useRef } from 'react';
 import { useForm } from '@mantine/form';
 import { Calendar } from '@mantine/dates';

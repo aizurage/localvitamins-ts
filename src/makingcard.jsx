@@ -1,7 +1,7 @@
 import { Card, Image, Text, Button, Group, Spoiler, Space, Modal } from '@mantine/core';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 export function Makingcard(props)
 {

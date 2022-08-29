@@ -1,16 +1,16 @@
-import { Center, TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
+import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { supabase } from '../supabaseClient';
+import { At } from 'tabler-icons-react';
+import { useNavigate } from 'react-router-dom';
+import { Center } from '@mantine/core';
+import { supabase } from './supabaseClient';
 import { useState } from 'react';
 
-export default function Register() {
+export default function Login() {
   const form = useForm({
     initialValues: {
       email: '',
       password: '',
-      username: '',
-      //firstname: '',
-      //familyname: '',
     },
 
     validate: {
@@ -18,26 +18,14 @@ export default function Register() {
     },
   });
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const submit = async (values) => {
     try {
       setLoading(true)
-      const { error } = await supabase.auth.signUp(
-        {
-          email: values.email,
-          password: values.password,
-        },
-        {
-          data:{
-            username: values.username,
-            //firstname: values.firstname,
-            //familyname: values.familyname,
-          }
-        }
-      )
-      //console.log(form.password);
+      const { error } = await supabase.auth.signIn( values )
       if (error) throw error
-      alert('Check your email for the login link!')
+      navigate('/eventlist');
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {
@@ -47,26 +35,18 @@ export default function Register() {
 
   return (
     <>
-    <Center>
-      <h1>アカウント登録</h1>
-    </Center>
-    <Center>
+      <Center>
+      <h1>ログイン</h1>
+      </Center>
+      <Center>
       <div>
         <LoadingOverlay visible={loading} />
         <form onSubmit={form.onSubmit(submit)}>
           <TextInput
             required
-            label="ユーザーネーム"
-            placeholder='ユーザーネーム'
-            margin="center"
-            style={{width: 500}}
-            {...form.getInputProps('username')}
-          />
-          <Space h="xl" />
-          <TextInput
-            required
             label="メールアドレス"
             placeholder="your@email.com"
+            icon={<At />}
             margin="center"
             style={{width: 500}}
             {...form.getInputProps('email')}
@@ -85,11 +65,11 @@ export default function Register() {
             <Button
               type="submit"
               color="orange"
-            >Submit</Button>
+            >ログイン</Button>
           </Group>
         </form>
       </div>
     </Center>
-    </>
+  </>
   );
 }

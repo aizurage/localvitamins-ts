@@ -1,6 +1,6 @@
 import { Button, Space, Table } from '@mantine/core';
 import { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export function EventMembersList()

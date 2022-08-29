@@ -1,5 +1,4 @@
-import React from 'react';
-import { Button, Group, Container, Center, Title, Space } from '@mantine/core';
+import { Button, Group, Center, Title, Space } from '@mantine/core';
 import { Link } from 'react-router-dom';
 //import './App.css';
 
