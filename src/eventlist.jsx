@@ -5,6 +5,7 @@ import { useForm }  from '@mantine/form';
 import { supabase }  from './supabaseClient';
 import { At } from 'tabler-icons-react';
 import { Makingcard } from './makingcard';
+import { Footer } from './footer';
 
 
 export default function Eventlist()
@@ -132,8 +133,6 @@ export default function Eventlist()
     } 
   }
 
-
-
   return(
     <>
       <Button
@@ -171,7 +170,6 @@ export default function Eventlist()
             variant="gradient" 
             gradient={{ from: 'teal', to: 'lime', deg: 105 }} 
             onClick={show_myEvent} 
-            style={{width:200, height:50}}
           >
           自分のイベントを表示</Button>
         </Group>
@@ -205,7 +203,8 @@ export default function Eventlist()
             required
             {...join_event_form.getInputProps('email')}
           />
-          <Button
+        </form>
+        <Button
             type="submit"
             color="red"
             margin="center"
@@ -213,8 +212,8 @@ export default function Eventlist()
             onClick={() => {setOpened(false)}}
           >送信
           </Button>
-        </form>
       </Modal>
+      <Footer/>
     </>
   );
 }
