@@ -1,6 +1,7 @@
 import { Button, Group, Center, Title, Space } from '@mantine/core';
 import { Link } from 'react-router-dom';
 //import './App.css';
+import { ServiceTerms } from './serviceTerms';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           <Button
             className="app"
             component={Link}
-            to="/register"
+            to="/serviceTerms"
             color="lime"
           >
           ユーザー登録</Button> {" "}
