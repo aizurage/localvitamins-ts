@@ -13,8 +13,6 @@ export default function Eventmaker(){
   const [date, setDate] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [hour, setHour] = useState('');
-  const [minute, setMinute] = useState('');
   const [tags, setTags] = useState([]);
 
   const inputRef = useRef();
@@ -24,7 +22,7 @@ export default function Eventmaker(){
       title: '',
       region: '',
       date: null,
-      time: null,
+      start_time: null,
       catchcopy: '',
       content: '',
       target: '',
@@ -34,8 +32,20 @@ export default function Eventmaker(){
       search_tags:'',
       picture: '',
       planner_uniqueID: '',
+      belongings: '',
+      clothes: '',
     }
   });
+
+  let start  = {
+    hour: '',
+    minute: '',
+  };
+
+  let end = {
+    hour: '',
+    minute:'',
+  };
 
   const [loading, setLoading] = useState(false)
   const submit = async (values) => {
@@ -46,7 +56,8 @@ export default function Eventmaker(){
         title: values.title,
         region: values.region,
         date: jsdate.format('YYYY-MM-DD'),
-        time: hour + ":" + minute + ":00",
+        start_time: start.hour + ":" + start.minute + ":00",
+        end_time: end.hour + ":" + end.minute + ":00",
         catchcopy: values.catchcopy,
         content: values.content,
         target: values.target,
@@ -56,8 +67,10 @@ export default function Eventmaker(){
         search_tags: tags,
         picture: pictureUrl,
         planner_uniqueID: supabase.auth.user().id,
+        belongings: values.belongings,
+        clothes: values.clothes,
       }])
-      navigate('/eventlist');
+      navigate('/home');
       if (error) {
         alert('Please go back and visit again!')
         throw error
@@ -111,34 +124,53 @@ export default function Eventmaker(){
       <form onSubmit={form.onSubmit(submit)}>
         <h1>お手伝い作成、編集</h1>
         <Space h="l" />
-        <h3>企画名</h3>
-        <Input required style={{width: 500}} placeholder="企画名" {...form.getInputProps('title')}/>
+        <h3>お手伝い、イベントの名前</h3>
+        <Input required style={{width: 500}} placeholder="お手伝いの名前" {...form.getInputProps('title')}/>
         <h3>開催場所</h3>
         <Input required placeholder="開催場所の住所" {...form.getInputProps('region')}/>
         <h3>キャッチコピー</h3>
         <Input required placeholder="キャッチコピー" {...form.getInputProps('catchcopy')}/>
-        <h3>ターゲット</h3>
-        <Input required placeholder="ターゲット" {...form.getInputProps('target')}/>
+        <h3>参加して欲しい人</h3>
+        <Input required placeholder="例：農業に興味のある人" {...form.getInputProps('target')}/>
         <h3>日時</h3>
         <Calendar required value={date} onChange={setDate} firstDayOfWeek="sunday" locale="ja"/>
         <Space h="xl" />
         <h3>開始時刻</h3>
         <Group>
           <Input 
-            value={hour} 
+            value={start.hour} 
             icon={<Clock/>}
-            onChange={(e) => setHour(e.target.value)}
+            onChange={(e) => {start.hour = e.target.value;}}
           />
           <p>時</p>
           <Input
-            value={minute}
+            value={start.minute}
             icon={<Clock/>}
-            onChange={(e) => setMinute(e.target.value)}
+            onChange={(e) => {start.minute = e.target.value;}}
+          />
+          <p>分</p>
+        </Group>
+        <h3>終了時刻</h3>
+        <Group>
+          <Input 
+            value={end.hour} 
+            icon={<Clock/>}
+            onChange={(e) => {end.hour = e.target.value;}}
+          />
+          <p>時</p>
+          <Input
+            value={end.minute}
+            icon={<Clock/>}
+            onChange={(e) => {end.minute = e.target.value;}}
           />
           <p>分</p>
         </Group>
         <h3>お手伝い内容</h3>
         <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
+        <h3>持ち物</h3>
+        <Input required placeholder="持ち物" {...form.getInputProps('belongings')}/>
+        <h3>服装</h3>
+        <Input required placeholder="服装" {...form.getInputProps('clothes')}/>
         <h3>お礼</h3>
         <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
         <h3>集合場所</h3>

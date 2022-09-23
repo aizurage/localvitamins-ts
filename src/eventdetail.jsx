@@ -37,15 +37,18 @@ export default function Eventdetail(){
       <Text size="lg">{element.date}, {element.time}</Text>
       <h2>キャッチコピー</h2>
       <Text size="lg">{element.catchcopy}</Text>
-      <h2>ターゲット</h2>
+      <h2>参加して欲しい人</h2>
       <Text size="lg">{element.target}</Text>
       <h2>お手伝い内容</h2>
       <Text size="lg">{element.content}</Text>
+      <h2>持ち物</h2>
+      <Text size="lg">{element.belongings}</Text>
+      <h2>服装</h2>
+      <Text size="lg">{element.clothes}</Text>
       <h2>お礼</h2>
       <Text size="lg">{element.reward}</Text>
       <h2>集合場所</h2>
       <Text size="lg">{element.site}</Text>
-      
       <h2>お問い合わせ先</h2>
       <Text size="lg">{element.inquiry}</Text>
       <Space h="xl" />

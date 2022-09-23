@@ -43,7 +43,7 @@ export function Makingcard(props)
         if (error) throw error;
         const {data} = await supabase.from('EventTable').select()
         props.setEvents(data);
-        navigate('/eventlist');
+        navigate('/home');
       } catch (error) {
         console.log('Error downloading image: ', error.message)
         alert(error.error_description || error.message)
@@ -57,10 +57,11 @@ export function Makingcard(props)
             variant="gradient" 
             gradient={{ from: 'orange', to: 'red' }}
             component={Link}
-            to={`/eventmemberslist/${props.row.id}`}
+            to={`/home/eventmemberslist/${props.row.id}`}
           >
             参加者リスト表示
           </Button> 
+          {" "}
           <Button
             color="dark"
             radius={'xl'}
@@ -112,7 +113,7 @@ export function Makingcard(props)
             color="blue"
             fullWidth style={{ marginTop: 14 }}
             component={Link}
-            to={`/eventdetail/${props.row.id}`}
+            to={`/home/eventdetail/${props.row.id}`}
             >
             詳細を見る
           </Button>

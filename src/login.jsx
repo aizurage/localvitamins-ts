@@ -25,7 +25,7 @@ export default function Login() {
       setLoading(true)
       const { error } = await supabase.auth.signIn( values )
       if (error) throw error
-      navigate('/eventlist');
+      navigate('/home');
     } catch (error) {
       alert(error.error_description || error.message)
     } finally {

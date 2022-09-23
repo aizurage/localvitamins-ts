@@ -6,13 +6,8 @@ import { MantineProvider } from '@mantine/core';
 
 import Register from './register';
 import Login from './login';
-import Eventlist from './eventlist';
-import Eventdetail from './eventdetail';
-import Eventmaker from './eventmaker';
-import EventMembersList from './eventmemberslist';
 import { ServiceTerms } from './serviceTerms';
-import { Withdrawal } from './withdrawal';
-import { Guide } from './guide';
+import Home from './home';
 
 
 ReactDOM.render(
@@ -27,16 +22,10 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="eventlist" element={<Eventlist />} />
-          <Route path='eventlist/serviceTerms' element={<ServiceTerms agree={false}/>}/>
-          <Route path='eventlist/withdrawal' element={<Withdrawal/>}/>
-          <Route path='eventlist/guide' element={<Guide/>}/>
-          <Route path="eventmaker" element={<Eventmaker />} />
-          <Route path="eventdetail/:eventNumber" element={<Eventdetail />}/>
-          <Route path="eventmemberslist/:eventNumber" element={ <EventMembersList/>}/>
-          <Route path="serviceTerms" element={ <ServiceTerms agree={true}/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home/*" element={<Home/>}/>
+          <Route path="/serviceTerms" element={ <ServiceTerms agree={true}/>}/>
           <Route
             path="*"
             element={

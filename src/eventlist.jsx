@@ -1,12 +1,11 @@
 import { Input, Text, Button, Group, Modal, useMantineTheme, TextInput } from '@mantine/core';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useForm }  from '@mantine/form';
 import { supabase }  from './supabaseClient';
 import { At } from 'tabler-icons-react';
 import { Makingcard } from './makingcard';
-import { Footer } from './footer';
-
+//import "./eventlist.css";
 
 export default function Eventlist()
 {
@@ -118,61 +117,41 @@ export default function Eventlist()
     setEvent({eventID, eventTitle})
   }
 
-  const navigate = useNavigate();
-
-  const log_out = async() => {
-    try {
-      const { error } = await supabase.auth.signOut()
-      navigate("/")
-      if (error) {
-        alert('ログアウトに失敗しました。')
-        throw error
-      }
-    } catch (error) {
-      alert(error.error_description || error.message)
-    } 
-  }
-
   return(
     <>
-      <Button
-        size='xs'
-        onClick={log_out}
-        className="logoutButton"
-        >ログアウト</Button>
       <h2>企画タイトル検索</h2>
       <Text>キーワードは最大３つまで入力できます。</Text>
       <Text>複数のキーワードで検索をかけるときは、全角スペースで区切ってください。</Text>
-        <Group position="left">
-          <form onSubmit={search_keywords_form.onSubmit(search_event)}>
-            <Group position="left">
-              <Input
-                placeholder="キーワードを入力して検索"
-                style={{width: 500}}
-                {...search_keywords_form.getInputProps('keywords')}
-              />
-              <Button
-                style={{width: 100}}
-                color="red"
-                type="submit"
-              >
-                検索</Button>
-            </Group>
-          </form>
-          <Button
-            style={{width: 200}}
-            color="pink"
-            component={Link}
-            to={`/eventmaker`}
-          >
-          お手伝い作成</Button>
-          <Button 
-            variant="gradient" 
-            gradient={{ from: 'teal', to: 'lime', deg: 105 }} 
-            onClick={show_myEvent} 
-          >
-          自分のイベントを表示</Button>
-        </Group>
+      <Group position="left">
+        <form onSubmit={search_keywords_form.onSubmit(search_event)}>
+          <Group position="left">
+            <Input
+              placeholder="キーワードを入力して検索"
+              style={{width: 500}}
+              {...search_keywords_form.getInputProps('keywords')}
+            />
+            <Button
+              style={{width: 100}}
+              color="red"
+              type="submit"
+            >
+              検索</Button>
+          </Group>
+        </form>
+        <Button
+          style={{width: 200}}
+          color="pink"
+          component={Link}
+          to={`/home/eventmaker`}
+        >
+        お手伝い作成</Button>
+        <Button 
+          variant="gradient" 
+          gradient={{ from: 'teal', to: 'lime', deg: 105 }} 
+          onClick={show_myEvent} 
+        >
+        自分のイベントを表示</Button>
+      </Group>
       <div>
         <nav
           style={{
@@ -213,7 +192,6 @@ export default function Eventlist()
           >送信
           </Button>
       </Modal>
-      <Footer/>
     </>
   );
 }
