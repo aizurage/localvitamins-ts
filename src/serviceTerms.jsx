@@ -4,6 +4,19 @@ import "./serviceTerms.css";
 
 export function ServiceTerms(props)
 {
+  const agree_confirmation = () => {
+    return(
+      <>
+        <p>以上の個人情報の使用条件について同意いただける場合は、「同意する」ボタンを押してください。アカウント登録画面が表示されます。</p>
+        <Button
+          color="red"
+          component={Link}
+          to="/register"
+        >同意する</Button>
+      </>
+    );
+  }
+
   return(
     <>
       <h1>利用規約</h1>
@@ -17,18 +30,12 @@ export function ServiceTerms(props)
         <li>個人情報の消し方について</li>
         <li className="mark-list">アカウントを消すことで24時間以内に情報が削除されます。</li>
         <li>利用規約変更時の対応について</li>
-        <li className="mark-list">利用規約に変更を加える場合、規約を実際に変更する１ヶ月前に、登録されたメールアドレス宛にメースで通知します。今後の利用規約変更に同意いただけない場合は、退会してください。</li>
+        <li className="mark-list">利用規約に変更を加える場合、規約を実際に変更する１ヶ月前に、登録されたメールアドレス宛にメールで通知します。今後の利用規約変更に同意いただけない場合は、退会してください。</li>
         <li>お問い合わせ先について</li>
         <li className="mark-list">個人情報の取扱で質問がある場合は、localvitamins 佐々木までメールでお問い合わせください。<br/>メールアドレス:wmid23lim@gmail.com</li>
       </ul>
-      <p>以上の個人情報の使用条件について同意いただける場合は、「同意する」ボタンを押してください。アカウント登録画面が表示されます。</p>
       <div>
-        {props.agree ? 
-          <Button
-            color="red"
-            component={Link}
-            to="/register"
-          >同意する</Button>:""}
+        {props.agree ? agree_confirmation():""}
       </div>
     </>
   );
