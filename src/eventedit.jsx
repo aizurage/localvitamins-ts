@@ -138,7 +138,7 @@ export default function Eventedit(){
               <h2>開催日時</h2>
               <Text weight={700} size="lg">{event.date}</Text>
               <Group spacing="xl">
-                <Calendar value={date} onChange={(_date) => {setDate(_date); form.setFieldValue({date: dayjs(date)}); console.log(form.values.date);}} firstDayOfWeek="sunday" locale="ja" />
+                <Calendar value={date} onChange={(_date) => {setDate(_date); form.setFieldValue('date', dayjs(_date));}} firstDayOfWeek="sunday" locale="ja" />
                 <Button
                   color="gray"
                   onClick={() => {form.setFieldValue('date', event.date)}}
@@ -289,7 +289,7 @@ export default function Eventedit(){
                   className='reset'
                   color="gray"
                   style={{height:50}}
-                  onClick={() => {form.reset();}}
+                  onClick={() => {form.setValues(event); form.setFieldValue('date', event.date); setStartHour(""); setStartMinute(""); setEndHour(""); setEndMinute("");}}
                   >リセット</Button>
               </div>
             </div>  
