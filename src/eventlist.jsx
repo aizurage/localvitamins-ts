@@ -119,14 +119,14 @@ export default function Eventlist()
 
   return(
     <>
-      <h2>企画タイトル検索</h2>
+      <h1>お手伝い一覧</h1>
       <Text>キーワードは最大３つまで入力できます。</Text>
       <Text>複数のキーワードで検索をかけるときは、全角スペースで区切ってください。</Text>
       <Group position="left">
         <form onSubmit={search_keywords_form.onSubmit(search_event)}>
           <Group position="left">
             <Input
-              placeholder="キーワードを入力して検索"
+              placeholder="キーワードを入力してお手伝いを検索"
               style={{width: 500}}
               {...search_keywords_form.getInputProps('keywords')}
             />

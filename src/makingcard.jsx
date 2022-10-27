@@ -2,6 +2,7 @@ import { Card, Image, Text, Button, Group, Spoiler, Space, Modal } from '@mantin
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
+import "./makingcard.css";
 
 export function Makingcard(props)
 {
@@ -52,7 +53,7 @@ export function Makingcard(props)
 
     const ownerOption = () => {
       return(
-        <>
+        <div className='ownerOption'>
           <Button
             variant="gradient" 
             gradient={{ from: 'orange', to: 'red' }}
@@ -70,6 +71,15 @@ export function Makingcard(props)
           >
             消去
           </Button>
+          <Button
+            color="pink"
+            radius={'xl'}
+            className='eventedit'
+            component={Link}
+            to={`/home/eventedit/${props.row.id}`}
+          >
+            編集
+          </Button>
           <Modal
             opened={opened}
             onClose={() => setOpened(false)}
@@ -85,13 +95,13 @@ export function Makingcard(props)
               </>
             }
           </Modal>
-        </>
+        </div>
       );
     }
   
     return (
-      <div style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block"}} key={props.row.id}>
-        <Card style={{height: 450}} shadow="sm" p="lg">
+      <div className="card" style={{ width: 340, margin: 'auto', padding: 10, display: "inline-block"}} key={props.row.id}>
+        <Card style={{height: 500}} shadow="sm" p="lg">
           <Card.Section>
             <Image src={pictureurl} height={160} alt={props.row.title} />
           </Card.Section>
@@ -105,29 +115,33 @@ export function Makingcard(props)
           </Text>
   
           <Spoiler maxHeight={100} showLabel="もっと表示" hideLabel="部分表示">
-            {props.row.catchcopy}
+            {props.row.content}
           </Spoiler>
 
-          <Button
-            variant="light"
-            color="blue"
-            fullWidth style={{ marginTop: 14 }}
-            component={Link}
-            to={`/home/eventdetail/${props.row.id}`}
-            >
-            詳細を見る
-          </Button>
-  
-          <Button
-            variant="light"
-            color="indigo"
-            fullWidth style={{ marginTop: 14 }}
-            onClick={ () => props.open(props.row.id, props.row.title) }
-            >参加する
-          </Button>
-          <Space h="md" />
-          <div>
-            {checkMyEvent() ? ownerOption() : ""}
+          <div className='buttons'>
+            <Button
+              variant="light"
+              color="blue"
+              fullWidth 
+              style={{ marginTop: 14 }}
+              component={Link}
+              to={`/home/eventdetail/${props.row.id}`}
+              >
+              詳細を見る
+            </Button>
+    
+            <Button
+              variant="light"
+              color="indigo"
+              fullWidth 
+              style={{ marginTop: 14 }}
+              onClick={ () => props.open(props.row.id, props.row.title) }
+              >参加する
+            </Button>
+            <Space h="md" />
+            <div className='ownerOption'>
+              {checkMyEvent() ? ownerOption() : ""}
+            </div>
           </div>
         </Card>
       </div>

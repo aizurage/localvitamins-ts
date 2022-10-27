@@ -1,0 +1,13 @@
+div.card{
+    position:relative;
+}
+
+.buttons{
+    position: absolute;
+    bottom: 10%;
+    width: 90%;
+}
+
+.ownerOption{
+    height: 15px;
+}

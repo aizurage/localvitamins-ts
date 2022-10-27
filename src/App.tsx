@@ -1,7 +1,6 @@
 import { Button, Group, Center, Title, Space } from '@mantine/core';
 import { Link } from 'react-router-dom';
 //import './App.css';
-import { ServiceTerms } from './serviceTerms';
 
 function App() {
   return (

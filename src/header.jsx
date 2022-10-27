@@ -55,8 +55,6 @@ export function Header()
                         <nav>
                             <ul>
                                 <li onClick={() => { navigate("/home/serviceTerms", false) }}>利用規約(個人情報の取り扱いについて)</li>
-                                <li onClick={() => { navigate("/home/guide") }}>使い方ガイド</li>
-                                <li onClick={() => { navigate("/home/withdrawal") }}>解約方法</li>
                                 <li onClick={() => { setDialogopen(true) }}>ログアウト</li>
                             </ul>
                         </nav>
