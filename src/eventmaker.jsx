@@ -7,7 +7,6 @@ import { At } from 'tabler-icons-react';
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
-import VisuallyHidden from '@reach/visually-hidden';
 
 export default function Eventmaker(){
   const [date, setDate] = useState(null);
@@ -173,14 +172,14 @@ export default function Eventmaker(){
                   </label>
                 </Paper>
               </>
-              <VisuallyHidden>
+              <div style={{display: 'none'}}>
                 <input 
-                  type="file" 
-                  id="single"
-                  accept="image/*"
-                  onChange={uploadImage}
-                  disabled={uploading}/>
-              </VisuallyHidden>
+                    type="file" 
+                    id="single"
+                    accept="image/*"
+                    onChange={uploadImage}
+                    disabled={uploading}/>
+              </div>
             </>
           )}
         </div>

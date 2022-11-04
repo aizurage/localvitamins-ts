@@ -7,8 +7,6 @@ import { At } from 'tabler-icons-react';
 import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import { useParams, useNavigate } from 'react-router-dom';
-import VisuallyHidden from '@reach/visually-hidden';
-
 import "./eventedit.css";
 
 export default function Eventedit(){
