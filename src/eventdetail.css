@@ -1,0 +1,14 @@
+.eventdetail{
+    display: flex;
+    width: 1500px;
+}
+
+.detail{
+    background-color: antiquewhite;
+    width: 80%;
+}
+
+.detail_recruiter{
+    background-color: pink;
+    height: 700px;
+}

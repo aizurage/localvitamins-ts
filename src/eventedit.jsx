@@ -1,4 +1,4 @@
-import { Button, Group, Image, Paper, Space, Text, TextInput } from '@mantine/core';
+import { Avatar, Button, Center, Group, Image, Space, Text, TextInput } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState, useEffect } from 'react';
 import { useForm } from '@mantine/form';
@@ -12,15 +12,16 @@ import "./eventedit.css";
 export default function Eventedit(){
     let params = useParams();
     const [ event, setEvent ] = useState([]);
-    const [pictureUrl, setPictureUrl] = useState('');
-    //const [uploading, setUploading] = useState(false);
+    const [eventPictureUrl, setEventPictureUrl] = useState('');
+    const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('');
     const navigate = useNavigate();
-
+    
     useEffect(() => {
       const getData = async () => {
         let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
         setEvent(data[0])
-        getImage(data[0].picture)
+        getEventImage(data[0].picture)
+        getRecruiterImage(data[0].recruiter_picture)
       }
       getData()
     }, []);
@@ -31,46 +32,24 @@ export default function Eventedit(){
       }
     });
 
-    const getImage = async (imageUrl) => {
-        try{
-            const { data, error } = await supabase.storage.from("event-images").download(imageUrl);
-            if(error) throw error;
-            setPictureUrl(URL.createObjectURL(data));
-        } catch (error) {
-            console.log('Error downloading image: ', error.message)
-            alert(error.error_description || error.message)
-        }
+    const getEventImage = async (imageUrl) => {
+      try {
+        await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
+      } catch (error) {
+        console.log('Error downloading image: ', error.message)
+        alert(error.error_description || error.message)
+      }
+    }
+  
+    const getRecruiterImage = async (imageUrl) => {
+      try {
+        await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
+      } catch (error) {
+        console.log('Error downloading image: ', error.message)
+        alert(error.error_description || error.message)
+      }
     }
 
-    /*const uploadImage = async (picture) => {
-      try {
-        setUploading(true);
-  
-        if (!picture.target.files || picture.target.files.length === 0) {
-          throw new Error("You must select an image to upload.");
-        }
-  
-        const file = picture.target.files[0];
-        const fileExt = file.name.split('.').pop();
-        const filename = `${Math.random()}.${fileExt}`;
-        const filepath = `${filename}`;
-  
-        let {data, error: uploadError} = await supabase.storage.from("event-images").upload(filepath, file);
-  
-        setPictureUrl(data["key"]);
-  
-        if (uploadError) {
-          throw uploadError;
-        }
-  
-        setPictureUrl(filepath);
-        
-      } catch (error) {
-        alert(error.message);
-      } finally {
-        setUploading(false);
-      }
-    }*/
 
     const [date, setDate] = useState(event.date);
     const [startHour, setStartHour] = useState("");
@@ -102,12 +81,13 @@ export default function Eventedit(){
     }
 
     return(  
+      <Center>
         <form className="editform" onSubmit={form.onSubmit(submit)}>
             <div className='form_body' onLoad={() => {form.setValues(event)}}>
               <h1>お手伝い編集</h1>
               <h3 className="warning" color='red'>（重要）訂正したい項目だけを入力してください。</h3>
               <h2>写真</h2>
-              <Image src={pictureUrl} alt={event.title} />
+              <Image src={eventPictureUrl} alt={event.title} />
 
               <h2>タイトル</h2>
               <Text weight={700} size="lg">{event.title}</Text>
@@ -270,8 +250,32 @@ export default function Eventedit(){
               </Group>
             </div>
 
-            <div className='blankSpace'></div>
-
+            <div className='recruiter_space'>
+              <div className='recruiter'>
+                <h1>お手伝い募集者</h1>
+                <Avatar src={recruiterPictureUrl} radius="xl" size={200}/>
+                <h3>お手伝い募集者の名前</h3>
+                <Text weight={700} size="lg">{event.recruiter_name}</Text>
+                <TextInput placeholder="お手伝い募集者の名前（訂正後）" {...form.getInputProps('recruiter_name')} />
+                <Button
+                  color="gray"
+                  onClick={() => {form.setFieldValue('recruiter_name', event.recruiter_name)}}
+                >
+                  キャンセル
+                </Button>
+                <br />
+                <h3>お手伝い募集者の情報</h3>
+                <Text weight={700} size="lg">{event.recruiter_info}</Text>
+                <TextInput placeholder="お手伝い募集者の情報（訂正後）" {...form.getInputProps('recruiter_info')} />
+                <Button
+                  color="gray"
+                  onClick={() => {form.setFieldValue('recruiter_info', event.recruiter_info)}}
+                >
+                  キャンセル
+                </Button>
+              </div>
+            </div>
+            
             <div className='right_side'>
               <div className='tracking_option'>
                 <Space h="xl"/>
@@ -292,5 +296,6 @@ export default function Eventedit(){
               </div>
             </div>  
         </form>
+      </Center>
     );
 }

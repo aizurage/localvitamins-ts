@@ -8,19 +8,28 @@ h3.warning{
 
 form.editform{
     display: flex;
+    width: 1500px;
 }
 
 .form_body{
-    width: 70%;
+    width: 50%;
 }
 
-.blankSpace{
-    width: 10%;
+.recruiter_space{
+    position: relative;
+    width: 30%;
+}
+
+.recruiter{
+    background-color:mistyrose;
+    position: absolute;
+    width: 100%;
+    top: 135px;
 }
 
 .right_side{
     right: 10;
-    width: 25%;
+    width: 20%;
 }
 
 .tracking_option{
