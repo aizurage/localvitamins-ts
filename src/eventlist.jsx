@@ -45,12 +45,11 @@ export default function Eventlist()
         familyname: values.familyname,
         email: values.email,
       }])
-      if (error) {
-        alert('Information cannot be registered!')
-        throw error
-      }
+      if (error) throw error
     } catch (error) {
-      alert(error.error_description || error.message)
+      console.log('Error joining event process') 
+      console.log(error.error_description || error.message)
+      alert("参加申請処理に失敗しました。運営チームにお問い合わせください。イベント一覧画面のメニューにあります。")
     } 
   }
 

@@ -27,7 +27,9 @@ export default function Login() {
       if (error) throw error
       navigate('/home');
     } catch (error) {
-      alert(error.error_description || error.message)
+      console.log("Log in failed");
+      console.log(error.message);
+      alert("ログイン処理に失敗しました。")
     } finally {
       setLoading(false)
     }

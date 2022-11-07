@@ -14,12 +14,11 @@ export function Header()
         try {
         const { error } = await supabase.auth.signOut()
         navigate("/")
-        if (error) {
-            alert('ログアウトに失敗しました。')
-            throw error
-        }
+        if (error) throw error
         } catch (error) {
-        alert(error.error_description || error.message)
+            console.log("Log out failed");
+            console.log(error.message);
+            alert('ログアウトに失敗しました。')
         } 
     }
 
@@ -58,7 +57,7 @@ export function Header()
                                 <li onClick={() => { setDialogopen(true) }}>ログアウト</li>
                             </ul>
                         </nav>
-                        <p>お問い合わせはこちら<br/> wmid23lim@gmail.com  までお願いします。</p>
+                        <p>お問い合わせはこちら<br/> localvitamins@gmail.com  までお願いします。</p>
                     </>
                 }
             </Drawer>
