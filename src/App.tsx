@@ -7,7 +7,7 @@ function App() {
     <>
         <Space h="xl"/>
         <Center>
-          <h1>企画運営アプリ</h1>
+          <h1>お手伝いマッチングアプリ</h1>
         </Center>
         <Space h="xl"/>
         <Center>
