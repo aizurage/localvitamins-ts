@@ -1,4 +1,4 @@
-import { Button, Chip, Chips, Container, Group, Input, LoadingOverlay, Paper, Space, TextInput } from '@mantine/core';
+import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
@@ -8,10 +8,14 @@ import 'dayjs/locale/ja';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
+import './eventmaker.css';
+
 export default function Eventmaker(){
   const [date, setDate] = useState(null);
-  const [pictureUrl, setPictureUrl] = useState(null);
-  const [uploading, setUploading] = useState(false);
+  const [event_image_pictureUrl, setEvent_image_pictureUrl] = useState(null);
+  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null);
+  const [event_image_uploading, setEvent_image_uploading] = useState(false);
+  const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false);
   const [tags, setTags] = useState("農作業");
 
   const form = useForm({
@@ -31,6 +35,9 @@ export default function Eventmaker(){
       planner_uniqueID: '',
       belongings: '',
       clothes: '',
+      recruiter_name: '',
+      recruiter_info: '',
+      recruiter_picture: '',
     }
   });
 
@@ -56,10 +63,13 @@ export default function Eventmaker(){
         reward: values.reward,
         inquiry: values.inquiry,
         search_tags: tags,
-        picture: pictureUrl,
+        picture: event_image_pictureUrl,
         planner_uniqueID: supabase.auth.user().id,
         belongings: values.belongings,
         clothes: values.clothes,
+        recruiter_name: values.recruiter_name,
+        recruiter_info: values.recruiter_info,
+        recruiter_picture: recruiter_pictureUrl,
       }])
       navigate('/home');
       if (error) {
@@ -73,123 +83,227 @@ export default function Eventmaker(){
     }
   }
 
-  const uploadImage = async (picture) => {
-    try {
-      setUploading(true);
+  const [eventpicture, setEventPicture] = useState(null);
+  const [recruiterpicture, setRecruiterPicture] = useState(null);
 
+  const uploadEventImage = async (picture) => {
+    try {
+      setEvent_image_uploading(true);
       if (!picture.target.files || picture.target.files.length === 0) {
         throw new Error("You must select an image to upload.");
       }
-
       const file = picture.target.files[0];
       const fileExt = file.name.split('.').pop();
       const filename = `${Math.random()}.${fileExt}`;
       const filepath = `${filename}`;
-
       let {data, error: uploadError} = await supabase.storage.from("event-images").upload(filepath, file);
-
-      setPictureUrl(data["key"]);
-
+      setEvent_image_pictureUrl(data["key"]);
+      setEventPicture(URL.createObjectURL(file));
       if (uploadError) {
         throw uploadError;
       }
-
-      setPictureUrl(filepath);
-      
+      setEvent_image_pictureUrl(filepath);
     } catch (error) {
       alert(error.message);
     } finally {
-      setUploading(false);
+      setEvent_image_uploading(false);
+    }
+  }
+
+  const uploadRecruiterImage = async (picture) => {
+    try {
+      setRecruiter_image_uploading(true);
+      if (!picture.target.files || picture.target.files.length === 0) {
+        throw new Error("You must select an image to upload.");
+      }
+      const file = picture.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const filename = `${Math.random()}.${fileExt}`;
+      const filepath = `${filename}`;
+      let {data, error: uploadError} = await supabase.storage.from("recruiter-images").upload(filepath, file);
+      setRecruiter_pictureUrl(data["key"]);
+      setRecruiterPicture(URL.createObjectURL(file));
+      if (uploadError) {
+        throw uploadError;
+      }
+      setRecruiter_pictureUrl(filepath);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setRecruiter_image_uploading(false);
     }
   }
 
   const navigate = useNavigate();
+  const [active, setActive] = useState(0);
+  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
   return(
     <Container>
       <LoadingOverlay visible={loading} />
       <form onSubmit={form.onSubmit(submit)}>
-        <h1>お手伝い新規作成</h1>
-        <Space h="l" />
-        <h3>お手伝い、イベントの名前</h3>
-        <Input required style={{width: 500}} placeholder="お手伝いの名前" {...form.getInputProps('title')}/>
-        <h3>開催場所</h3>
-        <Input required placeholder="開催場所の住所" {...form.getInputProps('region')}/>
-        <h3>参加して欲しい人</h3>
-        <Input required placeholder="例：農業に興味のある人" {...form.getInputProps('target')}/>
-        <h3>日時</h3>
-        <Calendar required value={date} onChange={setDate} firstDayOfWeek="sunday" locale="ja"/>
-        <Space h="xl" />
-        <Group>
-          <div>
-            <h3>開始時刻</h3>
-            <Group>
-                <Input required value={startHour} onChange={(e) => setStartHour(e.target.value)}/>
-                <p>時</p>
-                <Input required value={startMinute} onChange={(e) => setStartMinute(e.target.value)}/>
-                <p>分</p>
-            </Group>
-          </div>
-          {"   "}
-          <div>
-            <h3>終了時刻</h3>
-            <Group>
-                <Input required value={endHour} onChange={(e) => setEndHour(e.target.value)}/>
-                <p>時</p>
-                <Input required value={endMinute} onChange={(e) => setEndMinute(e.target.value)}/>
-                <p>分</p>
-            </Group>
-          </div>
+        <Group position="center" mt="xl">
+          <Button variant="default" onClick={prevStep}>戻る</Button>
+          <Button color="yellow" onClick={nextStep}>次へ</Button>
         </Group>
-        <h3>お手伝い内容</h3>
-        <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
-        <h3>持ち物</h3>
-        <Input required placeholder="持ち物" {...form.getInputProps('belongings')}/>
-        <h3>服装</h3>
-        <Input required placeholder="服装" {...form.getInputProps('clothes')}/>
-        <h3>お礼</h3>
-        <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
-        <h3>集合場所</h3>
-        <Input required placeholder="集合場所" {...form.getInputProps('site')}/>
-        <h3>お問い合わせ先（メールアドレス）</h3>
-        <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
-        <h3>タグの設定</h3>
-        <Chips multiple={false} value={tags} onChange={(e) => {setTags(e);}}>
-          <Chip size="lg" value="農作業">農作業</Chip>
-          <Chip size="lg" value="雪作業">雪作業</Chip>
-          <Chip size="lg" value="ゴミ拾い">ゴミ拾い</Chip>
-          <Chip size="lg" value="お祭り">お祭り</Chip>
-          <Chip size="lg" value="年中行事">年中行事</Chip>
-          <Chip size="lg" value="その他">その他</Chip>
-        </Chips>
-        <h3>イメージ画像の選択</h3>
-        <div style={{height: 100}}>
-          {uploading ? "アップロードしています..." : (
-            <>
-              <>
-                <Paper shadow="xl" radius="xl" p="xl" withBorder>
-                  <label className="button primary block" htmlFor="single">
-                    {pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
-                  </label>
-                </Paper>
-              </>
-              <div style={{display: 'none'}}>
-                <input 
-                    type="file" 
-                    id="single"
-                    accept="image/*"
-                    onChange={uploadImage}
-                    disabled={uploading}/>
+        <Space h='xl'/>
+        <Stepper color="orange" active={active} onStepClick={setActive} breakpoint="sm">
+          <Stepper.Step label="お手伝い情報入力" description="お手伝いの基本情報を入力してください。">
+            <h1>お手伝い新規作成</h1>
+            <Space h="l" />
+            <h3>お手伝い、イベントの名前</h3>
+            <Input required style={{width: 500}} placeholder="お手伝いの名前" {...form.getInputProps('title')}/>
+            <h3>開催場所</h3>
+            <Input required placeholder="開催場所の住所" {...form.getInputProps('region')}/>
+            <h3>参加して欲しい人</h3>
+            <Input required placeholder="例：農業に興味のある人" {...form.getInputProps('target')}/>
+            <h3>日時</h3>
+            <Calendar required value={date} onChange={setDate} firstDayOfWeek="sunday" locale="ja"/>
+            <Space h="xl" />
+            <Group>
+              <div>
+                <h3>開始時刻</h3>
+                <Group>
+                    <Input required value={startHour} onChange={(e) => setStartHour(e.target.value)}/>
+                    <p>時</p>
+                    <Input required value={startMinute} onChange={(e) => setStartMinute(e.target.value)}/>
+                    <p>分</p>
+                </Group>
               </div>
-            </>
-          )}
-        </div>
-        <Group position="center" mt="md">
-          <Button
-            type="submit"
-            color="green"
-            style={{height:50, width: 100}}
-          >提出</Button>
-        </Group>
+              {"   "}
+              <div>
+                <h3>終了時刻</h3>
+                <Group>
+                    <Input required value={endHour} onChange={(e) => setEndHour(e.target.value)}/>
+                    <p>時</p>
+                    <Input required value={endMinute} onChange={(e) => setEndMinute(e.target.value)}/>
+                    <p>分</p>
+                </Group>
+              </div>
+            </Group>
+            <h3>お手伝い内容</h3>
+            <TextInput required placeholder="企画内容" {...form.getInputProps('content')}/>
+            <h3>持ち物</h3>
+            <Input required placeholder="持ち物" {...form.getInputProps('belongings')}/>
+            <h3>服装</h3>
+            <Input required placeholder="服装" {...form.getInputProps('clothes')}/>
+            <h3>お礼</h3>
+            <Input required placeholder="お礼" {...form.getInputProps('reward')}/>
+            <h3>集合場所</h3>
+            <Input required placeholder="集合場所" {...form.getInputProps('site')}/>
+            <h3>お問い合わせ先（メールアドレス）</h3>
+            <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
+            <h3>タグの設定</h3>
+            <Chips multiple={false} value={tags} onChange={(e) => {setTags(e);}}>
+              <Chip size="lg" value="農作業">農作業</Chip>
+              <Chip size="lg" value="雪作業">雪作業</Chip>
+              <Chip size="lg" value="ゴミ拾い">ゴミ拾い</Chip>
+              <Chip size="lg" value="お祭り">お祭り</Chip>
+              <Chip size="lg" value="年中行事">年中行事</Chip>
+              <Chip size="lg" value="その他">その他</Chip>
+            </Chips>
+            <h3>イメージ画像の選択</h3>
+            <div style={{height: 100}}>
+              {event_image_uploading ? "アップロードしています..." : (
+                <>
+                  <>
+                    <Paper shadow="xl" radius="xl" p="xl" withBorder>
+                      <label className="button primary block" htmlFor="single">
+                        {event_image_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                      </label>
+                    </Paper>
+                  </>
+                  <div style={{display: 'none'}}>
+                    <input 
+                        required
+                        type="file" 
+                        id="single"
+                        accept="image/*"
+                        onChange={uploadEventImage}
+                        disabled={event_image_uploading}/>
+                  </div>
+                </>
+              )}
+            </div>
+          </Stepper.Step>
+          <Stepper.Step label="お手伝い募集者情報入力" description="お手伝いをお願いした人の情報を入力してください。">
+            <h1>お手伝い募集者情報入力</h1>
+            <h3>募集者の名前</h3>
+            <Input required style={{width: 500}} placeholder="お手伝い募集者の名前" {...form.getInputProps('recruiter_name')}/>
+            <h3>募集者の情報</h3>
+            <TextInput required placeholder="募集者の情報" {...form.getInputProps('recruiter_info')}/>
+            <h3>画像の登録</h3>
+            <div style={{height: 100}}>
+              {recruiter_image_uploading ? "アップロードしています..." : (
+                <>
+                  <>
+                    <Paper shadow="xl" radius="xl" p="xl" withBorder>
+                      <label className="button primary block" htmlFor="single">
+                        {recruiter_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                      </label>
+                    </Paper>
+                  </>
+                  <div style={{display: 'none'}}>
+                    <input 
+                        required
+                        type="file" 
+                        id="single"
+                        accept="image/*"
+                        onChange={uploadRecruiterImage}
+                        disabled={recruiter_image_uploading}/>
+                  </div>
+                </>
+              )}
+            </div>
+          </Stepper.Step>
+          <Stepper.Step label="入力情報確認" description="入力した情報を確認してください。">
+            <h1>入力情報確認</h1>
+            <h3>入力した情報が表示されます。訂正がない場合は提出ボタンを押してください。訂正事項がある場合は、お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。</h3>
+            <div className='input_content'>
+              <div className='input_result'>
+                <Image src={eventpicture} width={400}/>
+                <Title order={1}>{form.values.title}</Title>
+                <h2>開催場所</h2>
+                <Text size="lg">{form.values.region}</Text>
+                <h2>開催日時</h2>
+                <Text size="lg">{dayjs(date).format('YYYY-MM-DD')}</Text>
+                <ul>
+                  <li>開示時刻:{startHour + ":" + startMinute + ":00"}</li>
+                  <li>終了時刻:{endHour + ":" + endMinute + ":00"}</li>
+                </ul>
+                <h2>参加して欲しい人</h2>
+                <Text size="lg">{form.values.target}</Text>
+                <h2>お手伝い内容</h2>
+                <Text size="lg">{form.values.content}</Text>
+                <h2>持ち物</h2>
+                <Text size="lg">{form.values.belongings}</Text>
+                <h2>服装</h2>
+                <Text size="lg">{form.values.clothes}</Text>
+                <h2>お礼</h2>
+                <Text size="lg">{form.values.reward}</Text>
+                <h2>集合場所</h2>
+                <Text size="lg">{form.values.site}</Text>
+                <h2>お問い合わせ先</h2>
+                <Text size="lg">{form.values.inquiry}</Text>
+              </div>
+              <div className='recruiter_info'>
+                  <h1>お願いした人</h1>
+                  <Image src={recruiterpicture} width={200}/>
+                  <Text size="lg">{form.values.recruiter_name}さん</Text>
+                  <Text size="lg">{form.values.recruiter_info}</Text>
+              </div>
+            </div>  
+          </Stepper.Step>
+          <Stepper.Completed>
+            <h1>入力完了しました！</h1>
+            <h3>提出ボタンを押すことで、作成したお手伝いが登録、公開されます。</h3>
+            <Button
+              type="submit"
+              color="green"
+              style={{height:50, width: 100}}
+            >提出</Button>
+          </Stepper.Completed>
+        </Stepper>
       </form>
     </Container>
   );

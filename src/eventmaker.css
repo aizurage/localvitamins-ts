@@ -1,0 +1,14 @@
+.input_content{
+    display: flex;
+    width: 1000px;
+}
+
+.input_result{
+    width: 50%;
+    background-color:rgb(185, 245, 185);
+}
+
+.recruiter_info{
+    width: 50%;
+    background-color: coral;
+}
