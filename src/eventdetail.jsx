@@ -25,8 +25,9 @@ export default function Eventdetail(){
     try {
       await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
-      console.log('Error downloading image: ', error.message)
-      alert(error.error_description || error.message)
+      console.log('Error downloading image') 
+      console.log(error.error_description || error.message)
+      alert("イベントイメージ写真のダウンロードに失敗しました。")
     }
   }
 
@@ -34,8 +35,9 @@ export default function Eventdetail(){
     try {
       await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
-      console.log('Error downloading image: ', error.message)
-      alert(error.error_description || error.message)
+      console.log('Error downloading image')
+      console.log(error.error_description || error.message)
+      alert("お手伝い募集者の写真ダウンロードに失敗しました。")
     }
   }
 

@@ -23,8 +23,9 @@ export function Makingcard(props)
       try {
         await supabase.storage.from("event-images").download(imageUrl).then(result => setPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
       } catch (error) {
-        console.log('Error downloading image: ', error.message)
-        alert(error.error_description || error.message)
+        console.log('Error downloading image')
+        console.log(error.error_description || error.message)
+        alert("写真のダウンロードに失敗した、もしくは写真がないお手伝いがありました。アプリの動作に影響は無いので、タブを閉じてください。")
       }
     }
 
@@ -33,8 +34,9 @@ export function Makingcard(props)
         const { error } = await supabase.from("Participants").delete().match({eventID: props.row.eventID});
         if (error) throw error;
       } catch (error) {
-        console.log('Error downloading image: ', error.message)
-        alert(error.error_description || error.message)
+        console.log('Event participants deletion failed')
+        console.log(error.error_description || error.message)
+        alert("イベント参加者のデータ消去に失敗しました。")
       }
     }
 
@@ -46,8 +48,9 @@ export function Makingcard(props)
         props.setEvents(data);
         navigate('/home');
       } catch (error) {
-        console.log('Error downloading image: ', error.message)
-        alert(error.error_description || error.message)
+        console.log('Event deletion failed')
+        console.log(error.error_description || error.message)
+        alert("イベントのデータ消去に失敗しました。")
       }
     }
 

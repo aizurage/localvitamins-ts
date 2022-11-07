@@ -36,8 +36,9 @@ export default function Eventedit(){
       try {
         await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
       } catch (error) {
-        console.log('Error downloading image: ', error.message)
-        alert(error.error_description || error.message)
+        console.log('Error downloading image')
+        console.log(error.error_description || error.message)
+        alert("イベントイメージ写真のダウンロードに失敗しました。")
       }
     }
   
@@ -45,8 +46,9 @@ export default function Eventedit(){
       try {
         await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
       } catch (error) {
-        console.log('Error downloading image: ', error.message)
-        alert(error.error_description || error.message)
+        console.log('Error downloading image')
+        console.log(error.error_description || error.message)
+        alert("お手伝い募集者の写真ダウンロードに失敗しました。")
       }
     }
 
@@ -71,12 +73,11 @@ export default function Eventedit(){
         const { error } = await supabase.from("EventTable").upsert(form.values);
         navigate('/home');
         
-        if (error) {
-          alert('Please go back and visit again!')
-          throw error
-        }
+        if (error) throw error
       } catch (error) {
-        alert(error.error_description || error.message)
+        console.log('Error event update')
+        console.log(error.error_description || error.message)
+        alert("イベントを更新できませんでした。解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。")
       }
     }
 

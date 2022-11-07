@@ -72,12 +72,11 @@ export default function Eventmaker(){
         recruiter_picture: recruiter_pictureUrl,
       }])
       navigate('/home');
-      if (error) {
-        alert('Please go back and visit again!')
-        throw error
-      }
+      if (error) throw error
     } catch (error) {
-      alert(error.error_description || error.message)
+      console.log("Error event registration");
+      console.log(error.error_description || error.message);
+      alert("イベントを投稿できませんでした。入力不足がないかどうかご確認ください。それでも解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。")
     } finally {
       setLoading(false)
     }
@@ -99,12 +98,12 @@ export default function Eventmaker(){
       let {data, error: uploadError} = await supabase.storage.from("event-images").upload(filepath, file);
       setEvent_image_pictureUrl(data["key"]);
       setEventPicture(URL.createObjectURL(file));
-      if (uploadError) {
-        throw uploadError;
-      }
+      if (uploadError) throw uploadError;
       setEvent_image_pictureUrl(filepath);
     } catch (error) {
-      alert(error.message);
+      console.log("Error uploading event image");
+      console.log(error.error_description || error.message);
+      alert("イベントイメージ写真のアップロードに失敗しました。");
     } finally {
       setEvent_image_uploading(false);
     }
@@ -123,12 +122,12 @@ export default function Eventmaker(){
       let {data, error: uploadError} = await supabase.storage.from("recruiter-images").upload(filepath, file);
       setRecruiter_pictureUrl(data["key"]);
       setRecruiterPicture(URL.createObjectURL(file));
-      if (uploadError) {
-        throw uploadError;
-      }
+      if (uploadError) throw uploadError;
       setRecruiter_pictureUrl(filepath);
     } catch (error) {
-      alert(error.message);
+      console.log("Error uploading recruiter image");
+      console.log(error.error_description || error.message);
+      alert("お手伝い募集者の写真アップロードに失敗しました。");
     } finally {
       setRecruiter_image_uploading(false);
     }
