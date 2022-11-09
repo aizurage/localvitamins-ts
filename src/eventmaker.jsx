@@ -36,7 +36,8 @@ export default function Eventmaker(){
       belongings: '',
       clothes: '',
       recruiter_name: '',
-      recruiter_info: '',
+      recruiter_introduction: '',
+      recruiter_comment: '',
       recruiter_picture: '',
     }
   });
@@ -68,7 +69,8 @@ export default function Eventmaker(){
         belongings: values.belongings,
         clothes: values.clothes,
         recruiter_name: values.recruiter_name,
-        recruiter_info: values.recruiter_info,
+        recruiter_introduction: values.recruiter_introduction,
+        recruiter_comment: values.recruiter_comment,
         recruiter_picture: recruiter_pictureUrl,
       }])
       navigate('/home');
@@ -230,8 +232,10 @@ export default function Eventmaker(){
             <h1>お手伝い募集者情報入力</h1>
             <h3>募集者の名前</h3>
             <Input required style={{width: 500}} placeholder="お手伝い募集者の名前" {...form.getInputProps('recruiter_name')}/>
-            <h3>募集者の自己紹介文</h3>
-            <Textarea required autosize minRows={10} placeholder="募集者の自己紹介文" {...form.getInputProps('recruiter_info')}/>
+            <h3>自己紹介文</h3>
+            <TextInput required placeholder="募集者の自己紹介文" {...form.getInputProps('recruiter_introduction')}/>
+            <h3>一言コメント</h3>
+            <TextInput required placeholder="募集者の一言コメント" {...form.getInputProps('recruiter_comment')}/>
             <h3>画像の登録</h3>
             <div style={{height: 100}}>
               {recruiter_image_uploading ? "アップロードしています..." : (
@@ -290,7 +294,10 @@ export default function Eventmaker(){
                   <h1>お願いした人</h1>
                   <Image src={recruiterpicture} width={200}/>
                   <Text size="lg">{form.values.recruiter_name}さん</Text>
-                  <Text size="lg">{form.values.recruiter_info}</Text>
+                  <p>自己紹介</p>
+                  <Text size="lg">{form.values.recruiter_introduction}</Text>
+                  <p>一言コメント</p>
+                  <Text size="lg">{form.values.recruiter_comment}</Text>
               </div>
             </div>  
           </Stepper.Step>
