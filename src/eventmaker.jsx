@@ -1,4 +1,4 @@
-import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core';
+import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, Textarea, TextInput, Title } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
@@ -140,6 +140,7 @@ export default function Eventmaker(){
   return(
     <Container>
       <LoadingOverlay visible={loading} />
+      <h1>お手伝い新規作成</h1>
       <form onSubmit={form.onSubmit(submit)}>
         <Group position="center" mt="xl">
           <Button variant="default" onClick={prevStep}>戻る</Button>
@@ -148,7 +149,7 @@ export default function Eventmaker(){
         <Space h='xl'/>
         <Stepper color="orange" active={active} onStepClick={setActive} breakpoint="sm">
           <Stepper.Step label="お手伝い情報入力" description="お手伝いの基本情報を入力してください。">
-            <h1>お手伝い新規作成</h1>
+          <h1>お手伝い基本情報入力</h1>
             <Space h="l" />
             <h3>お手伝い、イベントの名前</h3>
             <Input required style={{width: 500}} placeholder="お手伝いの名前" {...form.getInputProps('title')}/>
@@ -229,8 +230,8 @@ export default function Eventmaker(){
             <h1>お手伝い募集者情報入力</h1>
             <h3>募集者の名前</h3>
             <Input required style={{width: 500}} placeholder="お手伝い募集者の名前" {...form.getInputProps('recruiter_name')}/>
-            <h3>募集者の情報</h3>
-            <TextInput required placeholder="募集者の情報" {...form.getInputProps('recruiter_info')}/>
+            <h3>募集者の自己紹介文</h3>
+            <Textarea required autosize minRows={10} placeholder="募集者の自己紹介文" {...form.getInputProps('recruiter_info')}/>
             <h3>画像の登録</h3>
             <div style={{height: 100}}>
               {recruiter_image_uploading ? "アップロードしています..." : (
@@ -295,12 +296,12 @@ export default function Eventmaker(){
           </Stepper.Step>
           <Stepper.Completed>
             <h1>入力完了しました！</h1>
-            <h3>提出ボタンを押すことで、作成したお手伝いが登録、公開されます。</h3>
+            <h3>登録ボタンを押すことで、作成したお手伝いが登録、公開されます。</h3>
             <Button
               type="submit"
               color="green"
               style={{height:50, width: 100}}
-            >提出</Button>
+            >登録する</Button>
           </Stepper.Completed>
         </Stepper>
       </form>

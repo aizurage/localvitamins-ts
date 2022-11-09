@@ -255,9 +255,9 @@ export default function Eventedit(){
               <div className='recruiter'>
                 <h1>お手伝い募集者</h1>
                 <Avatar src={recruiterPictureUrl} radius="xl" size={200}/>
-                <h3>お手伝い募集者の名前</h3>
+                <h3>募集者の名前</h3>
                 <Text weight={700} size="lg">{event.recruiter_name}</Text>
-                <TextInput placeholder="お手伝い募集者の名前（訂正後）" {...form.getInputProps('recruiter_name')} />
+                <TextInput placeholder="募集者の名前（訂正後）" {...form.getInputProps('recruiter_name')} />
                 <Button
                   color="gray"
                   onClick={() => {form.setFieldValue('recruiter_name', event.recruiter_name)}}
@@ -265,9 +265,9 @@ export default function Eventedit(){
                   キャンセル
                 </Button>
                 <br />
-                <h3>お手伝い募集者の情報</h3>
+                <h3>募集者の自己紹介文</h3>
                 <Text weight={700} size="lg">{event.recruiter_info}</Text>
-                <TextInput placeholder="お手伝い募集者の情報（訂正後）" {...form.getInputProps('recruiter_info')} />
+                <TextInput style={{height: 100}} laceholder="募集者の情報（訂正後）" {...form.getInputProps('recruiter_info')} />
                 <Button
                   color="gray"
                   onClick={() => {form.setFieldValue('recruiter_info', event.recruiter_info)}}
