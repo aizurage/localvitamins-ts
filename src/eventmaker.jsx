@@ -1,4 +1,4 @@
-import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, Textarea, TextInput, Title } from '@mantine/core';
+import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
