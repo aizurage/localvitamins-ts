@@ -31,17 +31,42 @@ export function Makingcard(props)
 
     const event_participants_delete = async() => {
       try {
-        const { error } = await supabase.from("Participants").delete().match({eventID: props.row.eventID});
+        const { error } = await supabase.from("Participants").delete().eq('eventID', props.row.id);
         if (error) throw error;
       } catch (error) {
         console.log('Event participants deletion failed')
         console.log(error.error_description || error.message)
-        alert("イベント参加者のデータ消去に失敗しました。")
+        alert("イベント参加者がいなかった、またはその他の理由でイベント参加者のデータ消去に失敗しました。")
+      }
+    }
+
+    const event_image_picture_delete = async() => {
+      try {
+        const { error } = await supabase.storage.from('event-images').remove(props.row.picture)
+        if (error) throw error;
+      } catch (error) {
+        console.log('Event image picture deletion failed')
+        console.log(error.error_description || error.message)
+        alert("イベント写真のデータ消去に失敗しました。このタブを閉じて、運営チームにご連絡ください。")
+      }
+    }
+
+    const event_recruiter_picture_delete = async() => {
+      try {
+        const { error } = await supabase.storage.from('recruiter-images').remove(props.row.recruiter_picture)
+        if (error) throw error;
+      } catch (error) {
+        console.log('Event recruiter picture deletion failed')
+        console.log(error.error_description || error.message)
+        alert("イベント募集者写真のデータ消去に失敗しました。このタブを閉じて、運営チームにご連絡ください。")
       }
     }
 
     const event_delete = async() => {
       try {
+        event_image_picture_delete();
+        event_recruiter_picture_delete();
+        event_participants_delete();
         const { error } = await supabase.from("EventTable").delete().match({uniqueID: props.row.uniqueID});
         if (error) throw error;
         const {data} = await supabase.from('EventTable').select()
@@ -92,7 +117,7 @@ export function Makingcard(props)
               <>
                 <p>{props.row.title}を消去します。よろしいですか？</p>
                 <Group>
-                  <Button color='red' onClick={() => {event_delete(); event_participants_delete(); setOpened(false)}}>消去する</Button>
+                  <Button color='red' onClick={() => {event_delete(); setOpened(false)}}>消去する</Button>
                   <Button color='teal' onClick={() => setOpened(false)}>キャンセル</Button>
                 </Group>
               </>
