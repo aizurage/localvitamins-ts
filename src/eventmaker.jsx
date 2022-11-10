@@ -293,10 +293,11 @@ export default function Eventmaker(){
               <div className='recruiter_info'>
                   <h1>お願いした人</h1>
                   <Image src={recruiterpicture} width={200}/>
+                  <h3>お名前</h3>
                   <Text size="lg">{form.values.recruiter_name}さん</Text>
-                  <p>自己紹介</p>
+                  <h3>自己紹介</h3>
                   <Text size="lg">{form.values.recruiter_introduction}</Text>
-                  <p>一言コメント</p>
+                  <h3>一言コメント</h3>
                   <Text size="lg">{form.values.recruiter_comment}</Text>
               </div>
             </div>  

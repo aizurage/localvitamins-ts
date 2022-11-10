@@ -265,12 +265,22 @@ export default function Eventedit(){
                   キャンセル
                 </Button>
                 <br />
-                <h3>募集者の自己紹介文</h3>
-                <Text weight={700} size="lg">{event.recruiter_info}</Text>
-                <TextInput style={{height: 100}} laceholder="募集者の情報（訂正後）" {...form.getInputProps('recruiter_info')} />
+                <h3>自己紹介文</h3>
+                <Text weight={700} size="lg">{event.recruiter_introduction}</Text>
+                <TextInput style={{height: 100}} laceholder="募集者の自己紹介文（訂正後）" {...form.getInputProps('recruiter_introduction')} />
                 <Button
                   color="gray"
-                  onClick={() => {form.setFieldValue('recruiter_info', event.recruiter_info)}}
+                  onClick={() => {form.setFieldValue('recruiter_introduction', event.recruiter_introduction)}}
+                >
+                  キャンセル
+                </Button>
+                <br />
+                <h3>一言コメント</h3>
+                <Text weight={700} size="lg">{event.recruiter_comment}</Text>
+                <TextInput style={{height: 100}} laceholder="募集者の一言コメント（訂正後）" {...form.getInputProps('recruiter_comment')} />
+                <Button
+                  color="gray"
+                  onClick={() => {form.setFieldValue('recruiter_comment', event.recruiter_comment)}}
                 >
                   キャンセル
                 </Button>

@@ -73,7 +73,10 @@ export default function Eventdetail(){
         <h1>お願いした人</h1>
         <Avatar src={recruiterPictureUrl} radius="xl" size={200}/>
         <Text size="lg">{event.recruiter_name}さん</Text>
-        <Text size="lg">{event.recruiter_info}</Text>
+        <h3>自己紹介</h3>
+        <Text size="lg">{event.recruiter_introduction}</Text>
+        <h3>一言コメント</h3>
+        <Text size="lg">{event.recruiter_comment}</Text>
       </div>
     </Container>
   );

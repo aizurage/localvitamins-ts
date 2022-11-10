@@ -17,6 +17,8 @@ export default function Eventlist()
 
   const join_event_form = useForm({
     initialValues: {
+      eventID: '',
+      eventTitle: '',
       email: '',
       firstname: '',
       familyname: '',
@@ -181,8 +183,7 @@ export default function Eventlist()
             required
             {...join_event_form.getInputProps('email')}
           />
-        </form>
-        <Button
+          <Button
             type="submit"
             color="red"
             margin="center"
@@ -190,6 +191,7 @@ export default function Eventlist()
             onClick={() => {setOpened(false)}}
           >送信
           </Button>
+        </form>
       </Modal>
     </>
   );
