@@ -15,7 +15,7 @@ export default function Eventdetail(){
     const getData = async () => {
       let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
-      getEventImage(data[0].picture)
+      getEventImage(data[0].event_picture)
       getRecruiterImage(data[0].recruiter_picture)
     }
     getData()
