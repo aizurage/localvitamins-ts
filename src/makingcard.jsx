@@ -15,7 +15,7 @@ export function Makingcard(props)
     }
 
     useEffect(() => {
-        getImage(props.row.picture)
+        getImage(props.row.event_picture)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -42,7 +42,7 @@ export function Makingcard(props)
 
     const event_image_picture_delete = async() => {
       try {
-        const { error } = await supabase.storage.from('event-images').remove(props.row.picture)
+        const { error } = await supabase.storage.from('event-images').remove(props.row.event_picture)
         if (error) throw error;
       } catch (error) {
         console.log('Event image picture deletion failed')

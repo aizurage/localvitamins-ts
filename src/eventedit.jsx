@@ -20,7 +20,7 @@ export default function Eventedit(){
       const getData = async () => {
         let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
         setEvent(data[0])
-        getEventImage(data[0].picture)
+        getEventImage(data[0].event_picture)
         getRecruiterImage(data[0].recruiter_picture)
       }
       getData()
@@ -115,6 +115,7 @@ export default function Eventedit(){
               </Group>
                 
               <h2>開催日時</h2>
+              <h3>日付</h3>
               <Text weight={700} size="lg">{event.date}</Text>
               <Group spacing="xl">
                 <Calendar value={date} onChange={(_date) => {setDate(_date); form.setFieldValue('date', dayjs(_date));}} firstDayOfWeek="sunday" locale="ja" />
@@ -125,15 +126,12 @@ export default function Eventedit(){
                   キャンセル
                 </Button>
               </Group>
-              
-              <ul>
-                  <li>開始時刻:{event.start_time}</li>
-                  <li>終了時刻:{event.end_time}</li>
-              </ul>
+             
               <Group>
                 <div>
                   <h3>開始時刻</h3>
-                  <p>訂正する場合、「時」と「分」両方入力してください。</p>
+                  <Text weight={700} size="lg">{event.start_time}</Text>
+                  <p>訂正する場合、半角で「時」と「分」両方入力してください。</p>
                   <Group>
                       <TextInput  value={startHour} placeholder="開始時刻(時)（訂正後）" onChange={(e) => {setStartHour(e.target.value)}}/>
                       <p>時</p>
@@ -150,7 +148,8 @@ export default function Eventedit(){
                 
                 <div>
                   <h3>終了時刻</h3>
-                  <p>訂正する場合、「時」と「分」両方入力してください。</p>
+                  <Text weight={700} size="lg">{event.end_time}</Text>
+                  <p>訂正する場合、半角で「時」と「分」両方入力してください。</p>
                   <Group>
                       <TextInput  value={endHour} placeholder="終了時刻(時)（訂正後）" onChange={(e) => {setEndHour(e.target.value)}}/>
                       <p>時</p>
