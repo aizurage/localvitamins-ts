@@ -8,6 +8,8 @@ import Register from './register';
 import Login from './login';
 import { ServiceTerms } from './serviceTerms';
 import Home from './home';
+import Email_ResetPassword from './email_resetpw';
+import ResetPassword from './resetpassword';
 
 
 ReactDOM.render(
@@ -23,6 +25,8 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/email_resetpw" element={<Email_ResetPassword />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home/*" element={<Home/>}/>
           <Route path="/serviceTerms" element={ <ServiceTerms agree={true}/>}/>
