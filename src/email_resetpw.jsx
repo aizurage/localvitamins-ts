@@ -1,7 +1,6 @@
 import { Center, Group, Input, Button, Space } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { At } from 'tabler-icons-react';
 import { useForm } from '@mantine/form';
 
@@ -22,7 +21,7 @@ export default function Email_ResetPassword(){
             const { error:sendingEmailError } = await supabase.auth.api.resetPasswordForEmail(values.email, {
                 // 送信メールに埋め込まれるリンクのリダイレクト先のURL
                 // reset-passwordへ遷移する
-                redirectTo: 'http://localhost:3000/resetpassword',
+                redirectTo: 'https://localvitamins-ts.vercel.app/resetpassword',
             });
             if (sendingEmailError) throw sendingEmailError
         } catch (error) {
