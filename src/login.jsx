@@ -1,7 +1,7 @@
 import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Center } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
@@ -62,6 +62,8 @@ export default function Login() {
             required
             {...form.getInputProps('password')}
           />
+          <p>パスワードを忘れた方は、下のリンクをクリックして、パスワードの再設定をしてください。</p>
+          <Link to="/email_resetpw">パスワードを忘れた方は、ここをクリック。</Link>
           <Space h="xl" />
           <Group position="center" mt="md">
             <Button
