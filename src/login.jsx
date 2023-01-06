@@ -29,7 +29,7 @@ export default function Login() {
     } catch (error) {
       console.log("Log in failed");
       console.log(error.message);
-      alert("ログイン処理に失敗しました。")
+      alert("ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。");
     } finally {
       setLoading(false)
     }
