@@ -12,10 +12,6 @@ import './eventmaker.css';
 
 export default function Eventmaker(){
   const [date, setDate] = useState(null);
-  const [event_image_pictureUrl, setEvent_image_pictureUrl] = useState(null);
-  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null);
-  const [event_image_uploading, setEvent_image_uploading] = useState(false);
-  const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false);
   const [tags, setTags] = useState("農作業");
 
   const form = useForm({
@@ -47,11 +43,22 @@ export default function Eventmaker(){
   const [endHour, setEndHour] = useState("");
   const [endMinute, setEndMinute] = useState("");
 
+  const [event_pictureUrl, setEvent_pictureUrl] = useState(null);
+  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null);
+  const [event_image_uploading, setEvent_image_uploading] = useState(false);
+  const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false);
+  const [eventpicture, setEventPicture] = useState(null);
+  const [recruiterpicture, setRecruiterPicture] = useState(null);
+
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false)
   const submit = async (values) => {
     try {
       setLoading(true)
       const jsdate = dayjs(date);
+
+      //入力項目の登録処理
       const { error } = await supabase.from("EventTable").insert([{
         title: values.title,
         region: values.region,
@@ -64,7 +71,7 @@ export default function Eventmaker(){
         reward: values.reward,
         inquiry: values.inquiry,
         search_tags: tags,
-        event_picture: event_image_pictureUrl,
+        event_picture: event_pictureUrl,
         planner_uniqueID: supabase.auth.user().id,
         belongings: values.belongings,
         clothes: values.clothes,
@@ -78,14 +85,11 @@ export default function Eventmaker(){
     } catch (error) {
       console.log("Error event registration");
       console.log(error.error_description || error.message);
-      alert("イベントを投稿できませんでした。入力不足がないかどうかご確認ください。それでも解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。")
+      alert("お手伝いを投稿できませんでした。入力不足がないかどうかご確認ください。それでも解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。")
     } finally {
       setLoading(false)
     }
   }
-
-  const [eventpicture, setEventPicture] = useState(null);
-  const [recruiterpicture, setRecruiterPicture] = useState(null);
 
   const uploadEventImage = async (picture) => {
     try {
@@ -97,17 +101,28 @@ export default function Eventmaker(){
       const fileExt = file.name.split('.').pop();
       const filename = `${Math.random()}.${fileExt}`;
       const filepath = `${filename}`;
-      let {data, error: uploadError} = await supabase.storage.from("event-images").upload(filepath, file);
-      setEvent_image_pictureUrl(data["key"]);
+      const {error} = await supabase.storage.from("event-images").upload(filepath, file);
+      if (error) throw error;
+      //setEvent_pictureUrl(data["key"]);
       setEventPicture(URL.createObjectURL(file));
-      if (uploadError) throw uploadError;
-      setEvent_image_pictureUrl(filepath);
+      setEvent_pictureUrl(filepath);
     } catch (error) {
       console.log("Error uploading event image");
       console.log(error.error_description || error.message);
       alert("イベントイメージ写真のアップロードに失敗しました。");
     } finally {
       setEvent_image_uploading(false);
+    }
+  }
+
+  const deleteEventImage = async () => {
+    try {
+      const {error} = await supabase.storage.from("event-images").remove(event_pictureUrl);
+      if(error) throw error;
+    } catch (error) {
+      console.log("Error deleting event image");
+      console.log(error.error_description || error.message);
+      alert("お手伝いイメージ写真の削除に失敗しました。運営チームにお問い合わせください。");
     }
   }
 
@@ -121,10 +136,10 @@ export default function Eventmaker(){
       const fileExt = file.name.split('.').pop();
       const filename = `${Math.random()}.${fileExt}`;
       const filepath = `${filename}`;
-      let {data, error: uploadError} = await supabase.storage.from("recruiter-images").upload(filepath, file);
-      setRecruiter_pictureUrl(data["key"]);
+      const {error} = await supabase.storage.from("recruiter-images").upload(filepath, file);
+      if (error) throw error;
+      //setRecruiter_pictureUrl(data["key"]);
       setRecruiterPicture(URL.createObjectURL(file));
-      if (uploadError) throw uploadError;
       setRecruiter_pictureUrl(filepath);
     } catch (error) {
       console.log("Error uploading recruiter image");
@@ -135,7 +150,24 @@ export default function Eventmaker(){
     }
   }
 
-  const navigate = useNavigate();
+  const deleteRecruiterImage = async () => {
+    try {
+      const {error} = await supabase.storage.from("recruiter-images").remove(recruiter_pictureUrl);
+      if(error) throw error;
+    } catch (error) {
+      console.log("Error deleting recruiter image");
+      console.log(error.error_description || error.message);
+      alert("お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。");
+    }
+  }
+
+  // ブラウザバック時に、登録された写真をsupabaseから削除する。
+  window.addEventListener('popstate', () => {
+    if(event_pictureUrl !== null) deleteEventImage();
+    if(recruiter_pictureUrl !== null) deleteRecruiterImage();
+    //alert('ブラウザバックを検知しました。入力した内容は削除されます。');
+  });
+
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
@@ -211,7 +243,7 @@ export default function Eventmaker(){
                   <>
                     <Paper shadow="xl" radius="xl" p="xl" withBorder>
                       <label className="button primary block" htmlFor="single">
-                        {event_image_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                        {event_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
                       </label>
                     </Paper>
                   </>
