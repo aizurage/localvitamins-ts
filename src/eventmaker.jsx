@@ -301,7 +301,7 @@ export default function Eventmaker(){
             <Space h='xs'/>
             <Button
               color="gray"
-              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture)); console.log(recruiter_pictureUrl); console.log(recruiterpicture);}}
+              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture));}}
             >
               アップロードを取り消す
             </Button>
