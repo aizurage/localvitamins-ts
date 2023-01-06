@@ -259,6 +259,13 @@ export default function Eventmaker(){
                 </>
               )}
             </div>
+            <Space h='xs'/>
+            <Button
+              color="gray"
+              onClick={() => {deleteEventImage(); setEvent_pictureUrl(null); setEventPicture(window.URL.revokeObjectURL(eventpicture));}}
+            >
+              アップロードを取り消す
+            </Button>
           </Stepper.Step>
           <Stepper.Step label="お手伝い募集者情報入力" description="お手伝いをお願いした人の情報を入力してください。">
             <h1>お手伝い募集者情報入力</h1>
@@ -291,6 +298,13 @@ export default function Eventmaker(){
                 </>
               )}
             </div>
+            <Space h='xs'/>
+            <Button
+              color="gray"
+              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture)); console.log(recruiter_pictureUrl); console.log(recruiterpicture);}}
+            >
+              アップロードを取り消す
+            </Button>
           </Stepper.Step>
           <Stepper.Step label="入力情報確認" description="入力した情報を確認してください。">
             <h1>入力情報確認</h1>
