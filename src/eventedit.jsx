@@ -19,13 +19,13 @@ export default function Eventedit(){
   const navigate = useNavigate();
   
   useEffect(() => {
-    const getData = async () => {
+    const downloadData = async () => {
       let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
-      getEventImage(data[0].event_picture)
-      getRecruiterImage(data[0].recruiter_picture)
+      downloadEventImage(data[0].event_picture)
+      downloadRecruiterImage(data[0].recruiter_picture)
     }
-    getData()
+    downloadData()
   }, []);
 
   const form = useForm({
@@ -34,7 +34,7 @@ export default function Eventedit(){
     }
   });
 
-  const getEventImage = async (imageUrl) => {
+  const downloadEventImage = async (imageUrl) => {
     try {
       await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
@@ -80,7 +80,7 @@ export default function Eventedit(){
     } 
   }
 
-  const getRecruiterImage = async (imageUrl) => {
+  const downloadRecruiterImage = async (imageUrl) => {
     try {
       await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
@@ -191,7 +191,7 @@ export default function Eventedit(){
                       deleteEventImage(); 
                       setEventPictureURL(null); 
                       setEventPictureObjectURL(window.URL.revokeObjectURL(eventPictureObjectURL));
-                      getEventImage(event.event_picture);
+                      downloadEventImage(event.event_picture);
                       form.setFieldValue('event_picture', event.event_picture);}
                     }
                   >
@@ -375,7 +375,7 @@ export default function Eventedit(){
                         deleteRecruiterImage(); 
                         setRecruiterPictureURL(null); 
                         setRecruiterPictureObjectURL(window.URL.revokeObjectURL(recruiterPictureObjectURL));
-                        getRecruiterImage(event.recruiter_picture);
+                        downloadRecruiterImage(event.recruiter_picture);
                         form.setFieldValue('recruiter_picture', event.recruiter_picture);}
                       }
                     >

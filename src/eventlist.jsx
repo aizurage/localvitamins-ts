@@ -104,11 +104,11 @@ export default function Eventlist()
 
 
   useEffect(() => {
-    const getData = async () => {
+    const downloadData = async () => {
       let { data } = await supabase.from('EventTable').select()
       setEvents(data);
     }
-    getData()
+    downloadData()
   }, []);
 
 
