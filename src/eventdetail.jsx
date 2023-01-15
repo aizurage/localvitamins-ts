@@ -12,13 +12,13 @@ export default function Eventdetail(){
   const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('');
 
   useEffect(() => {
-    const downloadData = async () => {
+    const downloadEventData = async () => {
       let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
       downloadEventImage(data[0].event_picture)
       downloadRecruiterImage(data[0].recruiter_picture)
     }
-    downloadData()
+    downloadEventData()
   }, []);
 
   const downloadEventImage = async (imageUrl) => {

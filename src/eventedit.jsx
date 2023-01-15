@@ -10,22 +10,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import "./eventedit.css";
 
 export default function Eventedit(){
-  let params = useParams();
+  const params = useParams();
   const [ event, setEvent ] = useState([]);
   const [eventPictureObjectURL, setEventPictureObjectURL] = useState(null);
   const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] = useState(null);
-  const [eventPictureURL, setEventPictureURL] = useState(null);
-  const [recruiterPictureURL, setRecruiterPictureURL] = useState(null);
+  const [newEventPictureURL, setNewEventPictureURL] = useState(null);
+  const [newRecruiterPictureURL, setNewRecruiterPictureURL] = useState(null);
   const navigate = useNavigate();
   
   useEffect(() => {
-    const downloadData = async () => {
-      let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
+    const downloadEventData = async () => {
+      const { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
-      downloadEventImage(data[0].event_picture)
-      downloadRecruiterImage(data[0].recruiter_picture)
+      downloadOldEventImage(data[0].event_picture)
+      downloadOldRecruiterImage(data[0].recruiter_picture)
     }
-    downloadData()
+    downloadEventData()
   }, []);
 
   const form = useForm({
@@ -34,7 +34,7 @@ export default function Eventedit(){
     }
   });
 
-  const downloadEventImage = async (imageUrl) => {
+  const downloadOldEventImage = async (imageUrl) => {
     try {
       await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
@@ -44,9 +44,9 @@ export default function Eventedit(){
     }
   }
 
-  const deleteEventImage = async () => {
+  const deleteNewEventImage = async () => {
     try {
-      const {error} = await supabase.storage.from("event-images").remove(eventPictureURL);
+      const {error} = await supabase.storage.from("event-images").remove(newEventPictureURL);
       if(error) throw error;
     } catch (error) {
       console.log("Error deleting event image");
@@ -55,7 +55,7 @@ export default function Eventedit(){
     }
   }
 
-  const uploadEventImage = async (picture) => {
+  const uploadNewEventImage = async (picture) => {
     try {
       
       if (!picture.target.files || picture.target.files.length === 0) {
@@ -71,8 +71,8 @@ export default function Eventedit(){
       //古い写真のオブジェクトURLはいらないので削除（明示的なメモリ解放が必要なため）
       URL.revokeObjectURL(eventPictureObjectURL);
       setEventPictureObjectURL(URL.createObjectURL(file));
-      setEventPictureURL(filepath);
-      form.setFieldValue('event_picture', filepath);
+      setNewEventPictureURL(filepath);
+      //form.setFieldValue('event_picture', filepath);
     } catch (error) {
       console.log("Error uploading event image");
       console.log(error.error_description || error.message);
@@ -80,7 +80,7 @@ export default function Eventedit(){
     } 
   }
 
-  const downloadRecruiterImage = async (imageUrl) => {
+  const downloadOldRecruiterImage = async (imageUrl) => {
     try {
       await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
@@ -90,9 +90,9 @@ export default function Eventedit(){
     }
   }
 
-  const deleteRecruiterImage = async () => {
+  const deleteNewRecruiterImage = async () => {
     try {
-      const {error} = await supabase.storage.from("recruiter-images").remove(recruiterPictureURL);
+      const {error} = await supabase.storage.from("recruiter-images").remove(newRecruiterPictureURL);
       if(error) throw error;
     } catch (error) {
       console.log("Error deleting recruiter image");
@@ -101,7 +101,7 @@ export default function Eventedit(){
     }
   }
 
-  const uploadRecruiterImage = async (picture) => {
+  const uploadNewRecruiterImage = async (picture) => {
     try {
       if (!picture.target.files || picture.target.files.length === 0) {
         throw new Error("You must select an image to upload.");
@@ -116,8 +116,8 @@ export default function Eventedit(){
       //古い写真のオブジェクトURLはいらないので削除（明示的なメモリ解放が必要なため）
       URL.revokeObjectURL(recruiterPictureObjectURL);
       setRecruiterPictureObjectURL(URL.createObjectURL(file));
-      setRecruiterPictureURL(filepath);
-      form.setFieldValue('recruiter_picture', filepath);
+      setNewRecruiterPictureURL(filepath);
+      //form.setFieldValue('recruiter_picture', filepath);
     } catch (error) {
       console.log("Error uploading recruiter image");
       console.log(error.error_description || error.message);
@@ -128,8 +128,8 @@ export default function Eventedit(){
   // ブラウザバック時に、登録された写真をsupabaseから削除する。
   window.addEventListener('popstate', () => {
     console.log("If this message is appeared after submission, it means it's fatal.");
-    if(eventPictureURL !== null) deleteEventImage();
-    if(recruiterPictureURL !== null) deleteRecruiterImage();
+    if(newEventPictureURL !== null) deleteNewEventImage();
+    if(newRecruiterPictureURL !== null) deleteNewRecruiterImage();
     //alert('ブラウザバックを検知しました。入力した内容は削除されます。');
   });
 
@@ -147,16 +147,18 @@ export default function Eventedit(){
         if (endHour !== "" && endMinute !== "") form.values.end_time = endHour + ":" + endMinute + ":00";
         
         // 写真の更新があった場合、古い写真は消して、新しい写真のURLをテーブルに書き込む
-        if (event.event_picture !== eventPictureURL) {
+        if (newEventPictureURL !== null) {
           const {error:DeleteOldEventPictureError} = await supabase.storage.from("event-images").remove(event.event_picture);
           if (DeleteOldEventPictureError) throw DeleteOldEventPictureError;
-          //form.setFieldValue('event_picture', eventPictureURL);
+          //form.values.event_picture = newEventPictureURL;
+          form.setFieldValue('event_picture', newEventPictureURL);
         }
 
-        if (event.recruiter_picture !== recruiterPictureURL) {
+        if (newRecruiterPictureURL !== null) {
           const {error:DeleteOldRecruiterPictureError} = await supabase.storage.from("recruiter-images").remove(event.recruiter_picture);
           if (DeleteOldRecruiterPictureError) throw DeleteOldRecruiterPictureError;
-          //form.setFieldValue('recruiter_picture', recruiterPictureURL);
+          //form.values.recruiter_picture = newRecruiterPictureURL;
+          form.setFieldValue('recruiter_picture', newRecruiterPictureURL);
         }
         
         const { error } = await supabase.from("EventTable").upsert(form.values);
@@ -183,15 +185,15 @@ export default function Eventedit(){
                   type="file" 
                   id="single"
                   accept="image/*"
-                  onChange={uploadEventImage}
+                  onChange={uploadNewEventImage}
                   />
                 <Button
                     color="gray"
                     onClick={() => {
-                      deleteEventImage(); 
-                      setEventPictureURL(null); 
+                      deleteNewEventImage(); 
+                      setNewEventPictureURL(null); 
                       setEventPictureObjectURL(window.URL.revokeObjectURL(eventPictureObjectURL));
-                      downloadEventImage(event.event_picture);
+                      downloadOldEventImage(event.event_picture);
                       form.setFieldValue('event_picture', event.event_picture);}
                     }
                   >
@@ -204,7 +206,7 @@ export default function Eventedit(){
                 <TextInput style={{width: 500}} placeholder="お手伝いのタイトル（訂正後）" {...form.getInputProps('title')} />
                 <Button
                   color="gray"
-                  onClick={() => {form.setFieldValue('title', event.title)}}
+                  onClick={() => {form.setFieldValue('title', event.title); console.log(form.values);}}
                 >
                   キャンセル
                 </Button>
@@ -361,21 +363,21 @@ export default function Eventedit(){
             <div className='recruiter_space'>
               <div className='recruiter'>
                 <h1>お手伝い募集者</h1>
-                <Avatar src={recruiterPictureURL} radius="xl" size={200}/>
+                <Avatar src={recruiterPictureObjectURL} radius="xl" size={200}/>
                 <Group>
                   <input
                     type="file" 
                     id="single"
                     accept="image/*"
-                    onChange={uploadRecruiterImage}
+                    onChange={uploadNewRecruiterImage}
                     />
                   <Button
                       color="gray"
                       onClick={() => {
-                        deleteRecruiterImage(); 
-                        setRecruiterPictureURL(null); 
+                        deleteNewRecruiterImage(); 
+                        setNewRecruiterPictureURL(null); 
                         setRecruiterPictureObjectURL(window.URL.revokeObjectURL(recruiterPictureObjectURL));
-                        downloadRecruiterImage(event.recruiter_picture);
+                        downloadOldRecruiterImage(event.recruiter_picture);
                         form.setFieldValue('recruiter_picture', event.recruiter_picture);}
                       }
                     >
