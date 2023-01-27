@@ -46,6 +46,7 @@ export default function Eventedit(){
 
   const deleteNewEventImage = async () => {
     try {
+      console.log("Delete new Event image");
       const {error} = await supabase.storage.from("event-images").remove(newEventPictureURL);
       if(error) throw error;
     } catch (error) {
@@ -72,7 +73,6 @@ export default function Eventedit(){
       URL.revokeObjectURL(eventPictureObjectURL);
       setEventPictureObjectURL(URL.createObjectURL(file));
       setNewEventPictureURL(filepath);
-      //form.setFieldValue('event_picture', filepath);
     } catch (error) {
       console.log("Error uploading event image");
       console.log(error.error_description || error.message);
@@ -92,6 +92,7 @@ export default function Eventedit(){
 
   const deleteNewRecruiterImage = async () => {
     try {
+      console.log("Delete new Recruiter image");
       const {error} = await supabase.storage.from("recruiter-images").remove(newRecruiterPictureURL);
       if(error) throw error;
     } catch (error) {
@@ -117,22 +118,12 @@ export default function Eventedit(){
       URL.revokeObjectURL(recruiterPictureObjectURL);
       setRecruiterPictureObjectURL(URL.createObjectURL(file));
       setNewRecruiterPictureURL(filepath);
-      //form.setFieldValue('recruiter_picture', filepath);
     } catch (error) {
       console.log("Error uploading recruiter image");
       console.log(error.error_description || error.message);
       alert("お手伝い募集者の写真アップロードに失敗しました。");
     } 
   }
-
-  // ブラウザバック時に、登録された写真をsupabaseから削除する。
-  window.addEventListener('popstate', () => {
-    console.log("If this message is appeared after submission, it means it's fatal.");
-    if(newEventPictureURL !== null) deleteNewEventImage();
-    if(newRecruiterPictureURL !== null) deleteNewRecruiterImage();
-    //alert('ブラウザバックを検知しました。入力した内容は削除されます。');
-  });
-
 
     const [date, setDate] = useState(event.date);
     const [startHour, setStartHour] = useState("");
@@ -148,21 +139,21 @@ export default function Eventedit(){
         
         // 写真の更新があった場合、古い写真は消して、新しい写真のURLをテーブルに書き込む
         if (newEventPictureURL !== null) {
+          console.log("Old event picture was deleted in submission.");
           const {error:DeleteOldEventPictureError} = await supabase.storage.from("event-images").remove(event.event_picture);
           if (DeleteOldEventPictureError) throw DeleteOldEventPictureError;
-          //form.values.event_picture = newEventPictureURL;
-          form.setFieldValue('event_picture', newEventPictureURL);
+          form.values.event_picture = newEventPictureURL;
         }
 
         if (newRecruiterPictureURL !== null) {
+          console.log("Old Recruiter picture was deleted in submission.");
           const {error:DeleteOldRecruiterPictureError} = await supabase.storage.from("recruiter-images").remove(event.recruiter_picture);
           if (DeleteOldRecruiterPictureError) throw DeleteOldRecruiterPictureError;
-          //form.values.recruiter_picture = newRecruiterPictureURL;
-          form.setFieldValue('recruiter_picture', newRecruiterPictureURL);
+          form.values.recruiter_picture = newRecruiterPictureURL;
         }
         
         const { error } = await supabase.from("EventTable").upsert(form.values);
-        if (error) throw error;
+        if (error) throw error
 
         navigate('/home');
       } catch (error) {
@@ -194,7 +185,7 @@ export default function Eventedit(){
                       setNewEventPictureURL(null); 
                       setEventPictureObjectURL(window.URL.revokeObjectURL(eventPictureObjectURL));
                       downloadOldEventImage(event.event_picture);
-                      form.setFieldValue('event_picture', event.event_picture);}
+                      }
                     }
                   >
                     キャンセル
@@ -206,7 +197,7 @@ export default function Eventedit(){
                 <TextInput style={{width: 500}} placeholder="お手伝いのタイトル（訂正後）" {...form.getInputProps('title')} />
                 <Button
                   color="gray"
-                  onClick={() => {form.setFieldValue('title', event.title); console.log(form.values);}}
+                  onClick={() => {form.setFieldValue('title', event.title)}}
                 >
                   キャンセル
                 </Button>
@@ -378,7 +369,7 @@ export default function Eventedit(){
                         setNewRecruiterPictureURL(null); 
                         setRecruiterPictureObjectURL(window.URL.revokeObjectURL(recruiterPictureObjectURL));
                         downloadOldRecruiterImage(event.recruiter_picture);
-                        form.setFieldValue('recruiter_picture', event.recruiter_picture);}
+                        }
                       }
                     >
                       キャンセル
