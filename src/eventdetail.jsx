@@ -12,16 +12,16 @@ export default function Eventdetail(){
   const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('');
 
   useEffect(() => {
-    const getData = async () => {
+    const downloadEventData = async () => {
       let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
-      getEventImage(data[0].event_picture)
-      getRecruiterImage(data[0].recruiter_picture)
+      downloadEventImage(data[0].event_picture)
+      downloadRecruiterImage(data[0].recruiter_picture)
     }
-    getData()
+    downloadEventData()
   }, []);
 
-  const getEventImage = async (imageUrl) => {
+  const downloadEventImage = async (imageUrl) => {
     try {
       await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
@@ -31,7 +31,7 @@ export default function Eventdetail(){
     }
   }
 
-  const getRecruiterImage = async (imageUrl) => {
+  const downloadRecruiterImage = async (imageUrl) => {
     try {
       await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
     } catch (error) {
