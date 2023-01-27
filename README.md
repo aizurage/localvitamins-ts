@@ -20,4 +20,5 @@ https://localvitamins-ts.vercel.app/
 * データベース・・・supabase
 * デプロイツール・・・Vercel
 ### 製作者
-会津大学　大学院　修士1年　　佐々木大翔（ササキヒロト）
+会津大学　大学院　修士1年　　佐々木大翔（ササキヒロト）  
+メールアドレス: m5261156@u-aizu.ac.jp
