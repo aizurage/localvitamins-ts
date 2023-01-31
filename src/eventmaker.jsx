@@ -58,7 +58,7 @@ export default function Eventmaker(){
       setLoading(true)
       const jsdate = dayjs(date);
 
-      //入力項目の登録処理
+      // 入力項目の登録処理
       const { error } = await supabase.from("EventTable").insert([{
         title: values.title,
         region: values.region,
@@ -103,7 +103,6 @@ export default function Eventmaker(){
       const filepath = `${filename}`;
       const {error} = await supabase.storage.from("event-images").upload(filepath, file);
       if (error) throw error;
-      //setEvent_pictureUrl(data["key"]);
       setEventPicture(URL.createObjectURL(file));
       setEvent_pictureUrl(filepath);
     } catch (error) {
@@ -138,7 +137,6 @@ export default function Eventmaker(){
       const filepath = `${filename}`;
       const {error} = await supabase.storage.from("recruiter-images").upload(filepath, file);
       if (error) throw error;
-      //setRecruiter_pictureUrl(data["key"]);
       setRecruiterPicture(URL.createObjectURL(file));
       setRecruiter_pictureUrl(filepath);
     } catch (error) {
@@ -160,13 +158,6 @@ export default function Eventmaker(){
       alert("お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。");
     }
   }
-
-  // ブラウザバック時に、登録された写真をsupabaseから削除する。
-  window.addEventListener('popstate', () => {
-    if(event_pictureUrl !== null) deleteEventImage();
-    if(recruiter_pictureUrl !== null) deleteRecruiterImage();
-    //alert('ブラウザバックを検知しました。入力した内容は削除されます。');
-  });
 
   const [active, setActive] = useState(0);
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));

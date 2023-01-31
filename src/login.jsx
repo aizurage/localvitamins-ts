@@ -1,12 +1,11 @@
-import { TextInput, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
+import { TextInput, Center, Button, Group, PasswordInput, Space, LoadingOverlay } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { At } from 'tabler-icons-react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Center } from '@mantine/core';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
 
-export default function Login() {
+export default function Login() { 
   const form = useForm({
     initialValues: {
       email: '',

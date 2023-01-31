@@ -26,7 +26,7 @@ export function ServiceTerms(props)
         <li>個人情報使用範囲について</li>
         <li className="mark-list">イベント企画者が、イベント参加者の情報を確認する際に使用されます。それ以外の用途では使用しません。</li>
         <li>個人情報の閲覧が可能な人について</li>
-        <li className="mark-list">氏名及びメールアドレスについて、アプリ内のイベント企画者と、アプリの開発・運営チーム"localvitamins"が見ることができます。</li>
+        <li className="mark-list">氏名及びメールアドレスについて、アプリ内のイベント企画者と、アプリの開発・運営チーム&localvitamins;が見ることができます。</li>
         <li>個人情報の消し方について</li>
         <li className="mark-list">アカウントを消すことで24時間以内に情報が削除されます。</li>
         <li>利用規約変更時の対応について</li>

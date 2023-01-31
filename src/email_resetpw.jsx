@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { At } from 'tabler-icons-react';
 import { useForm } from '@mantine/form';
 
-export default function Email_ResetPassword(){
+export default function EmailResetPassword(){
     const [submitted, setSubmitted] = useState(false);
     const form = useForm({
         initialValues: {

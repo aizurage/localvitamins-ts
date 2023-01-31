@@ -69,8 +69,8 @@ export function Header()
                 <p>ログアウトします。よろしいですか？</p>
                 <Group>
                     {<>
-                        <Button color="red" onClick={ () => { log_out();}}> はい </Button>
-                        <Button color="blue" onClick={ () => {setDialogopen(false)} }> いいえ </Button>
+                        <Button color="red" onClick={ () => { log_out() }}> はい </Button>
+                        <Button color="blue" onClick={ () => { setDialogopen(false) }}> いいえ </Button>
                     </>}
                 </Group>
             </Dialog>

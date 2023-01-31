@@ -1,8 +1,7 @@
 import { Button, Group, Center, Title, Space } from '@mantine/core';
 import { Link } from 'react-router-dom';
-//import './App.css';
 
-function App() {
+export default function App() {
   return (
     <>
         <Space h="xl"/>
@@ -34,5 +33,3 @@ function App() {
     </>
   );
 }
-
-export default App;
