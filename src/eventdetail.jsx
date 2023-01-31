@@ -6,20 +6,20 @@ import { supabase } from './supabaseClient';
 import './eventdetail.css';
 
 export default function Eventdetail(){
-  let params = useParams();
+  const params = useParams();
   const [event, setEvent] = useState([]);
   const [eventPictureUrl, setEventPictureUrl] = useState('');
   const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('');
 
   useEffect(() => {
     const downloadEventData = async () => {
-      let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
+      const { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
       downloadEventImage(data[0].event_picture)
       downloadRecruiterImage(data[0].recruiter_picture)
     }
     downloadEventData()
-  }, []);
+  }, [params.eventNumber]);
 
   const downloadEventImage = async (imageUrl) => {
     try {

@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom'; 
 import App from './App';
-//import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 
@@ -8,7 +7,7 @@ import Register from './register';
 import Login from './login';
 import { ServiceTerms } from './serviceTerms';
 import Home from './home';
-import Email_ResetPassword from './email_resetpw';
+import EmailResetPassword from './email_resetpw';
 import ResetPassword from './resetpassword';
 
 
@@ -25,7 +24,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/email_resetpw" element={<Email_ResetPassword />} />
+          <Route path="/email_resetpw" element={<EmailResetPassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home/*" element={<Home/>}/>
@@ -43,10 +42,3 @@ ReactDOM.render(
     </MantineProvider>,
     document.getElementById('root')
 );
-
-
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();

@@ -51,7 +51,7 @@ export default function ResetPassword(){
                     description="確認のため、パスワードをもう一度入力してください。" 
                     {...form.getInputProps('confirmed_password')}
                 />
-                <p color='red'>パスワードは忘れないように記録し、大切に保管してください。</p>
+                <p color='red'>パスワードは忘れないようにメモし、大切に保管してください。</p>
                 <Group position="center" mt="md">
                     <Button
                         color='green'

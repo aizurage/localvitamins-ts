@@ -2,7 +2,6 @@ import { Center, TextInput, Button, Group, PasswordInput, Space, LoadingOverlay 
 import { useForm } from '@mantine/form';
 import { supabase } from './supabaseClient';
 import { useState } from 'react';
-//import { ServiceTerms } from './serviceTerms';
 
 export default function Register() {
   const form = useForm({
@@ -36,7 +35,6 @@ export default function Register() {
           }
         }
       )
-      //console.log(form.password);
       if (error) throw error
       alert("登録したメールアドレスに、アプリの案内メールが届きます。この画面を閉じて、メールに記載されているリンクをクリックしてください。新しいアプリ画面が表示されます。")
     } catch (error) {

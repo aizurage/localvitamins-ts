@@ -11,7 +11,7 @@ export function Makingcard(props)
     const navigate = useNavigate();
 
     const checkMyEvent = () => {
-      return (supabase.auth.user().id === props.row.planner_uniqueID) ? true : false;
+      return supabase.auth.user().id === props.row.planner_uniqueID;
     }
 
     useEffect(() => {
