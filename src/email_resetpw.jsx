@@ -1,8 +1,8 @@
-import { Center, Group, Input, Button, Space } from '@mantine/core';
-import { supabase } from './supabaseClient';
-import { useState } from 'react';
-import { At } from 'tabler-icons-react';
-import { useForm } from '@mantine/form';
+import { Center, Group, Input, Button, Space } from '@mantine/core'
+import { supabase } from './supabaseClient'
+import { useState } from 'react'
+import { At } from 'tabler-icons-react'
+import { useForm } from '@mantine/form'
 
 export default function EmailResetPassword(){
     const [submitted, setSubmitted] = useState(false)
