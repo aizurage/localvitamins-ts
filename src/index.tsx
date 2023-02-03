@@ -1,14 +1,14 @@
-import ReactDOM from 'react-dom'; 
-import App from './App';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { MantineProvider } from '@mantine/core';
+import ReactDOM from 'react-dom' 
+import App from './App'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { MantineProvider } from '@mantine/core'
 
-import Register from './register';
-import Login from './login';
-import { ServiceTerms } from './serviceTerms';
-import Home from './home';
-import EmailResetPassword from './email_resetpw';
-import ResetPassword from './resetpassword';
+import Register from './register'
+import Login from './login'
+import { ServiceTerms } from './serviceTerms'
+import Home from './home'
+import EmailResetPassword from './email_resetpw'
+import ResetPassword from './resetpassword'
 
 
 ReactDOM.render(
@@ -41,4 +41,4 @@ ReactDOM.render(
       </BrowserRouter>
     </MantineProvider>,
     document.getElementById('root')
-);
+)
