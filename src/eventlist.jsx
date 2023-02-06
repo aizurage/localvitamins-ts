@@ -19,6 +19,7 @@ export default function Eventlist() {
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
   const [event, setEvent] = useState('')
+  const [isOnlyMyEvent, setIsOnlyMyEvent] = useState(false)
 
   const join_event_form = useForm({
     initialValues: {
@@ -98,7 +99,7 @@ export default function Eventlist() {
     setEvents(searching_events)
   }
 
-  const show_myEvent = async () => {
+  const downloadMyEventData = async () => {
     const { data } = await supabase
       .from('EventTable')
       .select()
@@ -107,11 +108,12 @@ export default function Eventlist() {
     setEvents(data)
   }
 
+  const downloadEventData = async () => {
+    const { data } = await supabase.from('EventTable').select()
+    setEvents(data)
+  }
+
   useEffect(() => {
-    const downloadEventData = async () => {
-      const { data } = await supabase.from('EventTable').select()
-      setEvents(data)
-    }
     downloadEventData()
   }, [])
 
@@ -148,13 +150,26 @@ export default function Eventlist() {
         >
           お手伝い作成
         </Button>
-        <Button
-          variant="gradient"
-          gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-          onClick={show_myEvent}
-        >
-          自分のイベントを表示
-        </Button>
+        <div>
+          {!isOnlyMyEvent ? 
+            <Button
+              variant="gradient"
+              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+              onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
+            >
+              自分のイベントを表示
+            </Button> 
+            :
+            <Button
+              variant="gradient"
+              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+              onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
+            >
+              全イベントを表示
+            </Button> 
+          }
+        </div>
+        
       </Group>
       <div>
         <nav
