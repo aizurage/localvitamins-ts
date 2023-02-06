@@ -1,18 +1,18 @@
-import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core';
-import { supabase } from './supabaseClient';
-import { useState } from 'react';
-import { useForm } from '@mantine/form';
-import { Calendar } from '@mantine/dates';
-import { At } from 'tabler-icons-react';
-import 'dayjs/locale/ja';
-import dayjs from 'dayjs';
-import { useNavigate } from 'react-router-dom';
+import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core'
+import { supabase } from './supabaseClient'
+import { useState } from 'react'
+import { useForm } from '@mantine/form'
+import { Calendar } from '@mantine/dates'
+import { At } from 'tabler-icons-react'
+import 'dayjs/locale/ja'
+import dayjs from 'dayjs'
+import { useNavigate } from 'react-router-dom'
 
-import './eventmaker.css';
+import './eventmaker.css'
 
 export default function Eventmaker(){
-  const [date, setDate] = useState(null);
-  const [tags, setTags] = useState("農作業");
+  const [date, setDate] = useState(null)
+  const [tags, setTags] = useState("農作業")
 
   const form = useForm({
     initialValues: {
@@ -36,27 +36,27 @@ export default function Eventmaker(){
       recruiter_comment: '',
       recruiter_picture: '',
     }
-  });
+  })
 
-  const [startHour, setStartHour] = useState("");
-  const [startMinute, setStartMinute] = useState("");
-  const [endHour, setEndHour] = useState("");
-  const [endMinute, setEndMinute] = useState("");
+  const [startHour, setStartHour] = useState("")
+  const [startMinute, setStartMinute] = useState("")
+  const [endHour, setEndHour] = useState("")
+  const [endMinute, setEndMinute] = useState("")
 
-  const [event_pictureUrl, setEvent_pictureUrl] = useState(null);
-  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null);
-  const [event_image_uploading, setEvent_image_uploading] = useState(false);
-  const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false);
-  const [eventpicture, setEventPicture] = useState(null);
-  const [recruiterpicture, setRecruiterPicture] = useState(null);
+  const [event_pictureUrl, setEvent_pictureUrl] = useState(null)
+  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null)
+  const [event_image_uploading, setEvent_image_uploading] = useState(false)
+  const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false)
+  const [eventpicture, setEventPicture] = useState(null)
+  const [recruiterpicture, setRecruiterPicture] = useState(null)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
   const submit = async (values) => {
     try {
       setLoading(true)
-      const jsdate = dayjs(date);
+      const jsdate = dayjs(date)
 
       // 入力項目の登録処理
       const { error } = await supabase.from("EventTable").insert([{
@@ -80,11 +80,11 @@ export default function Eventmaker(){
         recruiter_comment: values.recruiter_comment,
         recruiter_picture: recruiter_pictureUrl,
       }])
-      navigate('/home');
+      navigate('/home')
       if (error) throw error
     } catch (error) {
-      console.log("Error event registration");
-      console.log(error.error_description || error.message);
+      console.log("Error event registration")
+      console.log(error.error_description || error.message)
       alert("お手伝いを投稿できませんでした。入力不足がないかどうかご確認ください。それでも解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。")
     } finally {
       setLoading(false)
@@ -93,75 +93,75 @@ export default function Eventmaker(){
 
   const uploadEventImage = async (picture) => {
     try {
-      setEvent_image_uploading(true);
+      setEvent_image_uploading(true)
       if (!picture.target.files || picture.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
+        throw new Error("You must select an image to upload.")
       }
-      const file = picture.target.files[0];
-      const fileExt = file.name.split('.').pop();
-      const filename = `${Math.random()}.${fileExt}`;
-      const filepath = `${filename}`;
-      const {error} = await supabase.storage.from("event-images").upload(filepath, file);
-      if (error) throw error;
-      setEventPicture(URL.createObjectURL(file));
-      setEvent_pictureUrl(filepath);
+      const file = picture.target.files[0]
+      const fileExt = file.name.split('.').pop()
+      const filename = `${Math.random()}.${fileExt}`
+      const filepath = `${filename}`
+      const {error} = await supabase.storage.from("event-images").upload(filepath, file)
+      if (error) throw error
+      setEventPicture(URL.createObjectURL(file))
+      setEvent_pictureUrl(filepath)
     } catch (error) {
-      console.log("Error uploading event image");
-      console.log(error.error_description || error.message);
-      alert("イベントイメージ写真のアップロードに失敗しました。");
+      console.log("Error uploading event image")
+      console.log(error.error_description || error.message)
+      alert("イベントイメージ写真のアップロードに失敗しました。")
     } finally {
-      setEvent_image_uploading(false);
+      setEvent_image_uploading(false)
     }
   }
 
   const deleteEventImage = async () => {
     try {
-      const {error} = await supabase.storage.from("event-images").remove(event_pictureUrl);
-      if(error) throw error;
+      const {error} = await supabase.storage.from("event-images").remove(event_pictureUrl)
+      if(error) throw error
     } catch (error) {
-      console.log("Error deleting event image");
-      console.log(error.error_description || error.message);
-      alert("お手伝いイメージ写真の削除に失敗しました。運営チームにお問い合わせください。");
+      console.log("Error deleting event image")
+      console.log(error.error_description || error.message)
+      alert("お手伝いイメージ写真の削除に失敗しました。運営チームにお問い合わせください。")
     }
   }
 
   const uploadRecruiterImage = async (picture) => {
     try {
-      setRecruiter_image_uploading(true);
+      setRecruiter_image_uploading(true)
       if (!picture.target.files || picture.target.files.length === 0) {
-        throw new Error("You must select an image to upload.");
+        throw new Error("You must select an image to upload.")
       }
-      const file = picture.target.files[0];
-      const fileExt = file.name.split('.').pop();
-      const filename = `${Math.random()}.${fileExt}`;
-      const filepath = `${filename}`;
-      const {error} = await supabase.storage.from("recruiter-images").upload(filepath, file);
-      if (error) throw error;
-      setRecruiterPicture(URL.createObjectURL(file));
-      setRecruiter_pictureUrl(filepath);
+      const file = picture.target.files[0]
+      const fileExt = file.name.split('.').pop()
+      const filename = `${Math.random()}.${fileExt}`
+      const filepath = `${filename}`
+      const {error} = await supabase.storage.from("recruiter-images").upload(filepath, file)
+      if (error) throw error
+      setRecruiterPicture(URL.createObjectURL(file))
+      setRecruiter_pictureUrl(filepath)
     } catch (error) {
-      console.log("Error uploading recruiter image");
-      console.log(error.error_description || error.message);
-      alert("お手伝い募集者の写真アップロードに失敗しました。");
+      console.log("Error uploading recruiter image")
+      console.log(error.error_description || error.message)
+      alert("お手伝い募集者の写真アップロードに失敗しました。")
     } finally {
-      setRecruiter_image_uploading(false);
+      setRecruiter_image_uploading(false)
     }
   }
 
   const deleteRecruiterImage = async () => {
     try {
-      const {error} = await supabase.storage.from("recruiter-images").remove(recruiter_pictureUrl);
-      if(error) throw error;
+      const {error} = await supabase.storage.from("recruiter-images").remove(recruiter_pictureUrl)
+      if(error) throw error
     } catch (error) {
-      console.log("Error deleting recruiter image");
-      console.log(error.error_description || error.message);
-      alert("お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。");
+      console.log("Error deleting recruiter image")
+      console.log(error.error_description || error.message)
+      alert("お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。")
     }
   }
 
-  const [active, setActive] = useState(0);
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  const [active, setActive] = useState(0)
+  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current))
+  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current))
   return(
     <Container>
       <LoadingOverlay visible={loading} />
@@ -219,7 +219,7 @@ export default function Eventmaker(){
             <h3>お問い合わせ先（メールアドレス）</h3>
             <Input required icon={<At />} placeholder="Your mail address" {...form.getInputProps('inquiry')}/>
             <h3>タグの設定</h3>
-            <Chips multiple={false} value={tags} onChange={(e) => {setTags(e);}}>
+            <Chips multiple={false} value={tags} onChange={(e) => {setTags(e)}}>
               <Chip size="lg" value="農作業">農作業</Chip>
               <Chip size="lg" value="雪作業">雪作業</Chip>
               <Chip size="lg" value="ゴミ拾い">ゴミ拾い</Chip>
@@ -253,7 +253,7 @@ export default function Eventmaker(){
             <Space h='xs'/>
             <Button
               color="gray"
-              onClick={() => {deleteEventImage(); setEvent_pictureUrl(null); setEventPicture(window.URL.revokeObjectURL(eventpicture));}}
+              onClick={() => {deleteEventImage(); setEvent_pictureUrl(null); setEventPicture(window.URL.revokeObjectURL(eventpicture))}}
             >
               アップロードを取り消す
             </Button>
@@ -292,7 +292,7 @@ export default function Eventmaker(){
             <Space h='xs'/>
             <Button
               color="gray"
-              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture));}}
+              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture))}}
             >
               アップロードを取り消す
             </Button>
@@ -351,5 +351,5 @@ export default function Eventmaker(){
         </Stepper>
       </form>
     </Container>
-  );
+  )
 }

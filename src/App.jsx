@@ -1,5 +1,5 @@
-import { Button, Group, Center, Title, Space } from '@mantine/core';
-import { Link } from 'react-router-dom';
+import { Button, Group, Center, Title, Space } from '@mantine/core'
+import { Link } from 'react-router-dom'
 
 export default function App() {
   return (
@@ -31,5 +31,5 @@ export default function App() {
           ログイン</Button>
         </Group>
     </>
-  );
+  )
 }

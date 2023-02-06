@@ -1,22 +1,22 @@
-import { Button, Space, Table } from '@mantine/core';
-import { useState, useEffect } from 'react';
-import { supabase } from './supabaseClient';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Button, Space, Table } from '@mantine/core'
+import { useState, useEffect } from 'react'
+import { supabase } from './supabaseClient'
+import { useParams, useNavigate } from 'react-router-dom'
 
 export default function EventMembersList() {
-  const params = useParams();
-  const [participants, setParticipants] = useState([]);
+  const params = useParams()
+  const [participants, setParticipants] = useState([])
 
   useEffect(() => {
     const getParticipantList = async (eventID) => {
       const { data } = await supabase
         .from('Participants')
         .select()
-        .eq('eventID', eventID);
-      setParticipants(data);
-    };
-    getParticipantList(params.eventNumber);
-  }, [params.eventNumber]);
+        .eq('eventID', eventID)
+      setParticipants(data)
+    }
+getParticipantList(params.eventNumber)
+  }, [params.eventNumber])
 
   const row = participants.map((member) => (
     <tr key={member.id}>
@@ -26,9 +26,9 @@ export default function EventMembersList() {
       <td>{member.firstname}</td>
       <td>{member.email}</td>
     </tr>
-  ));
+  ))
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <>
@@ -50,5 +50,5 @@ export default function EventMembersList() {
       <Space h="xl" />
       <Button onClick={() => navigate('/home')}>閉じる</Button>
     </>
-  );
+  )
 }

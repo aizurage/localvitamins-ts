@@ -6,19 +6,20 @@ import {
   Modal,
   useMantineTheme,
   TextInput,
-} from '@mantine/core';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { useForm } from '@mantine/form';
-import { supabase } from './supabaseClient';
-import { At } from 'tabler-icons-react';
-import { Makingcard } from './makingcard';
+} from '@mantine/core'
+import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useForm } from '@mantine/form'
+import { supabase } from './supabaseClient'
+import { At } from 'tabler-icons-react'
+import { Makingcard } from './makingcard'
 
 export default function Eventlist() {
-  const [events, setEvents] = useState([]);
-  const theme = useMantineTheme();
-  const [opened, setOpened] = useState(false);
-  const [event, setEvent] = useState('');
+  const [events, setEvents] = useState([])
+  const theme = useMantineTheme()
+  const [opened, setOpened] = useState(false)
+  const [event, setEvent] = useState('')
+  const [isOnlyMyEvent, setIsOnlyMyEvent] = useState(false)
 
   const join_event_form = useForm({
     initialValues: {
@@ -32,13 +33,13 @@ export default function Eventlist() {
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
     },
-  });
+  })
 
   const search_keywords_form = useForm({
     initialValues: {
       keywords: '',
     },
-  }); 
+  }) 
 
   const join_event = async (values) => {
     try {
@@ -50,75 +51,76 @@ export default function Eventlist() {
           familyname: values.familyname,
           email: values.email,
         },
-      ]);
-      if (error) throw error;
+      ])
+      if (error) throw error
     } catch (error) {
-      console.log('Error joining event process');
-      console.log(error.error_description || error.message);
+      console.log('Error joining event process')
+      console.log(error.error_description || error.message)
       alert(
         '参加申請処理に失敗しました。運営チームにお問い合わせください。イベント一覧画面のメニューにあります。',
-      );
+      )
     }
-  };
+  }
 
   const merge_event = (array1, array2) => {
     for (let i = 0; i < array1.length; i++) {
       for (let j = 0; j < array2.length; j++) {
         if (array1[i].id === array2[j].id) {
-          array2.splice(j, 1);
+          array2.splice(j, 1)
         }
       }
     }
 
-    return [...array1, array2].flat(2);
-  };
+    return [...array1, array2].flat(2)
+  }
 
   const search_event = async ({ keywords }) => {
     if (keywords.length === 0) {
-      const { data } = await supabase.from('EventTable').select();
-      setEvents(data);
-      return;
+      const { data } = await supabase.from('EventTable').select()
+      setEvents(data)
+      return
     }
 
     // キーワードを配列に格納する。（主に複数の場合）
     // 全角スペースで区切った場合
-    keywords = keywords.split('　');
+    keywords = keywords.split('　')
 
-    let searching_events = [];
+    let searching_events = []
     for (let i = 0; i < keywords.length; i++) {
-      keywords[i] = '%' + keywords[i] + '%';
+      keywords[i] = '%' + keywords[i] + '%'
       const { data } = await supabase
         .from('EventTable')
         .select()
-        .like('search_tags', keywords[i]);
-      if (i) searching_events = merge_event(searching_events, data);
-      else searching_events = [...searching_events, data].flat(2);
+        .like('search_tags', keywords[i])
+      if (i) searching_events = merge_event(searching_events, data)
+      else searching_events = [...searching_events, data].flat(2)
     }
 
-    setEvents(searching_events);
-  };
+    setEvents(searching_events)
+  }
 
-  const show_myEvent = async () => {
+  const downloadMyEventData = async () => {
     const { data } = await supabase
       .from('EventTable')
       .select()
-      .eq('planner_uniqueID', supabase.auth.user().id);
-    if (data == null) return;
-    setEvents(data);
-  };
+      .eq('planner_uniqueID', supabase.auth.user().id)
+    if (data == null) return
+    setEvents(data)
+  }
+
+  const downloadEventData = async () => {
+    const { data } = await supabase.from('EventTable').select()
+    setEvents(data)
+  }
 
   useEffect(() => {
-    const downloadEventData = async () => {
-      const { data } = await supabase.from('EventTable').select();
-      setEvents(data);
-    };
-    downloadEventData();
-  }, []);
+    downloadEventData()
+  }, [])
 
   const open = (eventID, eventTitle) => {
-    setOpened(true);
-    setEvent({ eventID, eventTitle });
-  };
+    setOpened(true)
+    setEvent({ eventID, eventTitle })
+  }
 
   return (
     <>
@@ -148,13 +150,26 @@ export default function Eventlist() {
         >
           お手伝い作成
         </Button>
-        <Button
-          variant="gradient"
-          gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-          onClick={show_myEvent}
-        >
-          自分のイベントを表示
-        </Button>
+        <div>
+          {!isOnlyMyEvent ? 
+            <Button
+              variant="gradient"
+              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+              onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
+            >
+              自分のイベントを表示
+            </Button> 
+            :
+            <Button
+              variant="gradient"
+              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+              onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
+            >
+              全イベントを表示
+            </Button> 
+          }
+        </div>
+        
       </Group>
       <div>
         <nav
@@ -210,7 +225,7 @@ export default function Eventlist() {
             margin="center"
             style={{ top: 20 }}
             onClick={() => {
-              setOpened(false);
+              setOpened(false)
             }}
           >
             送信
@@ -218,5 +233,5 @@ export default function Eventlist() {
         </form>
       </Modal>
     </>
-  );
+  )
 }

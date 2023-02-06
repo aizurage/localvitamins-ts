@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core";
-import { Link } from 'react-router-dom';
-import "./serviceTerms.css";
+import { Button } from "@mantine/core"
+import { Link } from 'react-router-dom'
+import "./serviceTerms.css"
 
 export function ServiceTerms(props)
 {
@@ -14,7 +14,7 @@ export function ServiceTerms(props)
           to="/register"
         >同意する</Button>
       </>
-    );
+    )
   }
 
   return(
@@ -38,5 +38,5 @@ export function ServiceTerms(props)
         {props.agree ? agree_confirmation():""}
       </div>
     </>
-  );
+  )
 }
