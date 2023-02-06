@@ -1,11 +1,11 @@
-import { Center, Group, Input, Button, Space } from '@mantine/core';
-import { supabase } from './supabaseClient';
-import { useState } from 'react';
-import { At } from 'tabler-icons-react';
-import { useForm } from '@mantine/form';
+import { Center, Group, Input, Button, Space } from '@mantine/core'
+import { supabase } from './supabaseClient'
+import { useState } from 'react'
+import { At } from 'tabler-icons-react'
+import { useForm } from '@mantine/form'
 
-export default function Email_ResetPassword(){
-    const [submitted, setSubmitted] = useState(false);
+export default function EmailResetPassword(){
+    const [submitted, setSubmitted] = useState(false)
     const form = useForm({
         initialValues: {
             email: '',
@@ -14,7 +14,7 @@ export default function Email_ResetPassword(){
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'メールアドレスが正しくありません'),
         },
-    });
+    })
 
     const submit = async (values) => {
         try {
@@ -22,11 +22,11 @@ export default function Email_ResetPassword(){
                 // 送信メールに埋め込まれるリンクのリダイレクト先のURL
                 // reset-passwordへ遷移する
                 redirectTo: 'https://localvitamins-ts.vercel.app/resetpassword',
-            });
+            })
             if (sendingEmailError) throw sendingEmailError
         } catch (error) {
-            console.log("Sending email for reset password failed");
-            console.log(error.message);
+            console.log("Sending email for reset password failed")
+            console.log(error.message)
             alert("メール送信に失敗しました。運営チームにお問い合わせください。")
         }
     }
@@ -66,5 +66,5 @@ export default function Email_ResetPassword(){
                 }
             </form>
         </Center>
-    );
+    )
 }

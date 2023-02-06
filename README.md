@@ -19,6 +19,8 @@ https://localvitamins-ts.vercel.app/
 * ライブラリ・・・React, Mantine, React Router v6
 * データベース・・・supabase
 * デプロイツール・・・Vercel
+* 静的解析ツール・・・ESlint
+* コード整形ツール・・・Prettier
 ### 製作者
 会津大学　大学院　修士1年　　佐々木大翔（ササキヒロト）  
 メールアドレス: m5261156@u-aizu.ac.jp

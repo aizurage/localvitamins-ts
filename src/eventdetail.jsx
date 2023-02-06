@@ -1,29 +1,29 @@
-import { Avatar, Image, Text, Title, Container } from '@mantine/core';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { supabase } from './supabaseClient';
+import { Avatar, Image, Text, Title, Container } from '@mantine/core'
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { supabase } from './supabaseClient'
 
-import './eventdetail.css';
+import './eventdetail.css'
 
 export default function Eventdetail(){
-  let params = useParams();
-  const [event, setEvent] = useState([]);
-  const [eventPictureUrl, setEventPictureUrl] = useState('');
-  const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('');
+  const params = useParams()
+  const [event, setEvent] = useState([])
+  const [eventPictureUrl, setEventPictureUrl] = useState('')
+  const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('')
 
   useEffect(() => {
     const downloadEventData = async () => {
-      let { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
+      const { data } = await supabase.from('EventTable').select().eq("id", params.eventNumber)
       setEvent(data[0])
       downloadEventImage(data[0].event_picture)
       downloadRecruiterImage(data[0].recruiter_picture)
     }
     downloadEventData()
-  }, []);
+  }, [params.eventNumber])
 
   const downloadEventImage = async (imageUrl) => {
     try {
-      await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
+      await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error})
     } catch (error) {
       console.log('Error downloading image') 
       console.log(error.error_description || error.message)
@@ -33,7 +33,7 @@ export default function Eventdetail(){
 
   const downloadRecruiterImage = async (imageUrl) => {
     try {
-      await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error});
+      await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error})
     } catch (error) {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
@@ -79,5 +79,5 @@ export default function Eventdetail(){
         <Text size="lg">{event.recruiter_comment}</Text>
       </div>
     </Container>
-  );
+  )
 }
