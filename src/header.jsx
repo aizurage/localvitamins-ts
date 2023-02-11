@@ -50,6 +50,7 @@ export function Header()
                             color='red'
                             component={Link}
                             to={'/home'}
+                            onClick={() => setOpened(false)}
                         >ホームへ戻る</Button>
                         <nav>
                             <ul>
