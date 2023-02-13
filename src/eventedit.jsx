@@ -65,7 +65,7 @@ export default function Eventedit() {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
       alert(
-        'イベントイメージ写真のダウンロードに失敗しました。運営チームにお問い合わせください。',
+        'イベントイメージ写真のダウンロードに失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
       )
     }
   }
@@ -81,7 +81,7 @@ export default function Eventedit() {
       console.log('Error deleting event image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝いイメージ写真の削除に失敗しました。運営チームにお問い合わせください。',
+        'お手伝いイメージ写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
       )
     }
   }
@@ -126,7 +126,7 @@ export default function Eventedit() {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝い募集者の写真ダウンロードに失敗しました。運営チームにお問い合わせください。',
+        'お手伝い募集者の写真ダウンロードに失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
       )
     }
   }
@@ -142,7 +142,7 @@ export default function Eventedit() {
       console.log('Error deleting recruiter image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。',
+        'お手伝い募集者写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
       )
     }
   }

@@ -58,7 +58,7 @@ export function Header()
                                 <li onClick={() => { setDialogopen(true) }}>ログアウト</li>
                             </ul>
                         </nav>
-                        <p>お問い合わせはこちら<br/> localvitamins@gmail.com  までお願いします。</p>
+                        <p>お問い合わせはこちら<br/> eiwachiku.c@gmail.com  までお願いします。</p>
                     </>
                 }
             </Drawer>

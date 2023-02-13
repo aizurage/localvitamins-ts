@@ -37,7 +37,7 @@ export default function Login() {
       console.log('Log in failed')
       console.log(error.message)
       alert(
-        'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。',
+        'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。それでも解決できない場合は、運営チームeiwachiku.c@gmail.comまでお問い合わせください。',
       )
     } finally {
       setLoading(false)

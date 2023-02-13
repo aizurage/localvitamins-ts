@@ -72,7 +72,7 @@ useEffect(() => {
       console.log('Event image picture deletion failed')
       console.log(error.error_description || error.message)
       alert(
-        'イベント写真のデータ消去に失敗しました。このタブを閉じて、運営チームにご連絡ください。',
+        'イベント写真のデータ消去に失敗しました。このタブを閉じて、運営チーム（eiwachiku.c@gmail.com）にご連絡ください。',
       )
     }
   }
@@ -87,7 +87,7 @@ useEffect(() => {
       console.log('Event recruiter picture deletion failed')
       console.log(error.error_description || error.message)
       alert(
-        'イベント募集者写真のデータ消去に失敗しました。このタブを閉じて、運営チームにご連絡ください。',
+        'イベント募集者写真のデータ消去に失敗しました。このタブを閉じて、運営チーム（eiwachiku.c@gmail.com）にご連絡ください。',
       )
     }
   }
