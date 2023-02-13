@@ -121,7 +121,7 @@ export default function Eventmaker(){
     } catch (error) {
       console.log("Error deleting event image")
       console.log(error.error_description || error.message)
-      alert("お手伝いイメージ写真の削除に失敗しました。運営チームにお問い合わせください。")
+      alert("お手伝いイメージ写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。")
     }
   }
 
@@ -155,7 +155,7 @@ export default function Eventmaker(){
     } catch (error) {
       console.log("Error deleting recruiter image")
       console.log(error.error_description || error.message)
-      alert("お手伝い募集者写真の削除に失敗しました。運営チームにお問い合わせください。")
+      alert("お手伝い募集者写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。")
     }
   }
 

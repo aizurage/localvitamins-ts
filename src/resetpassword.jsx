@@ -47,7 +47,7 @@ alert(
       console.log('Sending new password failed')
       console.log(error.message)
       alert(
-        'パスワード再設定に失敗しました。運営チームにお問い合わせください。',
+        'パスワード再設定に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
       )
     } finally {
       setLoading(false)

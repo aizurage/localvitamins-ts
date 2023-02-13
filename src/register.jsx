@@ -57,7 +57,7 @@ export default function Register() {
       console.log('Error new account creation')
       console.log(error.error_description || error.message)
       alert(
-        'アカウント作成に失敗しました。入力に不備がないか、パスワードの書式に不備がないかどうかご確認ください。それでも解決しない場合は、アプリ運営チームLocal Vitaminsのメールアドレスlocalvitamins@gmail.comにお問い合わせください。',
+        'アカウント作成に失敗しました。入力に不備がないか、パスワードの書式に不備がないかどうかご確認ください。それでも解決しない場合は、アプリ運営チームのメールアドレスeiwachiku.c@gmail.comにお問い合わせください。',
       )
     } finally {
       setLoading(false)

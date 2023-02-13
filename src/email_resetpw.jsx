@@ -27,7 +27,7 @@ export default function EmailResetPassword(){
         } catch (error) {
             console.log("Sending email for reset password failed")
             console.log(error.message)
-            alert("メール送信に失敗しました。運営チームにお問い合わせください。")
+            alert("メール送信に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。")
         }
     }
 
