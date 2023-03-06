@@ -62,6 +62,7 @@ export default function EmailResetPassword(){
                             <li>登録したメールアドレスとは異なるメールアドレスを入力していないか。</li>
                             <li>スペルミスをしていないか。</li>
                         </ul>
+                        <p><font color='red'>確認していただき、それでも解決しない場合は運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。</font></p>
                     </div>
                 }
             </form>
