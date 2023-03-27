@@ -299,7 +299,7 @@ export default function Eventmaker(){
           </Stepper.Step>
           <Stepper.Step label="入力情報確認" description="入力した情報を確認してください。">
             <h1>入力情報確認</h1>
-            <h3>入力した情報が表示されます。訂正がない場合は提出ボタンを押してください。訂正事項がある場合は、お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。</h3>
+            <h3>入力した情報が表示されます。訂正がない場合は「次へ」ボタンを押してください。訂正事項がある場合は、お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。</h3>
             <div className='input_content'>
               <div className='input_result'>
                 <Image src={eventPictureObjectURL} width={400}/>
@@ -349,6 +349,10 @@ export default function Eventmaker(){
             >登録する</Button>
           </Stepper.Completed>
         </Stepper>
+        <Group position="center" mt="xl">
+          <Button variant="default" onClick={prevStep}>戻る</Button>
+          <Button color="yellow" onClick={nextStep}>次へ</Button>
+        </Group>
       </form>
     </Container>
   )

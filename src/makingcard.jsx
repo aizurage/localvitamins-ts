@@ -165,6 +165,7 @@ export function Makingcard(props) {
       </div>
     )
   }
+  
 return (
     <div
       className="card"
