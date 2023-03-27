@@ -62,7 +62,7 @@ export default function Eventlist() {
     }
   }
 
-  const merge_event = (array1, array2) => {
+  const merge_eventarrays = (array1, array2) => {
     for (let i = 0; i < array1.length; i++) {
       for (let j = 0; j < array2.length; j++) {
         if (array1[i].id === array2[j].id) {
@@ -70,7 +70,6 @@ export default function Eventlist() {
         }
       }
     }
-
     return [...array1, array2].flat(2)
   }
 
@@ -92,7 +91,7 @@ export default function Eventlist() {
         .from('EventTable')
         .select()
         .like('search_tags', keywords[i])
-      if (i) searching_events = merge_event(searching_events, data)
+      if (i) searching_events = merge_eventarrays(searching_events, data)
       else searching_events = [...searching_events, data].flat(2)
     }
 
