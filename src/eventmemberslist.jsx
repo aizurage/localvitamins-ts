@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 export default function EventMembersList() {
   const params = useParams()
-  const [participants, setParticipants] = useState([])
+  const [participantsList, setParticipantsList] = useState([])
 
   useEffect(() => {
     const getParticipantList = async (eventID) => {
@@ -13,12 +13,12 @@ export default function EventMembersList() {
         .from('Participants')
         .select()
         .eq('eventID', eventID)
-      setParticipants(data)
+      setParticipantsList(data)
     }
 getParticipantList(params.eventNumber)
   }, [params.eventNumber])
 
-  const row = participants.map((member) => (
+  const row = participantsList.map((member) => (
     <tr key={member.id}>
       <td>{member.eventID}</td>
       <td>{member.eventTitle}</td>
@@ -44,7 +44,7 @@ getParticipantList(params.eventNumber)
           </tr>
         </thead>
         <tbody>
-          {participants.length === 0 ? '参加者がまだいません。' : row}
+          {participantsList.length === 0 ? '参加者がまだいません。' : row}
         </tbody>
       </Table>
       <Space h="xl" />

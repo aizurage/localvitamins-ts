@@ -43,12 +43,12 @@ export default function Eventmaker(){
   const [endHour, setEndHour] = useState("")
   const [endMinute, setEndMinute] = useState("")
 
-  const [event_pictureUrl, setEvent_pictureUrl] = useState(null)
-  const [recruiter_pictureUrl, setRecruiter_pictureUrl] = useState(null)
+  const [eventPictureURL, setEventPictureURL] = useState(null)
+  const [recruiterPictureURL, setRecruiterPictureURL] = useState(null)
   const [event_image_uploading, setEvent_image_uploading] = useState(false)
   const [recruiter_image_uploading, setRecruiter_image_uploading] = useState(false)
-  const [eventpicture, setEventPicture] = useState(null)
-  const [recruiterpicture, setRecruiterPicture] = useState(null)
+  const [eventPictureObjectURL, setEventPictureObjectURL] = useState(null)
+  const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] = useState(null)
 
   const navigate = useNavigate()
 
@@ -71,14 +71,14 @@ export default function Eventmaker(){
         reward: values.reward,
         inquiry: values.inquiry,
         search_tags: tags,
-        event_picture: event_pictureUrl,
+        event_picture: eventPictureURL,
         planner_uniqueID: supabase.auth.user().id,
         belongings: values.belongings,
         clothes: values.clothes,
         recruiter_name: values.recruiter_name,
         recruiter_introduction: values.recruiter_introduction,
         recruiter_comment: values.recruiter_comment,
-        recruiter_picture: recruiter_pictureUrl,
+        recruiter_picture: recruiterPictureURL,
       }])
       navigate('/home')
       if (error) throw error
@@ -103,8 +103,8 @@ export default function Eventmaker(){
       const filepath = `${filename}`
       const {error} = await supabase.storage.from("event-images").upload(filepath, file)
       if (error) throw error
-      setEventPicture(URL.createObjectURL(file))
-      setEvent_pictureUrl(filepath)
+      setEventPictureObjectURL(URL.createObjectURL(file))
+      setEventPictureURL(filepath)
     } catch (error) {
       console.log("Error uploading event image")
       console.log(error.error_description || error.message)
@@ -116,7 +116,7 @@ export default function Eventmaker(){
 
   const deleteEventImage = async () => {
     try {
-      const {error} = await supabase.storage.from("event-images").remove(event_pictureUrl)
+      const {error} = await supabase.storage.from("event-images").remove(eventPictureURL)
       if(error) throw error
     } catch (error) {
       console.log("Error deleting event image")
@@ -137,8 +137,8 @@ export default function Eventmaker(){
       const filepath = `${filename}`
       const {error} = await supabase.storage.from("recruiter-images").upload(filepath, file)
       if (error) throw error
-      setRecruiterPicture(URL.createObjectURL(file))
-      setRecruiter_pictureUrl(filepath)
+      setRecruiterPictureObjectURL(URL.createObjectURL(file))
+      setRecruiterPictureURL(filepath)
     } catch (error) {
       console.log("Error uploading recruiter image")
       console.log(error.error_description || error.message)
@@ -150,7 +150,7 @@ export default function Eventmaker(){
 
   const deleteRecruiterImage = async () => {
     try {
-      const {error} = await supabase.storage.from("recruiter-images").remove(recruiter_pictureUrl)
+      const {error} = await supabase.storage.from("recruiter-images").remove(recruiterPictureURL)
       if(error) throw error
     } catch (error) {
       console.log("Error deleting recruiter image")
@@ -234,7 +234,7 @@ export default function Eventmaker(){
                   <>
                     <Paper shadow="xl" radius="xl" p="xl" withBorder>
                       <label className="button primary block" htmlFor="single">
-                        {event_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                        {eventPictureURL == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
                       </label>
                     </Paper>
                   </>
@@ -253,7 +253,7 @@ export default function Eventmaker(){
             <Space h='xs'/>
             <Button
               color="gray"
-              onClick={() => {deleteEventImage(); setEvent_pictureUrl(null); setEventPicture(window.URL.revokeObjectURL(eventpicture))}}
+              onClick={() => {deleteEventImage(); setEventPictureURL(null); setEventPictureObjectURL(window.URL.revokeObjectURL(eventPictureObjectURL))}}
             >
               アップロードを取り消す
             </Button>
@@ -273,7 +273,7 @@ export default function Eventmaker(){
                   <>
                     <Paper shadow="xl" radius="xl" p="xl" withBorder>
                       <label className="button primary block" htmlFor="single">
-                        {recruiter_pictureUrl == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
+                        {recruiterPictureURL == null ? "ここをクリックして、画像をアップロードしてください。" : "画像アップロードが完了しました。"}
                       </label>
                     </Paper>
                   </>
@@ -292,7 +292,7 @@ export default function Eventmaker(){
             <Space h='xs'/>
             <Button
               color="gray"
-              onClick={() => {deleteRecruiterImage(); setRecruiter_pictureUrl(null); setRecruiterPicture(window.URL.revokeObjectURL(recruiterpicture))}}
+              onClick={() => {deleteRecruiterImage(); setRecruiterPictureURL(null); setRecruiterPictureObjectURL(window.URL.revokeObjectURL(recruiterPictureObjectURL))}}
             >
               アップロードを取り消す
             </Button>
@@ -302,7 +302,7 @@ export default function Eventmaker(){
             <h3>入力した情報が表示されます。訂正がない場合は提出ボタンを押してください。訂正事項がある場合は、お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。</h3>
             <div className='input_content'>
               <div className='input_result'>
-                <Image src={eventpicture} width={400}/>
+                <Image src={eventPictureObjectURL} width={400}/>
                 <Title order={1}>{form.values.title}</Title>
                 <h2>開催場所</h2>
                 <Text size="lg">{form.values.region}</Text>
@@ -329,7 +329,7 @@ export default function Eventmaker(){
               </div>
               <div className='recruiter_info'>
                   <h1>お願いした人</h1>
-                  <Image src={recruiterpicture} width={200}/>
+                  <Image src={recruiterPictureObjectURL} width={200}/>
                   <h3>お名前</h3>
                   <Text size="lg">{form.values.recruiter_name}さん</Text>
                   <h3>自己紹介</h3>

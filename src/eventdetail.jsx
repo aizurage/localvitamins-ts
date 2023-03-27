@@ -8,8 +8,8 @@ import './eventdetail.css'
 export default function Eventdetail(){
   const params = useParams()
   const [event, setEvent] = useState([])
-  const [eventPictureUrl, setEventPictureUrl] = useState('')
-  const [recruiterPictureUrl, setRecruiterPictureUrl] = useState('')
+  const [eventPictureObjectURL, setEventPictureObjectURL] = useState('')
+  const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] = useState('')
 
   useEffect(() => {
     const downloadEventData = async () => {
@@ -23,7 +23,7 @@ export default function Eventdetail(){
 
   const downloadEventImage = async (imageUrl) => {
     try {
-      await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureUrl(URL.createObjectURL(result.data)), error => {throw error})
+      await supabase.storage.from("event-images").download(imageUrl).then(result => setEventPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error})
     } catch (error) {
       console.log('Error downloading image') 
       console.log(error.error_description || error.message)
@@ -33,7 +33,7 @@ export default function Eventdetail(){
 
   const downloadRecruiterImage = async (imageUrl) => {
     try {
-      await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureUrl(URL.createObjectURL(result.data)), error => {throw error})
+      await supabase.storage.from("recruiter-images").download(imageUrl).then(result => setRecruiterPictureObjectURL(URL.createObjectURL(result.data)), error => {throw error})
     } catch (error) {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
@@ -44,7 +44,7 @@ export default function Eventdetail(){
   return (
     <Container className='eventdetail'>
       <div className='detail'>
-        <Image src={eventPictureUrl} width={400} alt={event.title} />
+        <Image src={eventPictureObjectURL} width={400} alt={event.title} />
         <Title order={1}>{event.title}</Title>
         <h2>開催場所</h2>
         <Text size="lg">{event.region}</Text>
@@ -71,7 +71,7 @@ export default function Eventdetail(){
       </div>
       <div className='detail_recruiter'>
         <h1>お願いした人</h1>
-        <Avatar src={recruiterPictureUrl} radius="xl" size={200}/>
+        <Avatar src={recruiterPictureObjectURL} radius="xl" size={200}/>
         <Text size="lg">{event.recruiter_name}さん</Text>
         <h3>自己紹介</h3>
         <Text size="lg">{event.recruiter_introduction}</Text>

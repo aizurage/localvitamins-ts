@@ -14,25 +14,22 @@ import { supabase } from './supabaseClient'
 import './makingcard.css'
 
 export function Makingcard(props) {
-  const [pictureurl, setPictureUrl] = useState('')
+  const [eventPictureObjectURL, setEventPictureObjectURL] = useState('')
   const [opened, setOpened] = useState('')
   const navigate = useNavigate()
 
-  const checkMyEvent = () => {
-    return supabase.auth.user().id === props.row.planner_uniqueID
-  }
-useEffect(() => {
-    getImage(props.row.event_picture)
+  useEffect(() => {
+    downloadEventImage(props.row.event_picture)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const getImage = async (imageUrl) => {
+  const downloadEventImage = async (imageUrl) => {
     try {
       await supabase.storage
         .from('event-images')
         .download(imageUrl)
         .then(
-          (result) => setPictureUrl(URL.createObjectURL(result.data)),
+          (result) => setEventPictureObjectURL(URL.createObjectURL(result.data)),
           (error) => {
             throw error
           },
@@ -46,7 +43,7 @@ useEffect(() => {
     }
   }
 
-  async function event_participants_delete() {
+  async function deleteEventParticipants() {
     try {
       const { error } = await supabase
         .from('Participants')
@@ -62,7 +59,7 @@ useEffect(() => {
     }
   }
 
-  const event_image_picture_delete = async () => {
+  const deleteEventImage = async () => {
     try {
       const { error } = await supabase.storage
         .from('event-images')
@@ -77,7 +74,7 @@ useEffect(() => {
     }
   }
 
-  const event_recruiter_picture_delete = async () => {
+  const deleteRecruiterImage = async () => {
     try {
       const { error } = await supabase.storage
         .from('recruiter-images')
@@ -92,11 +89,11 @@ useEffect(() => {
     }
   }
 
-  const event_delete = async () => {
+  const deleteEvent = async () => {
     try {
-      event_image_picture_delete()
-      event_recruiter_picture_delete()
-      event_participants_delete()
+      deleteEventImage()
+      deleteRecruiterImage()
+      deleteEventParticipants()
       const { error } = await supabase
         .from('EventTable')
         .delete()
@@ -152,7 +149,7 @@ useEffect(() => {
                 <Button
                   color="red"
                   onClick={() => {
-                    event_delete()
+                    deleteEvent()
                     setOpened(false)
                   }}
                 >
@@ -181,7 +178,7 @@ return (
     >
       <Card style={{ height: 500 }} shadow="sm" p="lg">
         <Card.Section>
-          <Image src={pictureurl} height={160} alt={props.row.title} />
+          <Image src={eventPictureObjectURL} height={160} alt={props.row.title} />
         </Card.Section>
 
         <Group
@@ -222,7 +219,7 @@ return (
           </Button>
           <Space h="md" />
           <div className="ownerOption">
-            {checkMyEvent() ? ownerOption() : ''}
+            { supabase.auth.user().id === props.row.planner_uniqueID ? ownerOption() : ''}
           </div>
         </div>
       </Card>
