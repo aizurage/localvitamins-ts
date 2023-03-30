@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Burger, Button, Dialog, Drawer, Group } from '@mantine/core'
-import './header.css'
+import { Burger, Button, Dialog, Divider, Drawer, Group } from '@mantine/core'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase }  from './supabaseClient'
+import Contact from './contact'
+
+import './header.css'
 
 export function Header()
 {
@@ -58,7 +60,8 @@ export function Header()
                                 <li onClick={() => { setDialogopen(true) }}>ログアウト</li>
                             </ul>
                         </nav>
-                        <p>お問い合わせはこちら<br/> eiwachiku.c@gmail.com  までお願いします。</p>
+                        <Divider my="sm" />
+                        <Contact />
                     </>
                 }
             </Drawer>
