@@ -19,10 +19,12 @@ export default function Contact() {
 
     const submit = (values) => {
       try {
+        console.log(supabase.auth.user())
         emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, {
           title: values.title,
           main: values.main,
-          email: supabase.auth.user().email
+          email: supabase.auth.user().email,
+          username: supabase.auth.user().user_metadata.username,
         }, process.env.REACT_APP_PUBLIC_KEY)
         .then(() => {
           alert("フォームの送信に成功しました。このタブを閉じてください。")
