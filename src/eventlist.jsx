@@ -57,7 +57,7 @@ export default function Eventlist() {
       console.log('Error joining event process')
       console.log(error.error_description || error.message)
       alert(
-        '参加申請処理に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        '参加申請処理に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }

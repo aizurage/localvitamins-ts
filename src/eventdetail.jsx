@@ -27,7 +27,7 @@ export default function Eventdetail(){
     } catch (error) {
       console.log('Error downloading image') 
       console.log(error.error_description || error.message)
-      alert("イベントイメージ写真のダウンロードに失敗しました。")
+      alert("イベントイメージ写真のダウンロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。")
     }
   }
 
@@ -37,7 +37,7 @@ export default function Eventdetail(){
     } catch (error) {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
-      alert("お手伝い募集者の写真ダウンロードに失敗しました。")
+      alert("お手伝い募集者の写真ダウンロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。")
     }
   }
 

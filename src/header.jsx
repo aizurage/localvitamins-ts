@@ -20,7 +20,7 @@ export function Header()
         } catch (error) {
             console.log('Log out failed')
             console.log(error.message)
-            alert('ログアウトに失敗しました。')
+            alert('ログアウトに失敗しました。もう一度お試しいただき、それでも失敗する場合は、お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。')
         } 
     }
 

@@ -65,7 +65,7 @@ export default function Eventedit() {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
       alert(
-        'イベントイメージ写真のダウンロードに失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        'お手伝いイメージ写真のダウンロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -81,7 +81,7 @@ export default function Eventedit() {
       console.log('Error deleting event image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝いイメージ写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        'お手伝いイメージ写真の削除に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -106,7 +106,7 @@ export default function Eventedit() {
     } catch (error) {
       console.log('Error uploading event image')
       console.log(error.error_description || error.message)
-      alert('イベントイメージ写真のアップロードに失敗しました。')
+      alert('イベントイメージ写真のアップロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。')
     }
   }
 
@@ -126,7 +126,7 @@ export default function Eventedit() {
       console.log('Error downloading image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝い募集者の写真ダウンロードに失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        'お手伝い募集者の写真ダウンロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -142,7 +142,7 @@ export default function Eventedit() {
       console.log('Error deleting recruiter image')
       console.log(error.error_description || error.message)
       alert(
-        'お手伝い募集者写真の削除に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        'お手伝い募集者写真の削除に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -167,7 +167,7 @@ export default function Eventedit() {
     } catch (error) {
       console.log('Error uploading recruiter image')
       console.log(error.error_description || error.message)
-      alert('お手伝い募集者の写真アップロードに失敗しました。')
+      alert('お手伝い募集者の写真アップロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。')
     }
   }
 
@@ -213,7 +213,7 @@ export default function Eventedit() {
       console.log('Error event update')
       console.log(error.error_description || error.message)
       alert(
-        'イベントを更新できませんでした。解決できない場合には、お問い合わせ先のメールアドレスにご連絡ください。お手伝い一覧画面のメニューにあります。',
+        'イベントを更新できませんでした。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
