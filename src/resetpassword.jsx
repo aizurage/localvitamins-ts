@@ -47,7 +47,7 @@ export default function ResetPassword() {
       console.log('Sending new password failed')
       console.log(error.message)
       alert(
-        'パスワード再設定に失敗しました。運営チーム（eiwachiku.c@gmail.com）にお問い合わせください。',
+        'パスワード再設定に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     } finally {
       setLoading(false)

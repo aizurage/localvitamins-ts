@@ -45,16 +45,17 @@ export function Makingcard(props) {
 
   async function deleteEventParticipants() {
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('Participants')
         .delete()
         .eq('eventID', props.row.id)
-      if (error) throw error
+      // イベント参加者がいて、かつその参加者データを削除できなかった場合、エラーを投げる
+      if (data.length > 0 && error) throw error
     } catch (error) {
       console.log('Event participants deletion failed')
       console.log(error.error_description || error.message)
       alert(
-        'イベント参加者がいなかった、またはその他の理由でイベント参加者のデータ消去に失敗しました。',
+        'イベント参加者のデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -69,7 +70,7 @@ export function Makingcard(props) {
       console.log('Event image picture deletion failed')
       console.log(error.error_description || error.message)
       alert(
-        'イベント写真のデータ消去に失敗しました。このタブを閉じて、運営チーム（eiwachiku.c@gmail.com）にご連絡ください。',
+        'イベント写真のデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -84,7 +85,7 @@ export function Makingcard(props) {
       console.log('Event recruiter picture deletion failed')
       console.log(error.error_description || error.message)
       alert(
-        'イベント募集者写真のデータ消去に失敗しました。このタブを閉じて、運営チーム（eiwachiku.c@gmail.com）にご連絡ください。',
+        'イベント募集者写真のデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
     }
   }
@@ -105,7 +106,7 @@ export function Makingcard(props) {
     } catch (error) {
       console.log('Event deletion failed')
       console.log(error.error_description || error.message)
-      alert('イベントのデータ消去に失敗しました。')
+      alert('イベントのデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。')
     }
   }
 
