@@ -14,6 +14,8 @@ import { supabase } from './supabaseClient'
 import { At } from 'tabler-icons-react'
 import { Makingcard } from './makingcard'
 
+import dayjs from 'dayjs'
+
 export default function Eventlist() {
   const [events, setEvents] = useState([])
   const theme = useMantineTheme()
@@ -99,16 +101,22 @@ export default function Eventlist() {
   }
 
   const downloadMyEventData = async () => {
+    const today = new Date()
     const { data } = await supabase
       .from('EventTable')
       .select()
       .eq('planner_uniqueID', supabase.auth.user().id)
+      .gt('date', dayjs(today))
     if (data == null) return
     setEvents(data)
   }
 
   const downloadEventData = async () => {
-    const { data } = await supabase.from('EventTable').select()
+    const today = new Date()
+    const { data } = await supabase
+      .from('EventTable')
+      .select()
+      .gt('date', dayjs(today))
     setEvents(data)
   }
 
