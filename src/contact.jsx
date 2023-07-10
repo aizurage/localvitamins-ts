@@ -58,7 +58,7 @@ export default function Contact() {
         <Textarea
           required
           placeholder="本文"
-          minRows={8}
+          minRows={5}
           style={{ width: 400 }}
           {...form.getInputProps('main')}
         />
