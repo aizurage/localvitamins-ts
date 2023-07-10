@@ -37,7 +37,7 @@ export default function Login() {
       console.log('Log in failed')
       console.log(error.error_description || error.message)
       alert(
-        'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。それでも解決できない場合は、運営チームeiwachiku.c@gmail.comまでお問い合わせください。',
+        'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。それでも解決できない場合は、運営チームmiraikuru0512@gmail.comまでお問い合わせください。',
       )
     } finally {
       setLoading(false)
@@ -74,7 +74,9 @@ export default function Login() {
             <p>
               パスワードを忘れた方は、下のリンクをクリックして、パスワードの再設定をしてください。
             </p>
-            <Link to={'/email_resetpw'}>パスワードを忘れた方は、ここをクリック。</Link>
+            <Link to={'/email_resetpw'}>
+              パスワードを忘れた方は、ここをクリック。
+            </Link>
             <Space h="xl" />
             <Group position="center" mt="md">
               <Button type="submit" color="orange">
