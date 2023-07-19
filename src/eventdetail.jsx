@@ -44,14 +44,14 @@ export default function Eventdetail(){
   return (
     <Container className='eventdetail'>
       <div className='detail'>
-        <Image src={eventPictureObjectURL} width={400} alt={event.title} />
+        <Image src={eventPictureObjectURL}  alt={event.title} />
         <Title order={1}>{event.title}</Title>
         <h2>開催場所</h2>
         <Text size="lg">{event.region}</Text>
         <h2>開催日時</h2>
         <Text size="lg">{event.date}</Text>
         <ul>
-          <li>開示時刻:{event.start_time}</li>
+          <li>開始時刻:{event.start_time}</li>
           <li>終了時刻:{event.end_time}</li>
         </ul>
         <h2>参加して欲しい人</h2>
