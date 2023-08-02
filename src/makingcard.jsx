@@ -119,7 +119,7 @@ export function Makingcard(props) {
           variant="gradient"
           gradient={{ from: 'orange', to: 'red' }}
           component={Link}
-          to={`/home/eventmemberslist/${props.row.id}`}
+          to={`/eventmemberslist/${props.row.id}`}
         >
           参加者リスト表示
         </Button>{' '}
@@ -136,7 +136,7 @@ export function Makingcard(props) {
           radius={'xl'}
           className="eventedit"
           component={Link}
-          to={`/home/eventedit/${props.row.id}`}
+          to={`/eventedit/${props.row.id}`}
         >
           編集
         </Button>
@@ -207,7 +207,7 @@ return (
             fullWidth
             style={{ marginTop: 14 }}
             component={Link}
-            to={`/home/eventdetail/${props.row.id}`}
+            to={`/eventdetail/${props.row.id}`}
           >
             詳細を見る
           </Button>
@@ -222,9 +222,15 @@ return (
             参加する
           </Button>
           <Space h="md" />
-          <div className="ownerOption">
-            { supabase.auth.user().id === props.row.planner_uniqueID ? ownerOption() : ''}
+          <div>
+            { 
+              supabase.auth.user() === null ? '' : 
+              <div className="ownerOption">
+              { supabase.auth.user().id === props.row.planner_uniqueID ? ownerOption() : ''}
+              </div>
+            }
           </div>
+          
         </div>
       </Card>
     </div>

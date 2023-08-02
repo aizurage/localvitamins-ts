@@ -208,7 +208,7 @@ export default function Eventedit() {
       const { error } = await supabase.from('EventTable').upsert(form.values)
       if (error) throw error
 
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       console.log('Error event update')
       console.log(error.error_description || error.message)

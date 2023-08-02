@@ -80,7 +80,7 @@ export default function Eventmaker(){
         recruiter_comment: values.recruiter_comment,
         recruiter_picture: recruiterPictureURL,
       }])
-      navigate('/home')
+      navigate('/')
       if (error) throw error
     } catch (error) {
       console.log("Error event registration")

@@ -48,7 +48,7 @@ getParticipantList(params.eventNumber)
         </tbody>
       </Table>
       <Space h="xl" />
-      <Button onClick={() => navigate('/home')}>閉じる</Button>
+      <Button onClick={() => navigate('/')}>閉じる</Button>
     </>
   )
 }

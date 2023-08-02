@@ -32,7 +32,7 @@ export default function Login() {
       setLoading(true)
       const { error } = await supabase.auth.signIn(values)
       if (error) throw error
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       console.log('Log in failed')
       console.log(error.error_description || error.message)

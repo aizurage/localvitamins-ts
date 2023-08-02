@@ -4,10 +4,11 @@ import {
   Button,
   Group,
   Modal,
+  Popover,
   useMantineTheme,
   TextInput,
 } from '@mantine/core'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useForm } from '@mantine/form'
 import { supabase } from './supabaseClient'
@@ -20,8 +21,10 @@ export default function Eventlist() {
   const [events, setEvents] = useState([])
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
+  const [popoverOpened, setPopoverOpened] = useState(false)
   const [event, setEvent] = useState('')
   const [isOnlyMyEvent, setIsOnlyMyEvent] = useState(false)
+  const navigate = useNavigate()
 
   const join_event_form = useForm({
     initialValues: {
@@ -149,34 +152,50 @@ export default function Eventlist() {
             </Button>
           </Group>
         </form>
-        <Button
-          style={{ width: 200 }}
-          color="pink"
-          component={Link}
-          to={`/home/eventmaker`}
+        <Popover
+          opened={popoverOpened}
+          onClose={() => setPopoverOpened(false)}
+          target={
+            <Button
+              style={{ width: 200 }}
+              color="pink"
+              onClick={() => {supabase.auth.user() === null ? setPopoverOpened(true) : navigate('/eventmaker')}}
+            >
+              お手伝い作成
+            </Button>
+          }
+          width={400}
+          position="bottom"
+          withArrow
         >
-          お手伝い作成
-        </Button>
+          アカウントを登録し、ログインすることで、あなた自身で「お手伝い」を作ることが出来ます。
+          お手伝い作成、募集を行いたい場合は、ログイン、または新規登録をお願いします。
+        </Popover>
+        
         <div>
-          {!isOnlyMyEvent ? 
-            <Button
-              variant="gradient"
-              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-              onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
-            >
-              自分のイベントを表示
-            </Button> 
-            :
-            <Button
-              variant="gradient"
-              gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-              onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
-            >
-              全イベントを表示
-            </Button> 
+          {
+            supabase.auth.user() === null ? '':
+            <div>
+              {!isOnlyMyEvent ? 
+                <Button
+                  variant="gradient"
+                  gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+                  onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
+                >
+                  自分のイベントを表示
+                </Button> 
+                :
+                <Button
+                  variant="gradient"
+                  gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+                  onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
+                >
+                  全イベントを表示
+                </Button> 
+              }
+            </div>
           }
         </div>
-        
       </Group>
       <div>
         <nav

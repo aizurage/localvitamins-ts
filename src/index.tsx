@@ -1,14 +1,19 @@
 import ReactDOM from 'react-dom' 
-import App from './App'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { MantineProvider } from '@mantine/core'
+
+import Eventlist from './eventlist'
+import Eventdetail from './eventdetail'
+import Eventmaker from './eventmaker'
+import EventMembersList from './eventmemberslist'
+import Eventedit from './eventedit'
 
 import Register from './register'
 import Login from './login'
 import { ServiceTerms } from './serviceTerms'
-import Home from './home'
 import EmailResetPassword from './email_resetpw'
 import ResetPassword from './resetpassword'
+import { Header } from './header'
 
 
 ReactDOM.render(
@@ -21,24 +26,33 @@ ReactDOM.render(
       }}
     >
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/email_resetpw" element={<EmailResetPassword />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home/*" element={<Home/>}/>
-          <Route path="/serviceTerms" element={ <ServiceTerms agree={true}/>}/>
-          <Route
-            path="*"
-            element={
-              <main style={{padding: "1rem"}}>
-                <p>ページが見つかりません。</p>
-              </main>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+        <Header/>
+        <main>
+          <Routes>
+            <Route path="/" element={<Eventlist />} />
+            <Route path='/eventmaker' element={<Eventmaker />} />
+            <Route path='/eventdetail/:eventNumber' element={<Eventdetail />}/>
+            <Route path='/eventedit/:eventNumber' element={<Eventedit/>}/>
+            <Route path='/eventmemberslist/:eventNumber' element={<EventMembersList/>}/>
+            <Route path='/serviceTerms' element={<ServiceTerms agree={false}/>}/>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/email_resetpw" element={<EmailResetPassword />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/serviceTerms_agree" element={ <ServiceTerms agree={true}/>}/>
+
+            <Route
+              path="*"
+              element={
+                <main style={{padding: "1rem"}}>
+                  <p>ページが見つかりません。</p>
+                </main>
+              }
+            />
+          </Routes>
+          </main>
+        </BrowserRouter>
     </MantineProvider>,
     document.getElementById('root')
 )

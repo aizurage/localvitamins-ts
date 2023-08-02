@@ -40,9 +40,9 @@ export default function ResetPassword() {
       })
       if (PasswordResetError) throw PasswordResetError
       alert( 
-        '「OK」をクリックし、パスワードの再設定が完了するまでこのままお待ちください。パスワードの設定が完了したら、最初の画面に自動で切り替わります。'
+        '「OK」をクリックし、パスワードの再設定が完了するまでこのままお待ちください。パスワードの設定が完了したら、ログイン画面に自動で切り替わります。'
       )
-      navigate('/')
+      navigate('/login')
     } catch (error) {
       console.log('Sending new password failed')
       console.log(error.message)
