@@ -135,7 +135,6 @@ export function Makingcard(props) {
           消去
         </Button>
         <Button
-          color="pink"
           radius={'xl'}
           className="eventedit"
           component={Link}
@@ -183,7 +182,7 @@ export function Makingcard(props) {
       }}
       key={props.row.id}
     >
-      <Card style={{ height: 500 }} shadow="sm" p="lg">
+      <Card shadow="sm" p="lg">
         <Card.Section>
           <Image
             src={eventPictureObjectURL}
@@ -206,6 +205,10 @@ export function Makingcard(props) {
         <Spoiler maxHeight={50} showLabel="もっと表示" hideLabel="部分表示">
           {props.row.content}
         </Spoiler>
+
+        {/* Spoilerでお手伝い内容部分を全表示しても、文章がボタンとかぶらないように、
+        ボタンがすべて入る空白を、Spoilerの下にあえて作る */}
+        <div style={{height:160}}></div>
 
         <div className="buttons">
           <Button

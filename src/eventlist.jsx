@@ -17,6 +17,8 @@ import { Makingcard } from './makingcard'
 
 import dayjs from 'dayjs'
 
+import './eventlist.css'
+
 export default function Eventlist() {
   const [events, setEvents] = useState([])
   const theme = useMantineTheme()
@@ -147,7 +149,7 @@ export default function Eventlist() {
               style={{ width: 500 }}
               {...search_keywords_form.getInputProps('keywords')}
             />
-            <Button style={{ width: 100 }} color="red" type="submit">
+            <Button style={{ width: 100 }} className="search_button" type="submit">
               検索
             </Button>
           </Group>
@@ -158,7 +160,7 @@ export default function Eventlist() {
           target={
             <Button
               style={{ width: 200 }}
-              color="pink"
+              className='make_event'
               onClick={() => {supabase.auth.user() === null ? setPopoverOpened(true) : navigate('/eventmaker')}}
             >
               お手伝い作成
