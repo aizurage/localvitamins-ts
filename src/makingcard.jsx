@@ -29,7 +29,8 @@ export function Makingcard(props) {
         .from('event-images')
         .download(imageUrl)
         .then(
-          (result) => setEventPictureObjectURL(URL.createObjectURL(result.data)),
+          (result) =>
+            setEventPictureObjectURL(URL.createObjectURL(result.data)),
           (error) => {
             throw error
           },
@@ -104,11 +105,13 @@ export function Makingcard(props) {
       if (error) throw error
       const { data } = await supabase.from('EventTable').select()
       props.setEvents(data)
-      navigate('/home')
+      navigate('/')
     } catch (error) {
       console.log('Event deletion failed')
       console.log(error.error_description || error.message)
-      alert('イベントのデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。')
+      alert(
+        'イベントのデータ消去に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
+      )
     }
   }
 
@@ -119,7 +122,7 @@ export function Makingcard(props) {
           variant="gradient"
           gradient={{ from: 'orange', to: 'red' }}
           component={Link}
-          to={`/home/eventmemberslist/${props.row.id}`}
+          to={`/eventmemberslist/${props.row.id}`}
         >
           参加者リスト表示
         </Button>{' '}
@@ -136,7 +139,7 @@ export function Makingcard(props) {
           radius={'xl'}
           className="eventedit"
           component={Link}
-          to={`/home/eventedit/${props.row.id}`}
+          to={`/eventedit/${props.row.id}`}
         >
           編集
         </Button>
@@ -168,8 +171,8 @@ export function Makingcard(props) {
       </div>
     )
   }
-  
-return (
+
+  return (
     <div
       className="card"
       style={{
@@ -182,7 +185,11 @@ return (
     >
       <Card style={{ height: 500 }} shadow="sm" p="lg">
         <Card.Section>
-          <Image src={eventPictureObjectURL} height={160} alt={props.row.title} />
+          <Image
+            src={eventPictureObjectURL}
+            height={160}
+            alt={props.row.title}
+          />
         </Card.Section>
 
         <Group
@@ -207,7 +214,7 @@ return (
             fullWidth
             style={{ marginTop: 14 }}
             component={Link}
-            to={`/home/eventdetail/${props.row.id}`}
+            to={`/eventdetail/${props.row.id}`}
           >
             詳細を見る
           </Button>
@@ -222,8 +229,16 @@ return (
             参加する
           </Button>
           <Space h="md" />
-          <div className="ownerOption">
-            { supabase.auth.user().id === props.row.planner_uniqueID ? ownerOption() : ''}
+          <div>
+            {supabase.auth.user() === null ? (
+              ''
+            ) : (
+              <div className="ownerOption">
+                {supabase.auth.user().id === props.row.planner_uniqueID
+                  ? ownerOption()
+                  : ''}
+              </div>
+            )}
           </div>
         </div>
       </Card>

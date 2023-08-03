@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Burger, Button, Dialog, Divider, Drawer, Group } from '@mantine/core'
 import { Link, useNavigate } from 'react-router-dom'
-import { supabase }  from './supabaseClient'
 import Contact from './contact'
+import { supabase } from './supabaseClient'
 
 import './header.css'
 
@@ -37,6 +37,45 @@ export function Header()
                         className='burger'
                     />
                     <h1 className='title'>Local Vitamins</h1>
+                    <div>
+                        {
+                            supabase.auth.user() === null ?
+                            <Button
+                                color="green"
+                                onClick={() => { navigate('/login') }}
+                            >
+                                ログイン
+                            </Button>
+                            :
+                            <Button
+                                color="teal"
+                                onClick={() => { setDialogopen(true) }}
+                            >
+                                ログアウト
+                            </Button>
+                        }
+                    </div>
+                    <Dialog
+                        opened={dialogopen}
+                        onClose={ () => {setDialogopen(false)}}
+                        position={{ top: '10%', left: '80%'}}
+                    >
+                        <p>ログアウトします。よろしいですか？</p>
+                        <Group>
+                            {<>
+                                <Button color='red' onClick={ () => { log_out(); setDialogopen(false) }}> はい </Button>
+                                <Button color='blue' onClick={ () => { setDialogopen(false) }}> いいえ </Button>
+                            </>}
+                        </Group>
+                    </Dialog> 
+                    
+                    <Button
+                        color="dark"
+                        variant="outline"
+                        onClick={() => { navigate('/serviceTerms_agree') }}
+                     >
+                        新規登録
+                    </Button>
                 </Group>
             </header>
             <Drawer
@@ -51,13 +90,13 @@ export function Header()
                         <Button 
                             color='red'
                             component={Link}
-                            to={'/home'}
+                            to={'/'}
                             onClick={() => setOpened(false)}
                         >ホームへ戻る</Button>
                         <nav>
                             <ul>
-                                <li onClick={() => { navigate('/home/serviceTerms', false) }}>利用規約(個人情報の取り扱いについて)</li>
-                                <li onClick={() => { setDialogopen(true) }}>ログアウト</li>
+                                <li onClick={() => { navigate('/serviceTerms', false) }}>利用規約(個人情報の取り扱いについて)</li>
+                                {/* <li onClick={() => { setDialogopen(true) }}>ログアウト</li> */}
                             </ul>
                         </nav>
                         <Divider my="sm" />
@@ -65,19 +104,6 @@ export function Header()
                     </>
                 }
             </Drawer>
-            <Dialog
-                opened={dialogopen}
-                onClose={ () => {setDialogopen(false)}}
-                position={{ top: 350, left: 200 }}
-            >
-                <p>ログアウトします。よろしいですか？</p>
-                <Group>
-                    {<>
-                        <Button color='red' onClick={ () => { log_out() }}> はい </Button>
-                        <Button color='blue' onClick={ () => { setDialogopen(false) }}> いいえ </Button>
-                    </>}
-                </Group>
-            </Dialog>
         </>
     )
 }
