@@ -182,7 +182,7 @@ export function Makingcard(props) {
       }}
       key={props.row.id}
     >
-      <Card shadow="sm" p="lg">
+      <Card className="eventcard" shadow="sm" p="lg">
         <Card.Section>
           <Image
             src={eventPictureObjectURL}
