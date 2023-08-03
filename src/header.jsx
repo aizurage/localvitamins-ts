@@ -41,14 +41,14 @@ export function Header()
                         {
                             supabase.auth.user() === null ?
                             <Button
-                                color="green"
+                                className='dialog_login'
                                 onClick={() => { navigate('/login') }}
                             >
                                 ログイン
                             </Button>
                             :
                             <Button
-                                color="teal"
+                                className='dialog_logout'
                                 onClick={() => { setDialogopen(true) }}
                             >
                                 ログアウト
@@ -70,6 +70,7 @@ export function Header()
                     </Dialog> 
                     
                     <Button
+                        className='register'
                         color="dark"
                         variant="outline"
                         onClick={() => { navigate('/serviceTerms_agree') }}
@@ -88,7 +89,7 @@ export function Header()
                     <>
                         <h1>メニュー</h1>
                         <Button 
-                            color='red'
+                            className='back2home'
                             component={Link}
                             to={'/'}
                             onClick={() => setOpened(false)}

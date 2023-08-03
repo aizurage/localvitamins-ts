@@ -1,13 +1,23 @@
 div.card{
     position:relative;
+    vertical-align: 'top';
 }
 
 .buttons{
     position: absolute;
     bottom: 10%;
-    width: 90%;
+    width: 85%;
 }
 
 .ownerOption{
     height: 15px;
+}
+
+.eventedit{
+    color: white;
+    background-color: #800080;
+}
+
+.eventcard {
+    background-color: #ede58e;
 }

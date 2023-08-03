@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import { useParams, useNavigate } from 'react-router-dom'
 
+import './eventmemberslist.css'
+
 export default function EventMembersList() {
   const params = useParams()
   const [participantsList, setParticipantsList] = useState([])
@@ -48,7 +50,7 @@ getParticipantList(params.eventNumber)
         </tbody>
       </Table>
       <Space h="xl" />
-      <Button onClick={() => navigate('/')}>閉じる</Button>
+      <Button className='close_button' onClick={() => navigate('/')}>閉じる</Button>
     </>
   )
 }

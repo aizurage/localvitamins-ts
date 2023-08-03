@@ -28,3 +28,24 @@ nav ul li:active{
     -webkit-transform: translateY(4px);
     transform: translateY(4px);
 }
+
+.dialog_login {
+    color: black;
+    background-color: #cc0;
+    height: 50px;
+}
+
+.dialog_logout {
+    color: white;
+    background-color: #330;
+    height: 50px;
+}
+
+.register {
+    height: 50px;
+}
+
+.back2home {
+    color: white;
+    background-color: #800;
+}

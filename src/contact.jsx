@@ -3,6 +3,8 @@ import { useForm } from '@mantine/form'
 import emailjs from '@emailjs/browser'
 import { supabase } from './supabaseClient'
 
+import './contact.css'
+
 export default function Contact() {
   const form = useForm({
     initialValues: {
@@ -46,7 +48,7 @@ export default function Contact() {
   return (
     <Center>
       <form onSubmit={form.onSubmit(submit)}>
-        <p>お問い合わせフォーム</p>
+        <h3>お問い合わせフォーム</h3>
         <p>タイトル</p>
         <Input
           required
@@ -63,7 +65,7 @@ export default function Contact() {
           {...form.getInputProps('main')}
         />
         <Group position="center" mt="md">
-          <Button color="green" type="submit">
+          <Button className='form_submit' type="submit">
             送信
           </Button>
         </Group>
