@@ -203,7 +203,7 @@ export function Makingcard(props) {
           日付：{props.row.date}
         </Text>
 
-        <Spoiler maxHeight={100} showLabel="もっと表示" hideLabel="部分表示">
+        <Spoiler maxHeight={80} showLabel="もっと表示" hideLabel="部分表示">
           {props.row.content}
         </Spoiler>
 
