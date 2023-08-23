@@ -87,8 +87,9 @@ export default function Eventlist() {
   }
 
   const search_event = async ({ keywords }) => {
+    const today = new Date()
     if (keywords.length === 0) {
-      const { data } = await supabase.from('EventTable').select()
+      const { data } = await supabase.from('EventTable').select().gt('date', dayjs(today))
       setEvents(data)
       return
     }
@@ -104,6 +105,7 @@ export default function Eventlist() {
         .from('EventTable')
         .select()
         .like('search_tags', keywords[i])
+        .gt('date', dayjs(today))
       if (i) searching_events = merge_eventarrays(searching_events, data)
       else searching_events = [...searching_events, data].flat(2)
     }
