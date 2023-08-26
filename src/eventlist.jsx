@@ -3,6 +3,7 @@ import {
   Text,
   Button,
   Group,
+  LoadingOverlay,
   Modal,
   Popover,
   useMantineTheme,
@@ -27,6 +28,7 @@ export default function Eventlist() {
   const [event, setEvent] = useState('')
   const [isOnlyMyEvent, setIsOnlyMyEvent] = useState(false)
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
 
   const join_event_form = useForm({
     initialValues: {
@@ -50,6 +52,7 @@ export default function Eventlist() {
 
   const join_event = async (values) => {
     try {
+      setLoading(true)
       await supabase.from('Participants').insert([
         {
           eventID: event.eventID,
@@ -72,6 +75,8 @@ export default function Eventlist() {
       alert(
         '参加申請処理に失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。',
       )
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -144,6 +149,7 @@ export default function Eventlist() {
 
   return (
     <>
+      <LoadingOverlay visible={loading} />
       <h1>お手伝い一覧</h1>
       <Text>キーワードは最大３つまで入力できます。</Text>
       <Text>
