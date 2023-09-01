@@ -77,6 +77,8 @@ export default function Eventlist() {
       )
     } finally {
       setLoading(false)
+      // フォーム情報が送信し終わったら、モーダルを閉じる。（非同期処理だけど大丈夫かな？）
+      setOpened(false)
     }
   }
 
@@ -266,9 +268,6 @@ export default function Eventlist() {
             color="red"
             margin="center"
             style={{ top: 20 }}
-            onClick={() => {
-              setOpened(false)
-            }}
           >
             送信
           </Button>
