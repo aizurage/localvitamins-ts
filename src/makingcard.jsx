@@ -8,6 +8,7 @@ import {
   Space,
   Modal,
 } from '@mantine/core'
+import dayjs from 'dayjs'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
@@ -17,6 +18,7 @@ export function Makingcard(props) {
   const [eventPictureObjectURL, setEventPictureObjectURL] = useState('')
   const [opened, setOpened] = useState('')
   const navigate = useNavigate()
+  const today = new Date()
 
   useEffect(() => {
     downloadEventImage(props.row.event_picture)
@@ -228,6 +230,7 @@ export function Makingcard(props) {
             fullWidth
             style={{ marginTop: 14 }}
             onClick={() => props.open(props.row.id, props.row.title)}
+            disabled={dayjs(today) > props.row.date}
           >
             参加する
           </Button>
