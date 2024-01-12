@@ -4,6 +4,7 @@ import {
   Center,
   Group,
   Image,
+  Select,
   Space,
   Text,
   TextInput,
@@ -27,6 +28,16 @@ export default function Eventedit() {
   const [newEventPictureURL, setNewEventPictureURL] = useState(null)
   const [newRecruiterPictureURL, setNewRecruiterPictureURL] = useState(null)
   const navigate = useNavigate()
+
+  const hourSelections = Array.from({ length: 23 }, (_, index) => ({
+    value: String(index + 1),
+    label: String(index + 1)
+  }))
+  
+  const minuteSelections = Array.from({ length: 6 }, (_, index) => ({
+    value: String(index * 10),
+    label: String(index * 10)
+  }))
 
   const form = useForm({
     initialValues: {
@@ -320,22 +331,21 @@ export default function Eventedit() {
               <Text weight={700} size="lg">
                 {event.start_time}
               </Text>
-              <p>訂正する場合、半角で「時」と「分」両方入力してください。</p>
               <Group>
-                <TextInput
-                  value={startHour}
+                <Select 
+                  value={startHour} 
+                  onChange={setStartHour} 
+                  data={hourSelections} 
                   placeholder="開始時刻(時)（訂正後）"
-                  onChange={(e) => {
-                    setStartHour(e.target.value)
-                  }}
+                  clearable
                 />
                 <p>時</p>
-                <TextInput
-                  value={startMinute}
+                <Select 
+                  value={startMinute} 
+                  onChange={setStartMinute} 
+                  data={minuteSelections}
                   placeholder="開始時刻(分)（訂正後）"
-                  onChange={(e) => {
-                    setStartMinute(e.target.value)
-                  }}
+                  clearable
                 />
                 <p>分</p>
                 <Button
@@ -355,22 +365,21 @@ export default function Eventedit() {
               <Text weight={700} size="lg">
                 {event.end_time}
               </Text>
-              <p>訂正する場合、半角で「時」と「分」両方入力してください。</p>
               <Group>
-                <TextInput
-                  value={endHour}
+                <Select 
+                  value={endHour} 
+                  onChange={setEndHour} 
+                  data={hourSelections}
                   placeholder="終了時刻(時)（訂正後）"
-                  onChange={(e) => {
-                    setEndHour(e.target.value)
-                  }}
+                  clearable
                 />
                 <p>時</p>
-                <TextInput
-                  value={endMinute}
-                  placeholder="終了時刻(分)（訂正後）"
-                  onChange={(e) => {
-                    setEndMinute(e.target.value)
-                  }}
+                <Select 
+                  value={endMinute} 
+                  onChange={setEndMinute} 
+                  data={minuteSelections}
+                  placeholder="終了時刻(分)（訂正後）" 
+                  clearable
                 />
                 <p>分</p>
                 <Button
