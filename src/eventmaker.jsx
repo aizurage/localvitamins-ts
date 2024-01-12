@@ -1,4 +1,4 @@
-import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Space, Stepper, Text, TextInput, Title } from '@mantine/core'
+import { Button, Chip, Chips, Container, Group, Image, Input, LoadingOverlay, Paper, Select, Space, Stepper, Text, TextInput, Title } from '@mantine/core'
 import { supabase } from './supabaseClient'
 import { useState } from 'react'
 import { useForm } from '@mantine/form'
@@ -13,6 +13,16 @@ import './eventmaker.css'
 export default function Eventmaker(){
   const [date, setDate] = useState(null)
   const [tags, setTags] = useState("農作業")
+
+  const hourSelections = Array.from({ length: 23 }, (_, index) => ({
+    value: String(index + 1),
+    label: String(index + 1)
+  }))
+  
+  const minuteSelections = Array.from({ length: 6 }, (_, index) => ({
+    value: String(index * 10),
+    label: String(index * 10)
+  }))
 
   const form = useForm({
     initialValues: {
@@ -189,9 +199,9 @@ export default function Eventmaker(){
               <div>
                 <h3>開始時刻</h3>
                 <Group>
-                    <Input required value={startHour} onChange={(e) => setStartHour(e.target.value)}/>
+                    <Select value={startHour} onChange={setStartHour} data={hourSelections} clearable/>
                     <p>時</p>
-                    <Input required value={startMinute} onChange={(e) => setStartMinute(e.target.value)}/>
+                    <Select value={startMinute} onChange={setStartMinute} data={minuteSelections} clearable/>
                     <p>分</p>
                 </Group>
               </div>
@@ -199,9 +209,9 @@ export default function Eventmaker(){
               <div>
                 <h3>終了時刻</h3>
                 <Group>
-                    <Input required value={endHour} onChange={(e) => setEndHour(e.target.value)}/>
+                    <Select value={endHour} onChange={setEndHour} data={hourSelections} clearable/>
                     <p>時</p>
-                    <Input required value={endMinute} onChange={(e) => setEndMinute(e.target.value)}/>
+                    <Select value={endMinute} onChange={setEndMinute} data={minuteSelections} clearable/>
                     <p>分</p>
                 </Group>
               </div>

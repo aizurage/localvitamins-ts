@@ -230,7 +230,7 @@ export function Makingcard(props) {
             fullWidth
             style={{ marginTop: 14 }}
             onClick={() => props.open(props.row.id, props.row.title)}
-            disabled={dayjs(today) > props.row.date}
+            disabled={dayjs(today).isAfter( props.row.date )}
           >
             参加する
           </Button>
