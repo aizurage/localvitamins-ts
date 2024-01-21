@@ -7,6 +7,7 @@ import {
   Modal,
   Popover,
   useMantineTheme,
+  Textarea,
   TextInput,
 } from '@mantine/core'
 import { useNavigate } from 'react-router-dom'
@@ -15,8 +16,6 @@ import { useForm } from '@mantine/form'
 import { supabase } from './supabaseClient'
 import { At } from 'tabler-icons-react'
 import { Makingcard } from './makingcard'
-
-import dayjs from 'dayjs'
 
 import './eventlist.css'
 
@@ -37,6 +36,7 @@ export default function Eventlist() {
       email: '',
       firstname: '',
       familyname: '',
+      question: '',
     },
 
     validate: {
@@ -60,6 +60,7 @@ export default function Eventlist() {
           firstname: values.firstname,
           familyname: values.familyname,
           email: values.email,
+          question: values.question
         },
       ]).then(
         () => {
@@ -236,9 +237,9 @@ export default function Eventlist() {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title={event.eventTitle}
       >
         <form onSubmit={join_event_form.onSubmit(join_event)}>
+          <h3>{event.eventTitle}</h3>
           <p>以下の情報を主催者に送信して、参加申請をします。</p>
           <h3>名前</h3>
           <Group>
@@ -262,6 +263,14 @@ export default function Eventlist() {
             label="メールアドレス"
             required
             {...join_event_form.getInputProps('email')}
+          />
+          <h3>備考</h3>
+          <label htmlFor="question">備考（質問・特記事項などございましたら、ご記入ください↓）</label>
+          <Textarea
+            id='question'
+            style={{ top: 20 }}
+            autosize={true}
+            {...join_event_form.getInputProps('question')}
           />
           <Button
             type="submit"

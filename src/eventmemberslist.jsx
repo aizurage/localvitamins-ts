@@ -27,6 +27,7 @@ getParticipantList(params.eventNumber)
       <td>{member.familyname}</td>
       <td>{member.firstname}</td>
       <td>{member.email}</td>
+      <td>{member.question}</td>
     </tr>
   ))
 
@@ -43,6 +44,7 @@ getParticipantList(params.eventNumber)
             <th>性</th>
             <th>名</th>
             <th>メールアドレス</th>
+            <th>備考</th>
           </tr>
         </thead>
         <tbody>
