@@ -3,8 +3,6 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 
-import './eventdetail.css'
-
 export default function Eventdetail(){
   const params = useParams()
   const [event, setEvent] = useState([])
@@ -44,7 +42,7 @@ export default function Eventdetail(){
   return (
     <Container className='eventdetail'>
       <div className='detail'>
-        <Image src={eventPictureObjectURL}  alt={event.title} />
+        <Image style={{width: 400}} src={eventPictureObjectURL}  alt={event.title} />
         <Title order={1}>{event.title}</Title>
         <h2>開催場所</h2>
         <Text size="lg">{event.region}</Text>
@@ -69,13 +67,13 @@ export default function Eventdetail(){
         <h2>お問い合わせ先</h2>
         <Text size="lg">{event.inquiry}</Text>
       </div>
-      <div className='detail_recruiter'>
+      <div style={{backgroundColor: "pink"}} className='detail_recruiter'>
         <h1>お願いした人</h1>
         <Avatar src={recruiterPictureObjectURL} radius="xl" size={200}/>
         <Text size="lg">{event.recruiter_name}さん</Text>
-        <h3>自己紹介</h3>
+        <h2>自己紹介</h2>
         <Text size="lg">{event.recruiter_introduction}</Text>
-        <h3>一言コメント</h3>
+        <h2>一言コメント</h2>
         <Text size="lg">{event.recruiter_comment}</Text>
       </div>
     </Container>
