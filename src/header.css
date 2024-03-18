@@ -2,10 +2,23 @@ header{
     color: white;
     background-color: olive;
     height: 100px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0%;
+    z-index: 20;
+}
+
+.burger {
+    margin-top: 20px;
 }
 
 .title{
     width: 70%;
+    font-size: 50px;
     text-align: center;
     top: 50%;
 }
@@ -48,4 +61,36 @@ nav ul li:active{
 .back2home {
     color: white;
     background-color: #800;
+}
+
+.header_right {
+    margin-top: 20px;
+    /* display: -webkit-flex;
+    display: flex; */
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 450px) {
+    .title {
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 3%;
+    }
+
+    .dialog_login {
+        color: black;
+        background-color: #cc0;
+        height: 30px;
+    }
+
+    .register {
+        height: 30px;
+    }
+
+    .header_right {
+        margin-top: 20px;
+        width: 20%;
+    }
 }

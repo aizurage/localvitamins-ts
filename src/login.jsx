@@ -59,7 +59,7 @@ export default function Login() {
               placeholder="your@email.com"
               icon={<At />}
               margin="center"
-              style={{ width: 500 }}
+              
               {...form.getInputProps('email')}
             />
             <Space h="xl" />
@@ -67,7 +67,7 @@ export default function Login() {
               placeholder="パスワード"
               label="パスワード"
               description="パスワードには、文字、数字、そして特殊文字を含めてください。"
-              style={{ width: 500 }}
+
               required
               {...form.getInputProps('password')}
             />

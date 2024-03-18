@@ -153,70 +153,69 @@ export default function Eventlist() {
   return (
     <>
       <LoadingOverlay visible={loading} />
-      <h1>お手伝い一覧</h1>
-      <Text>キーワードは最大３つまで入力できます。</Text>
-      <Text>
-        複数のキーワードで検索をかけるときは、全角スペースで区切ってください。
-      </Text>
-      <Group position="left">
-        <form onSubmit={search_keywords_form.onSubmit(search_event)}>
-          <Group position="left">
+      <div className='titleAndSearchBarSection'>
+        <h1>お手伝い一覧</h1>
+        <Text>キーワードは最大３つまで入力できます。</Text>
+        <Text>
+          複数のキーワードで検索をかけるときは、全角スペースで区切ってください。
+        </Text>
+        <Group position="left">
+          <form className='search_form' onSubmit={search_keywords_form.onSubmit(search_event)}>
             <Input
-              placeholder="キーワードを入力してお手伝いを検索"
-              style={{ width: 500 }}
+              placeholder="キーワードを入力"
+              className='search_bar'
               {...search_keywords_form.getInputProps('keywords')}
             />
-            <Button style={{ width: 100 }} className="search_button" type="submit">
+            <Button className="search_button" type="submit">
               検索
             </Button>
-          </Group>
-        </form>
-        <Popover
-          opened={popoverOpened}
-          onClose={() => setPopoverOpened(false)}
-          target={
-            <Button
-              style={{ width: 200 }}
-              className='make_event'
-              onClick={() => {supabase.auth.user() === null ? setPopoverOpened(true) : navigate('/eventmaker')}}
-            >
-              お手伝い作成
-            </Button>
-          }
-          width={400}
-          position="bottom"
-          withArrow
-        >
-          アカウントを登録し、ログインすることで、あなた自身で「お手伝い」を作ることが出来ます。
-          お手伝い作成、募集を行いたい場合は、ログイン、または新規登録をお願いします。
-        </Popover>
-        
-        <div>
-          {
-            supabase.auth.user() === null ? '':
-            <div>
-              {!isOnlyMyEvent ? 
-                <Button
-                  variant="gradient"
-                  gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-                  onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
-                >
-                  自分のイベントを表示
-                </Button> 
-                :
-                <Button
-                  variant="gradient"
-                  gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-                  onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
-                >
-                  全イベントを表示
-                </Button> 
-              }
-            </div>
-          }
+          </form>
+          <Popover
+            opened={popoverOpened}
+            onClose={() => setPopoverOpened(false)}
+            target={
+              <Button
+                className='make_event'
+                onClick={() => {supabase.auth.user() === null ? setPopoverOpened(true) : navigate('/eventmaker')}}
+              >
+                お手伝い作成
+              </Button>
+            }
+            width={400}
+            position="bottom"
+            withArrow
+          >
+            アカウントを登録し、ログインすることで、あなた自身で「お手伝い」を作ることが出来ます。
+            お手伝い作成、募集を行いたい場合は、ログイン、または新規登録をお願いします。
+          </Popover>
+          
+          <div>
+            {
+              supabase.auth.user() === null ? '':
+              <div>
+                {!isOnlyMyEvent ? 
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+                    onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
+                  >
+                    自分のイベントを表示
+                  </Button> 
+                  :
+                  <Button
+                    variant="gradient"
+                    gradient={{ from: 'teal', to: 'lime', deg: 105 }}
+                    onClick={() => {downloadEventData(); setIsOnlyMyEvent(false)}}
+                  >
+                    全イベントを表示
+                  </Button> 
+                }
+              </div>
+            }
+          </div>
+        </Group>
         </div>
-      </Group>
-      <div>
+      <div className='eventCards'>
         <nav
           style={{
             borderRight: 'solid 1px',

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Burger, Button, Dialog, Divider, Drawer, Group } from '@mantine/core'
+import { Burger, Button, Dialog, Divider, Drawer, Group, Text } from '@mantine/core'
 import { Link, useNavigate } from 'react-router-dom'
 import Contact from './contact'
 import { supabase } from './supabaseClient'
@@ -29,15 +29,14 @@ export function Header()
     return(
         <>
             <header>
-                <Group position='center' spacing='xl'>
                     <Burger
                         opened={opened}
                         onClick={() => { setOpened( (o) => !o)}}
                         size='xl'
                         className='burger'
                     />
-                    <h1 className='title'>Local Vitamins</h1>
-                    <div>
+                    <Text className='title'>Local Vitamins</Text>
+                    <div className='header_right'>
                         {
                             supabase.auth.user() === null ?
                             <Button
@@ -54,6 +53,14 @@ export function Header()
                                 ログアウト
                             </Button>
                         }
+                        <Button
+                            className='register'
+                            color="dark"
+                            variant="outline"
+                            onClick={() => { navigate('/serviceTerms_agree') }}
+                        >
+                            新規登録
+                        </Button>
                     </div>
                     <Dialog
                         opened={dialogopen}
@@ -68,16 +75,6 @@ export function Header()
                             </>}
                         </Group>
                     </Dialog> 
-                    
-                    <Button
-                        className='register'
-                        color="dark"
-                        variant="outline"
-                        onClick={() => { navigate('/serviceTerms_agree') }}
-                     >
-                        新規登録
-                    </Button>
-                </Group>
             </header>
             <Drawer
                 opened={opened}
