@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Burger, Button, Dialog, Divider, Drawer, Group, Text } from '@mantine/core'
 import { Link, useNavigate } from 'react-router-dom'
-import Contact from './contact'
-import { supabase } from './supabaseClient'
+import Contact from '../../Contact/view'
+import { supabase } from '../../../supabaseClient'
 
-import './header.css'
+import './index.css'
 
 export function Header()
 {
