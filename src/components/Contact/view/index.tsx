@@ -1,9 +1,9 @@
 import { Button, Center, Group, Input, Textarea } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import emailjs from '@emailjs/browser'
-import { supabase } from './supabaseClient'
+import { supabase } from '../../../supabaseClient'
 
-import './contact.css'
+import './index.css'
 
 export default function Contact() {
   const form = useForm({
