@@ -33,7 +33,8 @@ const createRoutes = (
     pages: readonly {
         readonly path: string,
         readonly element: ReactNode
-}[]) => {
+    }[]
+) => {
     return(
         pages.map((page, i) => (
             <Route key={i} path={page.path} element={page.element} />
