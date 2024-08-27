@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import '@mantine/core/styles.css'
+import { MantineProvider } from '@mantine/core'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Layout } from './Layout'
+import Eventlist from './eventlist'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <MantineProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path='/' element={<Eventlist/>}/>
+            <Route path='/eventmaker' element={<Eventmaker />} />
+            <Route path='/eventdetail/:eventNumber' element={<Eventdetail />}/>
+            <Route path='/eventedit/:eventNumber' element={<Eventedit/>}/>
+            <Route path='/eventmemberslist/:eventNumber' element={<EventMembersList/>}/>
+            <Route path='/serviceTerms' element={<ServiceTerms agree={false}/>}/>
+          </Route>
+        </Routes>
+      </MantineProvider>
+    </BrowserRouter>
   )
 }
-
-export default App

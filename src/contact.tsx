@@ -18,8 +18,8 @@ export default function Contact() {
       console.log(supabase.auth.user())
       emailjs
         .send(
-          process.env.REACT_APP_SERVICE_ID,
-          process.env.REACT_APP_TEMPLATE_ID,
+          process.env.REACT_APP_SERVICE_ID as string,
+          process.env.REACT_APP_TEMPLATE_ID as string,
           {
             title: values.title,
             main: values.main,
@@ -64,7 +64,7 @@ export default function Contact() {
           style={{ width: 400 }}
           {...form.getInputProps('main')}
         />
-        <Group position="center" mt="md">
+        <Group mt="md">
           <Button className='form_submit' type="submit">
             送信
           </Button>
