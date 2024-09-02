@@ -1,75 +1,42 @@
 import {
-  TextInput,
   Center,
   Button,
   Group,
-  PasswordInput,
-  Space,
   LoadingOverlay,
 } from '@mantine/core'
-import { useForm } from '@mantine/form'
+
 import { At } from 'tabler-icons-react'
 import { useNavigate, Link } from 'react-router-dom'
-import { supabase } from './supabaseClient'
 import { useState } from 'react'
+import { FormBaseInput } from '../../../components/Inputs/FormBaseInput'
+import { PasswordInput } from '../../../components/Inputs/PasswordInput'
+import { useForm } from 'react-hook-form'
 
 export default function Login() {
-  const form = useForm({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-    },
-  })
-
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  async function submit(values) {
-    try {
-      setLoading(true)
-      const { error } = await supabase.auth.signIn(values)
-      if (error) throw error
-      navigate('/')
-    } catch (error) {
-      console.log('Log in failed')
-      console.log(error.error_description || error.message)
-      alert(
-        'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。それでも解決できない場合は、運営チームmiraikuru0512@gmail.comまでお問い合わせください。',
-      )
-    } finally {
-      setLoading(false)
-    }
-  }
+  const { register, handleSubmit } = useForm()
 
   return (
-    <>
-      <Center>
+    <Center>
         <h1>ログイン</h1>
-      </Center>
-      <Center>
         <div>
           <LoadingOverlay visible={loading} />
-          <form onSubmit={form.onSubmit(submit)}>
-            <TextInput
-              required
+          <form onSubmit={handleSubmit(_handleSubmit)}>
+            <FormBaseInput
+              required={true}
               label="メールアドレス"
               placeholder="your@email.com"
-              icon={<At />}
-              margin="center"
-              
-              {...form.getInputProps('email')}
+              fieldname="email"
+              register={register}
             />
-            <Space h="xl" />
             <PasswordInput
-              placeholder="パスワード"
+              required={true}
               label="パスワード"
+              placeholder="パスワード"
+              fieldname="password"
               description="パスワードには、文字、数字、そして特殊文字を含めてください。"
-
-              required
-              {...form.getInputProps('password')}
+              register={register}
             />
             <p>
               パスワードを忘れた方は、下のリンクをクリックして、パスワードの再設定をしてください。
@@ -77,15 +44,13 @@ export default function Login() {
             <Link to={'/email_resetpw'}>
               パスワードを忘れた方は、ここをクリック。
             </Link>
-            <Space h="xl" />
-            <Group position="center" mt="md">
+            <Group justify="center" align="center"  mt="md">
               <Button type="submit" color="orange">
                 ログイン
               </Button>
             </Group>
           </form>
         </div>
-      </Center>
-    </>
+    </Center>
   )
 }
