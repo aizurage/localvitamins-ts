@@ -4,15 +4,13 @@ import {
   Group,
   LoadingOverlay,
 } from '@mantine/core'
-
-import { At } from 'tabler-icons-react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { FormBaseInput } from '../../../components/Inputs/FormBaseInput'
 import { PasswordInput } from '../../../components/Inputs/PasswordInput'
 import { useForm } from 'react-hook-form'
 
-export default function Login() {
+export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
