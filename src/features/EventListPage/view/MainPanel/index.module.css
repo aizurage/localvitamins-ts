@@ -1,0 +1,8 @@
+.eventCards{
+    z-index: 10;
+}
+
+.navStyle{
+    border-right: solid 1px;
+    padding: 1rem;
+}
