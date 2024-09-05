@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { Participant } from "../state"
 
-export const TableBodyItem: FC<Participant> = (participant: Participant) => {
+export const TableBodyItem: FC<{ participant: Participant }> = ({ participant }) => {
     return(
         <tr key={participant.id}>
             <td>{participant.eventID}</td>

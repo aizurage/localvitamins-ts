@@ -2,7 +2,7 @@ import { FC } from "react"
 import { Participant } from "../TableBodyItem/state"
 import { TableBodyItem } from "../TableBodyItem/view"
 
-export const TableBody: FC<Participant[]> = (participants: Participant[]) => {
+export const TableBody: FC<{participants: Participant[]}> = ({ participants }) => {
     return(
         <tbody>
             {
