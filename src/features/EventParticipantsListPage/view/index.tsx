@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import styles from "./index.module.css"
 import { TablePanel } from '../TablePanel/view'
 
-export default function EventMembersList() {
+export default function EventParticipantsListPage() {
   const params = useParams()
   const navigate = useNavigate()
 
