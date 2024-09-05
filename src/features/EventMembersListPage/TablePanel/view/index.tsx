@@ -1,11 +1,11 @@
 import { Table } from "@mantine/core"
 import { TableBody } from "../TableBody/view"
 import { TableHeader } from "../TableHeader/view"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Participant } from "../TableBody/TableBodyItem/state"
 import { fetchParticipants } from "../../controller/fetchParticipants"
 
-export const TablePanel = (eventID: number) => {
+export const TablePanel: FC<{eventID: number}> = ({eventID}) => {
     const [participants, setParticipants] = useState<Participant[]>([])
 
     useEffect(() => {
