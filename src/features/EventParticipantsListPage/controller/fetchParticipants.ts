@@ -1,5 +1,5 @@
 import { supabase } from "../../../supabaseClient"
-import { Participant } from "../TablePanel/TableBody/TableBodyItem/state"
+import { Participant } from "../../../states/Participant"
 
 export const fetchParticipants = async (eventID: number): Promise<Participant[]> => {
   try {
