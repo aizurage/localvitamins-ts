@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Participant } from "../TableBodyItem/state"
+import { Participant } from "../../../../../states/Participant"
 import { TableBodyItem } from "../TableBodyItem/view"
 
 export const TableBody: FC<{participants: Participant[]}> = ({ participants }) => {

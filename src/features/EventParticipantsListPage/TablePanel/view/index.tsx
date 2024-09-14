@@ -2,7 +2,7 @@ import { Table } from "@mantine/core"
 import { TableBody } from "../TableBody/view"
 import { TableHeader } from "../TableHeader/view"
 import { FC, useEffect, useState } from "react"
-import { Participant } from "../TableBody/TableBodyItem/state"
+import { Participant } from "../../../../states/Participant"
 import { fetchParticipants } from "../../controller/fetchParticipants"
 
 export const TablePanel: FC<{eventID: number}> = ({eventID}) => {

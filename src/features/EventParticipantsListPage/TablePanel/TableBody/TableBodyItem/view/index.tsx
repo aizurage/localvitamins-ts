@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Participant } from "../state"
+import { Participant } from "../../../../../../states/"
 
 export const TableBodyItem: FC<{ participant: Participant }> = ({ participant }) => {
     return(
