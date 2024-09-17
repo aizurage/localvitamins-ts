@@ -1,0 +1,15 @@
+.card{
+    position:relative;
+    vertical-align: 'top';
+    width: 340;
+    margin: 'auto';
+    padding: 10;
+    display: 'inline-block';
+    background-color: #ede58e;
+}
+
+.buttons{
+    position: absolute;
+    bottom: 10%;
+    width: 85%;
+}
