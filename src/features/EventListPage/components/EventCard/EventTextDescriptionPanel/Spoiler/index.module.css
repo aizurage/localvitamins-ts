@@ -1,0 +1,13 @@
+.spoilerContainer {
+    margin: 1em 0;
+}
+
+.spoilerLink {
+    border:  none;
+    cursor: pointer;
+}
+
+.spoilerContent {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
