@@ -1,14 +1,5 @@
-import { Dayjs } from "dayjs"
 import { supabase } from "../../../supabaseClient"
-
-interface EventPropsForDetailPage {
-  title: string
-  eventID: number
-  content: string
-  date: Dayjs
-  event_picture: string
-  planner_uniqueID: string
-}
+import { EventPropsForDetailPage } from "../../../states/EventPropsForDetailPage"
 
 export const downloadEventData = async (): Promise<EventPropsForDetailPage[]> => {
   try {
