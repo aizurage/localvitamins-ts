@@ -1,5 +1,5 @@
 import { supabase } from "../../../supabaseClient"
-import { EventPropsForDetailPage } from "../../../states/EventPropsForDetailPage"
+import { EventPropsForDetailPage } from "../../../states/"
 
 export const downloadEventData = async (): Promise<EventPropsForDetailPage[]> => {
   try {
