@@ -1,12 +1,12 @@
 import { EventPropsForDetailPage } from "../../../states"
 import { supabase } from "../../../supabaseClient"
 
-export const downloadMyEventData = async (): Promise<EventPropsForDetailPage[]> => {
+export const downloadMyEventData = async (userUniqueId: string): Promise<EventPropsForDetailPage[]> => {
   try {
     const { data, error } = await supabase
       .from('EventTable')
       .select()
-      .eq('planner_uniqueID', supabase.auth.user().id)
+      .eq('planner_uniqueID', userUniqueId)
 
     if (error) throw new Error("Downloading user's event in failed")
     if (data == null) return[]
