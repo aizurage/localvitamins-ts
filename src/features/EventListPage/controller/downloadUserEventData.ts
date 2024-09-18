@@ -1,10 +1,23 @@
-export const downloadMyEventData = async () => {
-    // const today = new Date()
-    const { data } = await supabase
+import { EventPropsForDetailPage } from "../../../states"
+import { supabase } from "../../../supabaseClient"
+
+export const downloadMyEventData = async (): Promise<EventPropsForDetailPage[]> => {
+  try {
+    const { data, error } = await supabase
       .from('EventTable')
       .select()
       .eq('planner_uniqueID', supabase.auth.user().id)
-      // .gt('date', dayjs(today))
-    if (data == null) return
-    setEvents(data)
+
+    if (error) throw new Error("Downloading user's event in failed")
+    if (data == null) return[]
+
+    // WARNING: 以下のmap関数が正しく動くのか、検証する必要あり↓
+    const eventData: EventPropsForDetailPage[] = data[0].map((event: EventPropsForDetailPage) => {
+      return event
+    })
+    return eventData
+  } catch (error) {
+    alert("あなたのお手伝い情報取得処理に失敗しました。")
+    return []
+  }
 }
