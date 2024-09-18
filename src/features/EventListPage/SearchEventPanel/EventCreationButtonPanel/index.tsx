@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Popover } from "./Popover";
+import { GoToEventMakePageButton } from "./GoToEventMakePageButton";
 
 export const EventCreationButtonPanel: FC = () => {
     return(
