@@ -3,6 +3,11 @@ import styles from "./index.module.css"
 
 export const SearchBar = () => {
     return(
+      <>
+        <p>キーワードは最大３つまで入力できます。</p>
+        <p>
+          複数のキーワードで検索をかけるときは、全角スペースで区切ってください。
+        </p>
         <form className={styles.searchForm} onSubmit={search_keywords_form.onSubmit(search_event)}>
             <Input
               placeholder="キーワードを入力"
@@ -13,5 +18,6 @@ export const SearchBar = () => {
               検索
             </Button>
         </form>
+      </>
     )
 }
