@@ -1,4 +1,4 @@
-import { supabase } from "../../../../../../supabaseClient"
+import { supabase } from "../../../../../../../supabaseClient"
 import { deleteEventImage } from "./deleteEventImage"
 import { deleteEventParticipants } from "./deleteEventParticipants"
 import { deleteRecruiterImage } from "./deleteRecruiterImage"
