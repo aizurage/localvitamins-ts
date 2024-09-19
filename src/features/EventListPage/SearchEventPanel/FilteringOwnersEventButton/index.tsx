@@ -1,11 +1,17 @@
 import { Button } from "@mantine/core";
+import { FC } from "react";
+import styles from "./index.module.css"
 
-export const FilteringOwnersEventButton = () => {
+interface Props {
+    onClick: () => void
+}
+
+export const FilteringOwnersEventButton: FC<Props> = ({onClick}) => {
     return(
         <Button
             variant="gradient"
-            gradient={{ from: 'teal', to: 'lime', deg: 105 }}
-            onClick={() => {downloadMyEventData(); setIsOnlyMyEvent(true)}}
+            className={styles.button}
+            onClick={onClick}
         >
             自分のイベントを表示
         </Button> 
