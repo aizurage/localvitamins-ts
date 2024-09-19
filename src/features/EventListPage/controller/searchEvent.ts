@@ -1,26 +1,41 @@
-export const searchEvent = async ({ keywords }) => {
-    // const today = new Date()
-    if (keywords.length === 0) {
-      const { data } = await supabase.from('EventTable').select()// .gt('date', dayjs(today))
-      setEvents(data)
-      return
-    }
+import { EventPropsForDetailPage } from "../../../states"
+import { supabase } from "../../../supabaseClient"
 
-    // キーワードを配列に格納する。（主に複数の場合）
-    // 全角スペースで区切った場合
-    keywords = keywords.split('　')
-
-    let searching_events = []
+export const searchEvent = async (keywords: string[]): Promise<EventPropsForDetailPage[]> => {
+  try {
+    const searchEventResults: EventPropsForDetailPage[] = []
     for (let i = 0; i < keywords.length; i++) {
-      keywords[i] = '%' + keywords[i] + '%'
-      const { data } = await supabase
+      const regExKeyword = '%' + keywords[i] + '%'
+      const { data, error } = await supabase
         .from('EventTable')
         .select()
-        .like('search_tags', keywords[i])
-        // .gt('date', dayjs(today))
-      if (i) searching_events = merge_eventarrays(searching_events, data)
-      else searching_events = [...searching_events, data].flat(2)
+        .like('search_tags', regExKeyword)
+
+      if (error) throw new Error("Searching events in failed")
+
+      const {
+        title,
+        eventID,
+        content,
+        date,
+        event_picture,
+        planner_uniqueID
+      } = data[0]
+      const newEventObject: EventPropsForDetailPage = {
+        title,
+        eventID,
+        content,
+        date,
+        event_picture,
+        planner_uniqueID
+      }
+      searchEventResults.push(newEventObject)
     }
 
-    setEvents(searching_events)
+    return searchEventResults
+
+  } catch (error) {
+    alert("お手伝いの検索処理に失敗しました")
+    return []
   }
+}
