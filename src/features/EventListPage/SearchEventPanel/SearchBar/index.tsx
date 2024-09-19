@@ -8,7 +8,7 @@ export const SearchBar: FC = () => {
   const { register, handleSubmit } = useForm()
   const _handleSubmit = (data: FieldValues) => {
     // TODO: 全角スペース もしくは 半角スペースで区切る処理が必要
-    submitContents(_data)
+    // submitContents(_data)
   }
 
   return(
