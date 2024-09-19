@@ -2,7 +2,6 @@ import { TextInput } from "@mantine/core"
 import { FieldValues, UseFormRegister } from "react-hook-form"
 import { FC, ReactNode } from "react"
 import style from "./index.module.css"
-import { Icon } from "tabler-icons-react"
 
 export interface FormBaseInputProps {
     required: boolean
