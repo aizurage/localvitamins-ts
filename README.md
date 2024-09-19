@@ -28,13 +28,13 @@ https://localvitamins-ts.vercel.app/
 
 ### 使用技術
 
-- 言語・・・Javascript, CSS
+- 言語・・・TypeScript, Javascript, html, CSS
 - ライブラリ・・・React, Mantine, React Router v6
 - データベース・・・supabase
 - デプロイツール・・・Vercel
 - 静的解析ツール・・・ESlint
 - コード整形ツール・・・Prettier
+- ディレクトリアーキテクチャ・・・Fluxアーキテクチャ
 
 ### 製作者
-会津大学　大学院　修士2年　　佐々木大翔（ササキヒロト）  
-メールアドレス: m5261156@u-aizu.ac.jp
+hiro-creater
