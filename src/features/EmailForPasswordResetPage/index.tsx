@@ -1,5 +1,5 @@
 import { Center } from '@mantine/core'
-import { FormPanel } from '../FormPanel'
+import { FormPanel } from './FormPanel'
 
 export default function EmailForResetPasswordPage() {
   return (
