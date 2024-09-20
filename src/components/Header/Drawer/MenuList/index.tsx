@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LogoutConfirmationDialog } from "../../LogoutConfirmationDialog";
+import { MenuListItem } from "./MenuListItem";
 
 export const MenuList: FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -9,20 +10,20 @@ export const MenuList: FC = () => {
     <>
       <nav>
         <ul>
-          <li
+          <MenuListItem
             onClick={() => {
               navigate("/serviceTerms", {state: {isAgreementNecessary: false}})
             }}
           >
             利用規約(個人情報の取り扱いについて)
-          </li>
-          <li
+          </MenuListItem>
+          <MenuListItem
             onClick={() => {
               setDialogOpen(true)
             }}
           >
             ログアウト
-          </li>
+          </MenuListItem>
         </ul>
       </nav>
       <LogoutConfirmationDialog open={dialogOpen} setOpen={setDialogOpen} />
