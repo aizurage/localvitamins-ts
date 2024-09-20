@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { EventPanel } from './EventPanel'
 import { EventRecruiterPanel } from './EentRecruiterPanel'
-import { Event, EventRecruiter } from '../../../states'
-import { downloadEventData } from '../controller/downloadEventData'
+import { Event, EventRecruiter } from '../../states'
+import { downloadEventData } from './controller/downloadEventData'
 
 export default function EventDetailPage(){
   const params = useParams()

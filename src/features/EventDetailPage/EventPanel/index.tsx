@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
-import type { Event } from "../../../../states"
+import type { Event } from "../../../states"
 import styles from "./index.module.css"
 import { HeadingDescriptionBlock } from "../components/HeadingDescriptionBlock";
 import { DateTimeBlock } from "../components/DateTimeBlock";
-import { downloadEventImage } from "../../controller/downloadEventImage";
+import { downloadEventImage } from "../controller/downloadEventImage";
 
 export const EventPanel: FC<{event: Event}> = ({event}) => {
     const [eventPictureObjectURL, setEventPictureObjectURL] = useState('')

@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { HeadingDescriptionBlock } from "../components/HeadingDescriptionBlock";
-import { EventRecruiter } from "../../../../states";
+import { EventRecruiter } from "../../../states";
 import styles from "./index.module.css"
-import { downloadRecruiterImage } from "../../controller/downloadRecruiterImage";
+import { downloadRecruiterImage } from "../controller/downloadRecruiterImage";
 
 export const EventRecruiterPanel: FC<{eventRecruiter: EventRecruiter}> = ({eventRecruiter}) => {
     const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] = useState('')
