@@ -1,6 +1,6 @@
 import { Drawer as _Drawer } from "@mantine/core";
 import { FC } from "react";
-import Contact from "../../Contact/view";
+import Contact from "../../Contact";
 import { Back2HomeButton } from "./Back2HomeButton";
 import { MenuList } from "./MenuList";
 
