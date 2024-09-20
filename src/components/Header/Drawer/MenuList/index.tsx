@@ -11,14 +11,14 @@ export const MenuList: FC = () => {
         <ul>
           <li
             onClick={() => {
-              navigate("/serviceTerms", false);
+              navigate("/serviceTerms", {state: {isAgreementNecessary: false}})
             }}
           >
             利用規約(個人情報の取り扱いについて)
           </li>
           <li
             onClick={() => {
-              setDialogOpen(true);
+              setDialogOpen(true)
             }}
           >
             ログアウト
