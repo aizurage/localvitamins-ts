@@ -1,0 +1,50 @@
+.header {
+    color: white;
+    background-color: olive;
+    height: 100px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0%;
+    z-index: 20;
+}
+
+.title{
+    width: 70%;
+    font-size: 50px;
+    text-align: center;
+    top: 50%;
+}
+
+.headerRight {
+    margin-top: 20px;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 450px) {
+    .title {
+        width: 30%;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 3%;
+    }
+
+    .dialog_login {
+        color: black;
+        background-color: #cc0;
+        height: 30px;
+    }
+
+    .register {
+        height: 30px;
+    }
+
+    .headerRight {
+        margin-top: 20px;
+        width: 20%;
+    }
+}
