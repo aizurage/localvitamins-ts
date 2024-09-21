@@ -7,29 +7,6 @@ div.titleAndSearchBarSection {
     z-index: 20;
 }
 
-div.eventCards {
-    z-index: 10;
-}
-
-.search_form {
-    display: flex;
-}
-
-.search_button {
-    color: white;
-    background-color: #800;
-    width: 100px;
-}
-
-.make_event{
-    color: white;
-    background-color: #800080;
-}
-
-.search_bar {
-    width: 500px;
-}
-
 @media screen and (max-width: 450px) {
     .search_button {
         color: white;
