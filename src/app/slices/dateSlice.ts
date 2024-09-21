@@ -13,11 +13,11 @@ const dateSlice = createSlice({
     name: "date",
     initialState,
     reducers: {
-        updateDate: (state, action: PayloadAction<Dayjs>) => {
+        setDate: (state, action: PayloadAction<Dayjs>) => {
             state.date = action.payload.format("YYYY-MM-DD")
         }
     }
 })
 
-export const { updateDate } = dateSlice.actions
+export const { setDate } = dateSlice.actions
 export const dateReducer = dateSlice.reducer
