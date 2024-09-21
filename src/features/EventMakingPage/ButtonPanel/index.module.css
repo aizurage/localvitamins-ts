@@ -1,0 +1,18 @@
+.buttonPanel {
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+    margin: 10;
+}
+
+.nextButton base .button {
+    background-color: yellow;
+    color: white;
+}
+
+.backButton base .button {
+    background-color: gray;
+    color: white;
+}
