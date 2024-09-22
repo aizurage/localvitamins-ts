@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Time {
-    hour: number
-    minute: number
+    hour: string | null
+    minute: string | null
 }
 
 export interface Period {
@@ -12,12 +12,12 @@ export interface Period {
 
 const initialState: Period = {
     start: {
-        hour: 0,
-        minute: 0
+        hour: "",
+        minute: ""
     },
     end: {
-        hour: 0,
-        minute: 0
+        hour: "",
+        minute: ""
     }
 }
 
@@ -26,14 +26,20 @@ const timeSlice = createSlice({
     name: "time",
     initialState,
     reducers:{
-        setStartTime: (state, action: PayloadAction<Time>) => {
-            state.start = action.payload
+        setStartHour: (state, action: PayloadAction<string | null>) => {
+            state.start.hour = action.payload
         },
-        setEndTime: (state, action: PayloadAction<Time>) => {
-            state.end = action.payload
-        }
+        setStartMinute: (state, action: PayloadAction<string | null>) => {
+            state.start.minute = action.payload
+        },
+        setEndHour: (state, action: PayloadAction<string | null>) => {
+            state.end.hour = action.payload
+        },
+        setEndMinute: (state, action: PayloadAction<string | null>) => {
+            state.end.minute = action.payload
+        },
     }
 })
 
-export const {setStartTime, setEndTime} = timeSlice.actions
+export const {setStartHour, setStartMinute, setEndHour, setEndMinute} = timeSlice.actions
 export const timeReducer = timeSlice.reducer
