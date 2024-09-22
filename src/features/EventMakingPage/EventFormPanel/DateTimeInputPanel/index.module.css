@@ -1,0 +1,8 @@
+.calendar {
+    margin-bottom: 10;
+}
+
+.time {
+    display: flex;
+    flex-direction: row;
+}
