@@ -1,7 +1,7 @@
 import { FC } from "react"
-import styles from "./index.module.css"
 import { useAppDispatch } from "../../../../app/hook"
 import { setEventPicture } from "../../../../app/slices/eventPictureSlice"
+import styles from "./index.module.css"
 
 interface Props {
     disabled: boolean
