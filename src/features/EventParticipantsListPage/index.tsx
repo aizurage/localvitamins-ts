@@ -1,9 +1,10 @@
 import { Button } from '@mantine/core'
 import { useParams, useNavigate } from 'react-router-dom'
-import styles from "./index.module.css"
 import { TablePanel } from './TablePanel/view'
+import { FC } from 'react'
+import styles from "./index.module.css"
 
-export default function EventParticipantsListPage() {
+export const EventParticipantsListPage: FC = () => {
   const params = useParams()
   const navigate = useNavigate()
 

@@ -1,7 +1,8 @@
 import { Center } from '@mantine/core'
 import { FormPanel } from './FormPanel'
+import { FC } from 'react'
 
-export default function PasswordResetPage() {
+export const PasswordResetPage: FC = () => {
   return (
     <Center>
       <h1>パスワードの再設定</h1>

@@ -1,7 +1,8 @@
 import { Center } from '@mantine/core'
 import { FormPanel } from './FormPanel'
+import { FC } from 'react'
 
-export default function LoginPage() {
+export const LoginPage: FC = () => {
 
   return (
     <Center>

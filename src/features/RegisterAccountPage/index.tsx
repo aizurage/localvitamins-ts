@@ -1,7 +1,8 @@
 import { Center } from '@mantine/core'
 import { FormPanel } from './FormPanel'
+import { FC } from 'react'
 
-export function RegisterAccountPage() {
+export const RegisterAccountPage: FC = () => {
   return (
     <Center>
       <h1>アカウント登録</h1>

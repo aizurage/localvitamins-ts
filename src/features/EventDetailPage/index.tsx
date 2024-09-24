@@ -1,12 +1,12 @@
 import { Container } from '@mantine/core'
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FC } from 'react'
 import { EventPanel } from './EventPanel'
 import { EventRecruiterPanel } from './EentRecruiterPanel'
 import { Event, EventRecruiter } from '../../states'
 import { downloadEventData } from './controller/downloadEventData'
 
-export default function EventDetailPage(){
+export const EventDetailPage: FC = () => {
   const params = useParams()
   const [event, setEvent] = useState<Event>()
   const [eventRecruiter, setEventRecruiter] = useState<EventRecruiter>()
