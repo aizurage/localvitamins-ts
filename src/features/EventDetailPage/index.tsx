@@ -2,7 +2,7 @@ import { Container } from '@mantine/core'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect, FC } from 'react'
 import { EventPanel } from './EventPanel'
-import { EventRecruiterPanel } from './EentRecruiterPanel'
+import { EventRecruiterPanel } from './EventRecruiterPanel'
 import { Event, EventRecruiter } from '../../states'
 import { downloadEventData } from './controller/downloadEventData'
 
