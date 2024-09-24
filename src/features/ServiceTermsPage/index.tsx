@@ -1,7 +1,12 @@
+import { FC } from "react"
 import { AgreementConfirmationPanel } from "./AgreementConfirmationPanel"
 import styles from "./index.module.css"
 
-export default function ServiceTermsPage(isAgreementNecessary: boolean) {
+interface Props {
+  isAgreementNecessary: boolean
+}
+
+export const ServiceTermsPage: FC<Props> = ({isAgreementNecessary}) => {
   return(
     <>
       <h1>利用規約</h1>
