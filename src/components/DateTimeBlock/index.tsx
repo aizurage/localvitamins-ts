@@ -3,9 +3,9 @@ import { FC } from "react"
 
 interface DateTimeBlockProps {
     heading: string
-    date: string
-    from: string
-    to: string
+    date: string | null
+    from: string | null
+    to: string | null
 }
 
 export const DateTimeBlock: FC<DateTimeBlockProps> = (datetime) => {
