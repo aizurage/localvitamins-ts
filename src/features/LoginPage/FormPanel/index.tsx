@@ -8,11 +8,14 @@ import { Button, LoadingOverlay } from "@mantine/core"
 import styles from "./index.module.css"
 import { handleLoginDataSubmit } from "../controller/handleLoginDataSubmit"
 import { LoginData } from "../../../states"
+import { useAppDispatch } from "../../../app/hook"
+import { login } from "../../../app/slices/userSlice"
 
 export const FormPanel: FC = () => {
   const [loading, setLoading] = useState(false)
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const submit = async (values: FieldValues) => {
     setLoading(true)
@@ -21,7 +24,8 @@ export const FormPanel: FC = () => {
       password: values.password
     }
     await handleLoginDataSubmit(loginData)
-      .then(() => {
+      .then((response) => {
+        dispatch(login(response))
         navigate("/")
       }).catch(() => {
         alert(
