@@ -10,7 +10,9 @@ export const EventMakingCompletionPanel: FC = () => {
             <Button
                 className={styles.button}
                 type="submit"
-            >登録する</Button>
+            >
+                登録する
+            </Button>
         </>
     )
 }
