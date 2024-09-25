@@ -2,24 +2,23 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // TODO: 中身を考える必要あり↓ おそらくsupabaseのgetUser関数の戻り値を突っ込めばいいのでは？
 export interface UserState {
-    email: string
-    username: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    user: any
 }
 
 const initialState: UserState = {
-    email: "",
-    username: ""
+    user: null
 }
 
 const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login: () => {
-
+        login: (state, action) => {
+            state.user = action.payload
         },
-        logout: () => {
-
+        logout: (state) => {
+            state.user = null
         }
     }
 })
