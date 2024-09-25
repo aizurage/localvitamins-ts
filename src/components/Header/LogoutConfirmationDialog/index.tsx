@@ -1,7 +1,9 @@
 import { Dialog, Button } from "@mantine/core";
 import { FC } from "react";
-import { logout } from "../controller/logout";
+import { logout as supabaseLogout } from "../controller/logout";
 import styles from "./index.module.css"
+import { useAppDispatch } from "../../../app/hook";
+import { logout } from "../../../app/slices/userSlice";
 
 interface Props {
     open: boolean
@@ -9,8 +11,12 @@ interface Props {
 }
 
 export const LogoutConfirmationDialog: FC<Props> = ({open, setOpen}) => {
+    const dispatch = useAppDispatch()
     const handleLogout = async () => {
-        await logout()
+        await supabaseLogout()
+            .then(() => {
+                dispatch(logout())
+            })
             .catch(() => {
                 alert(
                     "ログアウトに失敗しました。もう一度お試しいただき、それでも失敗する場合は、お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。"
