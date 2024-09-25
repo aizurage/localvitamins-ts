@@ -6,13 +6,52 @@ import { EventInputsResultsPanel } from './EventInputsResultsPanel'
 import { EventMakingCompletionPanel } from './EventMakingCompletionPanel'
 import { EventRecruiterFormPanel } from './EventRecruiterFormPanel'
 import { ButtonPanel } from './ButtonPanel'
+import { useAppSelector } from '../../app/hook'
+import dayjs from 'dayjs'
+import { handleEventInfoSubmit } from './controller/handleEventInfoSubmit'
+import { useNavigate } from 'react-router-dom'
+import { selectEventDetails } from '../../app/selectEventDetails'
 
 export const EventMakingPage: FC = () => {
+  const {
+    eventPictureUrl,
+    eventRecruiterPictureUrl,
+    date,
+    time,
+    user
+  } = useAppSelector(selectEventDetails)
   const {register, handleSubmit, getValues} = useForm()
   const [active, setActive] = useState(0)
+  const navigate = useNavigate()
 
-  const submit = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const submit = async (values: any) => {
+    const eventInfoData = {
+      title: values.title,
+      region: values.region,
+      content: values.content,
+      target: values.target,
+      site: values.site,
+      reward: values.reward,
+      inquiry: values.inquiry,
+      belongings: values.belongings,
+      clothes: values.clothes,
+      event_picture: eventPictureUrl,
+      date: dayjs(date).format('YYYY-MM-DD'),
+      start_time: `${time.start.hour}:${time.start.minute}:00`,
+      end_time: `${time.end.hour}:${time.end.minute}:00`,
+      planner_uniqueID: user.id,
 
+      // event recruiter
+      recruiter_name: values.recruiter_name,
+      recruiter_introduction: values.recruiter_introduction,
+      recruiter_comment: values.recruiter_comment,
+      recruiter_picture: eventRecruiterPictureUrl,
+    }
+
+    handleEventInfoSubmit(eventInfoData)
+      .then(() => navigate("/"))
+      .catch(() => alert("イベントを登録できませんでした。"))
   }
 
   return(
