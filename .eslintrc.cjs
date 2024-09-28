@@ -37,6 +37,7 @@ module.exports = {
         'newlines-between': 'never',
       },
     ],
+    "max-len": ["error", { "code": 80 }],
     "semi": ["error", "never", {"beforeStatementContinuationChars": "never"}],
     "semi-spacing": ["error", {"after": true, "before": false}],
     "semi-style": ["error", "first"],
