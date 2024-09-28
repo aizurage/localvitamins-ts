@@ -1,16 +1,18 @@
-import { FC } from "react";
-import { FormBaseInput } from "../../../components/Inputs/FormBaseInput";
-import { FieldValues, UseFormRegister } from "react-hook-form";
-import { DateTimeInputPanel } from "./DateTimeInputPanel";
-import { FormBaseTextarea } from "../../../components/Inputs/FormBaseTextarea";
-import { At } from "tabler-icons-react";
-import { EventPictureInput } from "./EventPictureInput";
+import { FC } from "react"
+import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form"
+import { At } from "tabler-icons-react"
+import { FormBaseInput } from "../../../components/Inputs/FormBaseInput"
+import { FormBaseTextarea } from "../../../components/Inputs/FormBaseTextarea"
+import { DateTimeInputPanel } from "./DateTimeInputPanel"
+import { EventPictureInput } from "./EventPictureInput"
+import { EventSearchTagInput } from "./EventSearchTagInput"
 
 interface Props {
     register: UseFormRegister<FieldValues>
+    setValue: UseFormSetValue<FieldValues>
 }
 
-export const EventFormPanel: FC<Props> = ({register}) => {
+export const EventFormPanel: FC<Props> = ({register, setValue}) => {
     return(
         <>
             <h1>お手伝い基本情報入力</h1>
@@ -80,6 +82,7 @@ export const EventFormPanel: FC<Props> = ({register}) => {
                 register={register}
                 icon={<At />}
             />
+            <EventSearchTagInput setValue={setValue} />
             <EventPictureInput disabled={false} />
         </>
     )
