@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface Time {
     hour: string | null
@@ -41,5 +41,10 @@ const timeSlice = createSlice({
     }
 })
 
-export const {setStartHour, setStartMinute, setEndHour, setEndMinute} = timeSlice.actions
+export const {
+    setStartHour,
+    setStartMinute,
+    setEndHour,
+    setEndMinute
+} = timeSlice.actions
 export const timeReducer = timeSlice.reducer

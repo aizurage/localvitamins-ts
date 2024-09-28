@@ -1,9 +1,10 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { dateReducer } from "./slices/dateSlice";
-import { timeReducer } from "./slices/timeSlice";
-import { userReducer } from "./slices/userSlice";
-import { eventPictureReducer } from "./slices/eventPictureSlice";
-import { eventRecruiterPictureReducer } from "./slices/eventRecruiterPictureSlice";
+import { combineReducers } from "@reduxjs/toolkit"
+import { dateReducer } from "./slices/dateSlice"
+import { eventPictureReducer } from "./slices/eventPictureSlice"
+import { eventRecruiterPictureReducer } 
+    from "./slices/eventRecruiterPictureSlice"
+import { timeReducer } from "./slices/timeSlice"
+import { userReducer } from "./slices/userSlice"
 
 const rootReducer = combineReducers({
     user: userReducer,

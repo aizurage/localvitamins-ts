@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
 export interface EventRecruiterPictureState {
     eventRecruiterPictureUrl: string | null
@@ -38,5 +38,8 @@ const eventRecruiterPictureSlice = createSlice({
     }
 })
 
-export const { setEventRecruiterPicture, deleteEventRecruiterPicture } = eventRecruiterPictureSlice.actions
+export const { 
+    setEventRecruiterPicture, 
+    deleteEventRecruiterPicture 
+} = eventRecruiterPictureSlice.actions
 export const eventRecruiterPictureReducer = eventRecruiterPictureSlice.reducer
