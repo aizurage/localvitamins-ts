@@ -1,15 +1,15 @@
 import { FC, useState } from "react"
-import { FormBaseInput } from "../../../components/Inputs/FormBaseInput"
-import { FieldValues, useForm } from "react-hook-form"
-import { PasswordInput } from "../../../components/Inputs/PasswordInput"
 import { useNavigate } from "react-router-dom"
-import { PasswordResetPanel } from "../PasswordResetPanel"
 import { Button, LoadingOverlay } from "@mantine/core"
-import styles from "./index.module.css"
-import { handleLoginDataSubmit } from "../controller/handleLoginDataSubmit"
-import { LoginData } from "../../../states"
+import { FieldValues, useForm } from "react-hook-form"
 import { useAppDispatch } from "../../../app/hook"
 import { login } from "../../../app/slices/userSlice"
+import { FormBaseInput } from "../../../components/Inputs/FormBaseInput"
+import { PasswordInput } from "../../../components/Inputs/PasswordInput"
+import { LoginData } from "../../../states"
+import { PasswordResetPanel } from "../PasswordResetPanel"
+import { handleLoginDataSubmit } from "../controller/handleLoginDataSubmit"
+import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
   const [loading, setLoading] = useState(false)
@@ -29,7 +29,12 @@ export const FormPanel: FC = () => {
         navigate("/")
       }).catch(() => {
         alert(
-          'ログイン処理に失敗しました。メールアドレスまたはパスワードに間違いがないかどうか確認してください。それでも解決できない場合は、運営チームmiraikuru0512@gmail.comまでお問い合わせください。',
+          `
+          ログイン処理に失敗しました。
+          メールアドレスまたはパスワードに間違いがないかどうか確認してください。
+          それでも解決できない場合は、
+          運営チームmiraikuru0512@gmail.comまでお問い合わせください。
+          `
         )
       }).finally(() => {
         setLoading(false)
