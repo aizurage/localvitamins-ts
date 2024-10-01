@@ -5,17 +5,17 @@ export interface DateState {
 }
 
 const initialState: DateState = {
-    date: ""
+  date: ""
 }
 
 const dateSlice = createSlice({
-    name: "date",
-    initialState,
-    reducers: {
-        setDate: (state, action: PayloadAction<string>) => {
-            state.date = action.payload
-        }
+  name: "date",
+  initialState,
+  reducers: {
+    setDate: (state, action: PayloadAction<string>) => {
+      state.date = action.payload
     }
+  }
 })
 
 export const { setDate } = dateSlice.actions
