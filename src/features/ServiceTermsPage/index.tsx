@@ -6,7 +6,7 @@ interface Props {
   isAgreementNecessary: boolean
 }
 
-export const ServiceTermsPage: FC<Props> = ({isAgreementNecessary}) => {
+export const ServiceTermsPage: FC<Props> = ({ isAgreementNecessary }) => {
   return(
     <>
       <h1>利用規約</h1>
