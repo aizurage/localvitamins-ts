@@ -1,16 +1,16 @@
-import { Container, Stepper } from '@mantine/core'
 import { FC, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Container, Stepper } from '@mantine/core'
+import dayjs from 'dayjs'
 import { useForm } from 'react-hook-form'
+import { useAppSelector } from '../../app/hook'
+import { selectEventDetails } from '../../app/selectEventDetails'
+import { ButtonPanel } from './ButtonPanel'
 import { EventFormPanel } from './EventFormPanel'
 import { EventInputsResultsPanel } from './EventInputsResultsPanel'
 import { EventMakingCompletionPanel } from './EventMakingCompletionPanel'
 import { EventRecruiterFormPanel } from './EventRecruiterFormPanel'
-import { ButtonPanel } from './ButtonPanel'
-import { useAppSelector } from '../../app/hook'
-import dayjs from 'dayjs'
 import { handleEventInfoSubmit } from './controller/handleEventInfoSubmit'
-import { useNavigate } from 'react-router-dom'
-import { selectEventDetails } from '../../app/selectEventDetails'
 
 export const EventMakingPage: FC = () => {
   const {
@@ -20,8 +20,8 @@ export const EventMakingPage: FC = () => {
     time,
     user
   } = useAppSelector(selectEventDetails)
-  const {register, handleSubmit, getValues} = useForm()
-  const [active, setActive] = useState(0)
+  const { register, handleSubmit, getValues } = useForm()
+  const [ active, setActive ] = useState(0)
   const navigate = useNavigate()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

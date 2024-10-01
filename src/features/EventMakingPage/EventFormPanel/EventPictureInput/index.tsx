@@ -7,23 +7,23 @@ interface Props {
     disabled: boolean
 }
 
-export const EventPictureInput: FC<Props> = ({disabled}) => {
-    const dispatch = useAppDispatch()
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const picture = event.target.files?.[0]
-        if (picture) dispatch(setEventPicture(picture))
-    }
+export const EventPictureInput: FC<Props> = ({ disabled }) => {
+  const dispatch = useAppDispatch()
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const picture = event.target.files?.[0]
+    if (picture) dispatch(setEventPicture(picture))
+  }
 
-    return(
-        <>
-            <h4>お手伝いイメージ画像の選択</h4>
-            <input
-                className={styles.imageInput}
-                type="file"
-                accept="image/*"
-                onChange={onChange}
-                disabled={disabled}
-            />
-        </>
-    )
+  return(
+    <>
+      <h4>お手伝いイメージ画像の選択</h4>
+      <input
+        className={styles.imageInput}
+        type="file"
+        accept="image/*"
+        onChange={onChange}
+        disabled={disabled}
+      />
+    </>
+  )
 }
