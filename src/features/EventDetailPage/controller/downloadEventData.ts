@@ -6,7 +6,8 @@ export const downloadEventData = async (eventID: number): Promise<{
     eventRecruiter: EventRecruiter
 }> => {
     try {
-        const { data, error } = await supabase.from('EventTable').select().eq("id", eventID)
+        const { data, error } = await supabase
+            .from('EventTable').select().eq("id", eventID)
         if (error) throw new Error("Fetching whole event data in failed!")
         const { 
             recruiter_name, 
@@ -27,7 +28,12 @@ export const downloadEventData = async (eventID: number): Promise<{
         }
     } catch (error) {
         console.log('Error fetching event data') 
-        alert("イベントのダウンロードに失敗しました。お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。")
+        alert(
+            `
+            イベントのダウンロードに失敗しました。
+            お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。
+            `
+        )
         return {
             event: {} as Event,
             eventRecruiter: {} as EventRecruiter

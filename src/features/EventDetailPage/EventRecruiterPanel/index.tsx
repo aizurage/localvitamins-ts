@@ -1,22 +1,23 @@
-import { FC, useEffect, useState } from "react";
-import { HeadingDescriptionBlock } from "../../../components/HeadingDescriptionBlock";
-import { EventRecruiter } from "../../../states";
-import styles from "./index.module.css";
-import { downloadRecruiterImage } from "../controller/downloadRecruiterImage";
+import { FC, useEffect, useState } from "react"
+import { HeadingDescriptionBlock } from
+  "../../../components/HeadingDescriptionBlock"
+import { EventRecruiter } from "../../../states"
+import { downloadRecruiterImage } from "../controller/downloadRecruiterImage"
+import styles from "./index.module.css"
 
 export const EventRecruiterPanel: FC<{ eventRecruiter: EventRecruiter }> = ({
   eventRecruiter,
 }) => {
   const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] =
-    useState("");
+    useState("")
   useEffect(() => {
     (async () => {
       const eventRecruiterPictureObjectUrl = await downloadRecruiterImage(
         eventRecruiter.imageUrl
-      );
-      setRecruiterPictureObjectURL(eventRecruiterPictureObjectUrl);
-    })();
-  }, [eventRecruiter.imageUrl]);
+      )
+      setRecruiterPictureObjectURL(eventRecruiterPictureObjectUrl)
+    })()
+  }, [eventRecruiter.imageUrl])
 
   return (
     <div className={styles.eventRecruiterPanelStyle}>
@@ -36,5 +37,5 @@ export const EventRecruiterPanel: FC<{ eventRecruiter: EventRecruiter }> = ({
         description={eventRecruiter.comment}
       />
     </div>
-  );
-};
+  )
+}

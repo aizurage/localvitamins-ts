@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from "react";
-import type { Event } from "../../../states";
-import styles from "./index.module.css";
-import { HeadingDescriptionBlock } from "../../../components/HeadingDescriptionBlock";
-import { DateTimeBlock } from "../../../components/DateTimeBlock";
-import { downloadEventImage } from "../controller/downloadEventImage";
+import { FC, useEffect, useState } from "react"
+import { DateTimeBlock } from "../../../components/DateTimeBlock"
+import { HeadingDescriptionBlock } from 
+  "../../../components/HeadingDescriptionBlock"
+import { downloadEventImage } from "../controller/downloadEventImage"
+import styles from "./index.module.css"
+import type { Event } from "../../../states"
 
 export const EventPanel: FC<{ event: Event }> = ({ event }) => {
-  const [eventPictureObjectURL, setEventPictureObjectURL] = useState("");
+  const [eventPictureObjectURL, setEventPictureObjectURL] = useState("")
   useEffect(() => {
     (async () => {
-      const eventPictureObjectUrl = await downloadEventImage(event.imageUrl);
-      setEventPictureObjectURL(eventPictureObjectUrl);
-    })();
-  }, [event.imageUrl]);
+      const eventPictureObjectUrl = await downloadEventImage(event.imageUrl)
+      setEventPictureObjectURL(eventPictureObjectUrl)
+    })()
+  }, [event.imageUrl])
 
   return (
     <>
@@ -49,5 +50,5 @@ export const EventPanel: FC<{ event: Event }> = ({ event }) => {
         description={event.inquiry}
       />
     </>
-  );
-};
+  )
+}

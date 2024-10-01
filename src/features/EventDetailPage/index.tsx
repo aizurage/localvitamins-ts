@@ -1,9 +1,9 @@
-import { Container } from '@mantine/core'
-import { useParams } from 'react-router-dom'
 import { useState, useEffect, FC } from 'react'
+import { useParams } from 'react-router-dom'
+import { Container } from '@mantine/core'
+import { Event, EventRecruiter } from '../../states'
 import { EventPanel } from './EventPanel'
 import { EventRecruiterPanel } from './EventRecruiterPanel'
-import { Event, EventRecruiter } from '../../states'
 import { downloadEventData } from './controller/downloadEventData'
 
 export const EventDetailPage: FC = () => {
@@ -27,7 +27,11 @@ export const EventDetailPage: FC = () => {
   return (
     <Container>
       {event ? <EventPanel event={event} /> : <p>Loading event...</p>}
-      {eventRecruiter ? <EventRecruiterPanel eventRecruiter={eventRecruiter} /> : <p>Loading recruiter...</p>}
+      {
+        eventRecruiter ? 
+        <EventRecruiterPanel eventRecruiter={eventRecruiter} /> :
+        <p>Loading recruiter...</p>
+      }
     </Container>
   )
 }
