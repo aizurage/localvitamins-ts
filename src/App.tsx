@@ -1,10 +1,10 @@
-import "@mantine/core/styles.css";
-import { MantineProvider } from "@mantine/core";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { PAGES, createRoutes } from "./routes";
-import { Layout } from "./components/Layout";
-import { Provider } from "react-redux";
+import "@mantine/core/styles.css"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { MantineProvider } from "@mantine/core"
+import { Provider } from "react-redux"
 import store from "./app/store"
+import { Layout } from "./components/Layout"
+import { PAGES, createRoutes } from "./routes"
 
 export default function App() {
   return (
@@ -17,5 +17,5 @@ export default function App() {
         </Provider>
       </MantineProvider>
     </BrowserRouter>
-  );
+  )
 }
