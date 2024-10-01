@@ -6,15 +6,15 @@ interface Props {
     setOpen: (arg: boolean) => void
 }
 
-export const LogOutButton: FC<Props> = ({setOpen}) => {
-    return(
-        <Button
-            className={styles.button}
-            onClick={() => {
-                setOpen(true)
-            }}
-        >
+export const LogOutButton: FC<Props> = ({ setOpen }) => {
+  return(
+    <Button
+      className={styles.button}
+      onClick={() => {
+        setOpen(true)
+      }}
+    >
             ログアウト
-        </Button>
-    )
+    </Button>
+  )
 }

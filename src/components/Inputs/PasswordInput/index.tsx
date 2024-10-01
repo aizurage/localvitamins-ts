@@ -8,21 +8,21 @@ interface PasswordInputProps extends FormBaseInputProps {
 }
 
 export const PasswordInput: FC<PasswordInputProps> = ({
-    required,
-    label,
-    placeholder,
-    fieldname,
-    register,
-    description
+  required,
+  label,
+  placeholder,
+  fieldname,
+  register,
+  description
 }) => {
-    return(
-        <MantinePasswordInput
-            className={styles.PasswordInputStyle}
-            required={required}
-            label={label}
-            placeholder={placeholder}
-            description={description}
-            {...register(fieldname)}
-        />
-    )
+  return(
+    <MantinePasswordInput
+      className={styles.PasswordInputStyle}
+      required={required}
+      label={label}
+      placeholder={placeholder}
+      description={description}
+      {...register(fieldname)}
+    />
+  )
 }

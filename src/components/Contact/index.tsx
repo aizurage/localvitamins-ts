@@ -7,8 +7,8 @@ import { submitContactForm } from "./controller/submitContactForm"
 import styles from "./index.module.css"
 
 export default function Contact() {
-  const {register, handleSubmit} = useForm()
-  
+  const { register, handleSubmit } = useForm()
+
   const submit = async (values: FieldValues) => {
     const contactFormValues: ContactForm = {
       title: values.title,
@@ -21,13 +21,13 @@ export default function Contact() {
         alert(
           "フォームの送信に失敗しました。運営チーム (miraikuru0512@gmail.com) に直接メールにてお問い合わせください。"
         )
-    })
+      })
   }
 
   return (
     <form onSubmit={handleSubmit(submit)}>
       <h3>お問い合わせフォーム</h3>
-      <FormBaseInput 
+      <FormBaseInput
         required
         label="タイトル"
         placeholder="お問い合わせ件名"

@@ -10,18 +10,18 @@ interface Props {
 }
 
 export const Drawer: FC<Props> = ({ open, setOpen }) => {
-    return (
-        <_Drawer 
-            opened={open}
-            onClose={() => setOpen(false)}
-            padding="xl"
-            size="xl"
-        >
-            <h1>メニュー</h1>
-            <Back2HomeButton setOpen={setOpen} />
-            <MenuList />
-            <hr />
-            <Contact />
-        </_Drawer>
-    )
+  return (
+    <_Drawer
+      opened={open}
+      onClose={() => setOpen(false)}
+      padding="xl"
+      size="xl"
+    >
+      <h1>メニュー</h1>
+      <Back2HomeButton setOpen={setOpen} />
+      <MenuList />
+      <hr />
+      <Contact />
+    </_Drawer>
+  )
 }

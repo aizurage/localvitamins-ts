@@ -6,11 +6,11 @@ interface Props {
     setOpen: (arg0: boolean) => void
 }
 
-export const Burger: FC<Props> = ({setOpen}) => {
-    return(
-        <_Burger
-            onClick={() => setOpen(!open)}
-            className={styles.burger}
-        />
-    )
+export const Burger: FC<Props> = ({ setOpen }) => {
+  return(
+    <_Burger
+      onClick={() => setOpen(!open)}
+      className={styles.burger}
+    />
+  )
 }

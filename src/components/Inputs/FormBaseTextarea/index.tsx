@@ -14,23 +14,23 @@ export interface Props {
 }
 
 export const FormBaseTextarea: FC<Props> = ({
-    required,
-    label,
-    placeholder,
-    fieldname,
-    minRows,
-    register,
-    icon
+  required,
+  label,
+  placeholder,
+  fieldname,
+  minRows,
+  register,
+  icon
 }) => {
-    return(
-        <Textarea
-            className={styles.textarea}
-            required={required}
-            label={label}
-            placeholder={placeholder}
-            minRows={minRows}
-            leftSection={icon}
-            {...register(fieldname)}
-        />
-    )
+  return(
+    <Textarea
+      className={styles.textarea}
+      required={required}
+      label={label}
+      placeholder={placeholder}
+      minRows={minRows}
+      leftSection={icon}
+      {...register(fieldname)}
+    />
+  )
 }

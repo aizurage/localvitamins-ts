@@ -13,21 +13,21 @@ export interface FormBaseInputProps {
 }
 
 export const FormBaseInput: FC<FormBaseInputProps> = ({
-    required,
-    label,
-    placeholder,
-    fieldname,
-    register,
-    icon
+  required,
+  label,
+  placeholder,
+  fieldname,
+  register,
+  icon
 }) => {
-    return(
-        <TextInput
-            className={style.FormBaseInputBasicStyle}
-            required={required}
-            label={label}
-            placeholder={placeholder}
-            leftSection={icon}
-            {...register(fieldname)}
-        />
-    )
+  return(
+    <TextInput
+      className={style.FormBaseInputBasicStyle}
+      required={required}
+      label={label}
+      placeholder={placeholder}
+      leftSection={icon}
+      {...register(fieldname)}
+    />
+  )
 }

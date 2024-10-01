@@ -7,15 +7,15 @@ interface Props {
     setOpen: (arg: boolean) => void
 }
 
-export const Back2HomeButton: FC<Props> = ({setOpen}) => {
-    return(
-        <Button
-            className={styles.homeButton}
-            component={Link}
-            to={"/"}
-            onClick={() => setOpen(false)}
-        >
+export const Back2HomeButton: FC<Props> = ({ setOpen }) => {
+  return(
+    <Button
+      className={styles.homeButton}
+      component={Link}
+      to={"/"}
+      onClick={() => setOpen(false)}
+    >
             ホームへ戻る
-        </Button>
-    )
+    </Button>
+  )
 }

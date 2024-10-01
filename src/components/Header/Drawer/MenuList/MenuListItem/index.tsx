@@ -6,13 +6,13 @@ interface Props {
     onClick: () => void;
 }
 
-export const MenuListItem: FC<Props> = ({children, onClick}) => {
-    return(
-        <li
-            className={styles.li}
-            onClick={onClick}
-        >
-            {children}
-        </li>
-    )
+export const MenuListItem: FC<Props> = ({ children, onClick }) => {
+  return(
+    <li
+      className={styles.li}
+      onClick={onClick}
+    >
+      {children}
+    </li>
+  )
 }
