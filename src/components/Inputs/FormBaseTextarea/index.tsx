@@ -1,6 +1,6 @@
+import { FC, ReactNode } from "react"
 import { Textarea } from "@mantine/core"
 import { FieldValues, UseFormRegister } from "react-hook-form"
-import { FC, ReactNode } from "react"
 import styles from "./index.module.css"
 
 export interface Props {

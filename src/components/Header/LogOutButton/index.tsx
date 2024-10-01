@@ -1,5 +1,5 @@
-import { Button } from "@mantine/core";
-import { FC } from "react";
+import { FC } from "react"
+import { Button } from "@mantine/core"
 import styles from "./index.module.css"
 
 interface Props {

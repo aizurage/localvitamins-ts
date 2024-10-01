@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { LogoutConfirmationDialog } from "../../LogoutConfirmationDialog";
-import { MenuListItem } from "./MenuListItem";
+import { FC, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { LogoutConfirmationDialog } from "../../LogoutConfirmationDialog"
+import { MenuListItem } from "./MenuListItem"
 
 export const MenuList: FC = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const navigate = useNavigate();
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const navigate = useNavigate()
   return (
     <>
       <nav>
@@ -28,5 +28,5 @@ export const MenuList: FC = () => {
       </nav>
       <LogoutConfirmationDialog open={dialogOpen} setOpen={setDialogOpen} />
     </>
-  );
-};
+  )
+}

@@ -1,7 +1,7 @@
-import { Button } from "@mantine/core";
-import { FC } from "react";
+import { FC } from "react"
+import { useNavigate } from "react-router-dom"
+import { Button } from "@mantine/core"
 import styles from "./index.module.css"
-import { useNavigate } from "react-router-dom";
 
 export const SignUpButton: FC = () => {
     const navigate = useNavigate()
@@ -10,7 +10,7 @@ export const SignUpButton: FC = () => {
         <Button
             className={styles.button}
             onClick={() => {
-                navigate("/serviceTerms_agree");
+                navigate("/serviceTerms_agree")
             }}
         >
             新規登録

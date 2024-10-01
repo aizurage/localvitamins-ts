@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core"
 import { FC } from "react"
 import { Link } from "react-router-dom"
+import { Button } from "@mantine/core"
 import styles from "./index.module.css"
 
 interface Props {

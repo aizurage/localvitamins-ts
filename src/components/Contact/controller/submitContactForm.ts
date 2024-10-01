@@ -1,6 +1,6 @@
-import emailjs from "@emailjs/browser";
-import { supabase } from "../../../supabaseClient";
-import { ContactForm } from "../../../states";
+import emailjs from "@emailjs/browser"
+import { ContactForm } from "../../../states"
+import { supabase } from "../../../supabaseClient"
 
 export const submitContactForm = async (values: ContactForm): Promise<void> => {
     await emailjs.send(

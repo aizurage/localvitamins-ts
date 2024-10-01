@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core";
-import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { FC } from "react"
+import { useNavigate } from "react-router-dom"
+import { Button } from "@mantine/core"
 import styles from "./index.module.css"
 
 export const LogInButton: FC = () => {
@@ -10,7 +10,7 @@ export const LogInButton: FC = () => {
         <Button
             className={styles.button}
             onClick={() => {
-                navigate("/login");
+                navigate("/login")
             }}
         >
             ログイン

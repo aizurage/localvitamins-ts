@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { supabase } from "../../supabaseClient";
-import { Burger } from "./Burger";
-import { LogOutButton } from "./LogOutButton";
-import { LogInButton } from "./LogInButton";
-import { LogoutConfirmationDialog } from "./LogoutConfirmationDialog";
-import { Drawer } from "./Drawer";
+import { useState } from "react"
+import { supabase } from "../../supabaseClient"
+import { Burger } from "./Burger"
+import { Drawer } from "./Drawer"
+import { LogInButton } from "./LogInButton"
+import { LogOutButton } from "./LogOutButton"
+import { LogoutConfirmationDialog } from "./LogoutConfirmationDialog"
 import styles from "./index.module.css"
 
 export function Header() {
@@ -25,5 +25,5 @@ export function Header() {
       <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
       <LogoutConfirmationDialog open={dialogOpen} setOpen={setDialogOpen} />
     </header>
-  );
+  )
 }

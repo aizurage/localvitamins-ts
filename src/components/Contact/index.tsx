@@ -1,9 +1,9 @@
-import { Button } from "@mantine/core";
-import { submitContactForm } from "./controller/submitContactForm";
-import { FieldValues, useForm } from "react-hook-form";
-import { ContactForm } from "../../states";
-import { FormBaseInput } from "../Inputs/FormBaseInput";
-import { FormBaseTextarea } from "../Inputs/FormBaseTextarea";
+import { Button } from "@mantine/core"
+import { FieldValues, useForm } from "react-hook-form"
+import { ContactForm } from "../../states"
+import { FormBaseInput } from "../Inputs/FormBaseInput"
+import { FormBaseTextarea } from "../Inputs/FormBaseTextarea"
+import { submitContactForm } from "./controller/submitContactForm"
 import styles from "./index.module.css"
 
 export default function Contact() {
@@ -16,13 +16,13 @@ export default function Contact() {
     }
     await submitContactForm(contactFormValues)
       .then(() => {
-        alert("フォームの送信に成功しました。このタブを閉じてください。");
+        alert("フォームの送信に成功しました。このタブを閉じてください。")
       }).catch (() => {
         alert(
           "フォームの送信に失敗しました。運営チーム (miraikuru0512@gmail.com) に直接メールにてお問い合わせください。"
         )
     })
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit(submit)}>
@@ -46,5 +46,5 @@ export default function Contact() {
         送信
       </Button>
     </form>
-  );
+  )
 }

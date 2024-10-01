@@ -1,6 +1,6 @@
 import { FC } from "react"
-import { FormBaseInputProps } from "../FormBaseInput"
 import { PasswordInput as MantinePasswordInput } from "@mantine/core"
+import { FormBaseInputProps } from "../FormBaseInput"
 import styles from "./index.module.css"
 
 interface PasswordInputProps extends FormBaseInputProps {

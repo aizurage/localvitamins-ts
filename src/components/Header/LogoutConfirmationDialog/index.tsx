@@ -1,9 +1,9 @@
-import { Dialog, Button } from "@mantine/core";
-import { FC } from "react";
-import { logout as supabaseLogout } from "../controller/logout";
+import { FC } from "react"
+import { Dialog, Button } from "@mantine/core"
+import { useAppDispatch } from "../../../app/hook"
+import { logout } from "../../../app/slices/userSlice"
+import { logout as supabaseLogout } from "../controller/logout"
 import styles from "./index.module.css"
-import { useAppDispatch } from "../../../app/hook";
-import { logout } from "../../../app/slices/userSlice";
 
 interface Props {
     open: boolean
@@ -19,8 +19,14 @@ export const LogoutConfirmationDialog: FC<Props> = ({open, setOpen}) => {
             })
             .catch(() => {
                 alert(
-                    "ログアウトに失敗しました。もう一度お試しいただき、それでも失敗する場合は、お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。"
-                );
+                    `
+                    ログアウトに失敗しました。
+                    もう一度お試しいただき、
+                    それでも失敗する場合は、
+                    お手伝い一覧画面のメニュー内にある、
+                    お問い合わせフォームにてご連絡ください。
+                    `
+                )
             })
     }
 
@@ -36,8 +42,8 @@ export const LogoutConfirmationDialog: FC<Props> = ({open, setOpen}) => {
                 <Button
                     className={styles.yesButton}
                     onClick={() => {
-                        handleLogout();
-                        setOpen(false);
+                        handleLogout()
+                        setOpen(false)
                     }}
                 >
                     はい
@@ -45,7 +51,7 @@ export const LogoutConfirmationDialog: FC<Props> = ({open, setOpen}) => {
                 <Button
                     className={styles.noButton}
                     onClick={() => {
-                        setOpen(false);
+                        setOpen(false)
                     }}
                 >
                     いいえ

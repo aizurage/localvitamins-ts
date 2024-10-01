@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Burger as _Burger } from "@mantine/core";
+import { Burger as _Burger } from "@mantine/core"
 import styles from "./index.module.css"
 
 interface Props {
