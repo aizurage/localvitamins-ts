@@ -1,19 +1,19 @@
 import { FC, useEffect, useState } from "react"
 import { DateTimeBlock } from "../../../components/DateTimeBlock"
-import { HeadingDescriptionBlock } from 
+import { HeadingDescriptionBlock } from
   "../../../components/HeadingDescriptionBlock"
 import { downloadEventImage } from "../controller/downloadEventImage"
 import styles from "./index.module.css"
 import type { Event } from "../../../states"
 
 export const EventPanel: FC<{ event: Event }> = ({ event }) => {
-  const [eventPictureObjectURL, setEventPictureObjectURL] = useState("")
+  const [ eventPictureObjectURL, setEventPictureObjectURL ] = useState("")
   useEffect(() => {
     (async () => {
       const eventPictureObjectUrl = await downloadEventImage(event.imageUrl)
       setEventPictureObjectURL(eventPictureObjectUrl)
     })()
-  }, [event.imageUrl])
+  }, [ event.imageUrl ])
 
   return (
     <>

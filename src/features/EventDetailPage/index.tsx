@@ -8,9 +8,9 @@ import { downloadEventData } from './controller/downloadEventData'
 
 export const EventDetailPage: FC = () => {
   const params = useParams()
-  const [event, setEvent] = useState<Event>()
-  const [eventRecruiter, setEventRecruiter] = useState<EventRecruiter>()
-  
+  const [ event, setEvent ] = useState<Event>()
+  const [ eventRecruiter, setEventRecruiter ] = useState<EventRecruiter>()
+
   useEffect(() => {
     (async() => {
       await downloadEventData(Number(params.eventNumber))
@@ -22,15 +22,15 @@ export const EventDetailPage: FC = () => {
           console.log(error)
         })
     })()
-  }, [params.eventNumber])
+  }, [ params.eventNumber ])
 
   return (
     <Container>
       {event ? <EventPanel event={event} /> : <p>Loading event...</p>}
       {
-        eventRecruiter ? 
-        <EventRecruiterPanel eventRecruiter={eventRecruiter} /> :
-        <p>Loading recruiter...</p>
+        eventRecruiter ?
+          <EventRecruiterPanel eventRecruiter={eventRecruiter} /> :
+          <p>Loading recruiter...</p>
       }
     </Container>
   )

@@ -8,7 +8,7 @@ import styles from "./index.module.css"
 export const EventRecruiterPanel: FC<{ eventRecruiter: EventRecruiter }> = ({
   eventRecruiter,
 }) => {
-  const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] =
+  const [ recruiterPictureObjectURL, setRecruiterPictureObjectURL ] =
     useState("")
   useEffect(() => {
     (async () => {
@@ -17,7 +17,7 @@ export const EventRecruiterPanel: FC<{ eventRecruiter: EventRecruiter }> = ({
       )
       setRecruiterPictureObjectURL(eventRecruiterPictureObjectUrl)
     })()
-  }, [eventRecruiter.imageUrl])
+  }, [ eventRecruiter.imageUrl ])
 
   return (
     <div className={styles.eventRecruiterPanelStyle}>
