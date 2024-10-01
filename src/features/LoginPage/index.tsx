@@ -6,8 +6,8 @@ export const LoginPage: FC = () => {
 
   return (
     <Center>
-        <h1>ログイン</h1>
-        <FormPanel />
+      <h1>ログイン</h1>
+      <FormPanel />
     </Center>
   )
 }
