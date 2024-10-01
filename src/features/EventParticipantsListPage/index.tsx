@@ -1,7 +1,7 @@
-import { Button } from '@mantine/core'
-import { useParams, useNavigate } from 'react-router-dom'
-import { TablePanel } from './TablePanel/view'
 import { FC } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Button } from '@mantine/core'
+import { TablePanel } from './TablePanel/view'
 import styles from "./index.module.css"
 
 export const EventParticipantsListPage: FC = () => {
@@ -12,7 +12,12 @@ export const EventParticipantsListPage: FC = () => {
     <>
       <h1>参加者リスト</h1>
       <TablePanel eventID={Number(params.eventNumber)} />
-      <Button className={styles.closeButton} onClick={() => navigate('/')}>閉じる</Button>
+      <Button
+        className={styles.closeButton}
+        onClick={() => navigate('/')}
+      >
+        閉じる
+      </Button>
     </>
   )
 }

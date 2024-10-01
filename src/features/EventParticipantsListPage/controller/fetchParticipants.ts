@@ -1,7 +1,9 @@
-import { supabase } from "../../../supabaseClient"
 import { Participant } from "../../../states/Participant"
+import { supabase } from "../../../supabaseClient"
 
-export const fetchParticipants = async (eventID: number): Promise<Participant[]> => {
+export const fetchParticipants = async (
+  eventID: number
+): Promise<Participant[]> => {
   try {
     const { data, error } = await supabase
       .from('Participants')
