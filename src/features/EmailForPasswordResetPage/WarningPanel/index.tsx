@@ -16,7 +16,8 @@ export const WariningPanel: FC = () => {
                 <li>スペルミスをしていないか。</li>
             </ul>
             <p className={styles.redChar}>
-                確認していただき、それでも解決しない場合は運営チーム (miraikuru0512@gmail.com) にお問い合わせください。
+                確認していただき、それでも解決しない場合は運営チーム 
+                (miraikuru0512@gmail.com) にお問い合わせください。
             </p>
         </>
     )

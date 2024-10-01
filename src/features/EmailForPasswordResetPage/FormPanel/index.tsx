@@ -1,10 +1,10 @@
-import { FieldValues, useForm } from "react-hook-form"
-import { FormBaseInput } from "../../../components/Inputs/FormBaseInput"
 import { FC, useState } from "react"
-import { At } from "tabler-icons-react"
-import { handleEmailSubmit } from "../controller/handleEmailSubmit"
-import { WariningPanel } from "../WarningPanel"
 import { Button } from "@mantine/core"
+import { FieldValues, useForm } from "react-hook-form"
+import { At } from "tabler-icons-react"
+import { FormBaseInput } from "../../../components/Inputs/FormBaseInput"
+import { WariningPanel } from "../WarningPanel"
+import { handleEmailSubmit } from "../controller/handleEmailSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
