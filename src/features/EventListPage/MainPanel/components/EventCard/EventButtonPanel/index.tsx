@@ -1,5 +1,5 @@
-import { Dayjs } from "dayjs"
 import { FC } from "react"
+import { Dayjs } from "dayjs"
 import { ApplicationButton } from "./ApplicationButton"
 import { TransitionToDetailPageButton } from "./TransitionToDetailPageButton"
 
@@ -11,20 +11,20 @@ interface Props {
 }
 
 export const EventButtonPanel: FC<Props> = ({
-    eventId,
-    title,
-    date,
-    open
+  eventId,
+  title,
+  date,
+  open
 }) => {
-    return(
-        <div>
-            <TransitionToDetailPageButton eventId={eventId}/>
-            <ApplicationButton 
-                eventId={eventId}
-                title={title}
-                date={date}
-                open={open}
-            />
-        </div>
-    )
+  return(
+    <div>
+      <TransitionToDetailPageButton eventId={eventId}/>
+      <ApplicationButton
+        eventId={eventId}
+        title={title}
+        date={date}
+        open={open}
+      />
+    </div>
+  )
 }

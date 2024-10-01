@@ -5,12 +5,12 @@ import { UnfilteringEventButton } from "./UnfilteringEventButton"
 import styles from "./index.module.css"
 
 export const SearchEventPanel = () => {
-    return(
-        <div className={styles.SearchEventPanel}>
-            <SearchBar />
-            <FilteringOwnersEventButton />
-            <UnfilteringEventButton />
-            <EventCreationButton />
-        </div>
-    )
+  return(
+    <div className={styles.SearchEventPanel}>
+      <SearchBar />
+      <FilteringOwnersEventButton />
+      <UnfilteringEventButton />
+      <EventCreationButton />
+    </div>
+  )
 }

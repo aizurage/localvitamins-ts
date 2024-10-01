@@ -1,23 +1,23 @@
-import { FC, useEffect, useState } from "react";
-import { EventCard } from "./components/EventCard/view";
-import styles from "./index.module.css";
-import { downloadEventData } from "../controller/downloadEventData";
-import dayjs from "dayjs";
-import { EventPropsForDetailPage } from "../../../states/";
+import { FC, useEffect, useState } from "react"
+import dayjs from "dayjs"
+import { EventPropsForDetailPage } from "../../../states/"
+import { downloadEventData } from "../controller/downloadEventData"
+import { EventCard } from "./components/EventCard/view"
+import styles from "./index.module.css"
 
 export const MainPanel: FC = () => {
-  const [events, setEvents] = useState<EventPropsForDetailPage[]>([]);
+  const [ events, setEvents ] = useState<EventPropsForDetailPage[]>([])
   useEffect(() => {
     (async () => {
       await downloadEventData()
         .then((response) => {
-          setEvents(response);
+          setEvents(response)
         })
         .catch((error) => {
-          console.log(error);
-        });
-    })();
-  }, []);
+          console.log(error)
+        })
+    })()
+  }, [])
 
   return (
     <div className={styles.eventCards}>
@@ -35,5 +35,5 @@ export const MainPanel: FC = () => {
         ))}
       </nav>
     </div>
-  );
-};
+  )
+}

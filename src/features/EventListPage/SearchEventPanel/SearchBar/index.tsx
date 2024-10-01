@@ -1,12 +1,13 @@
+import { FC } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { SearchButton } from "./SearchButton"
 import { SearchInput } from "./SearchInput"
 import styles from "./index.module.css"
-import { FC } from "react"
 
 export const SearchBar: FC = () => {
   const { register, handleSubmit } = useForm()
   const _handleSubmit = (data: FieldValues) => {
+
     // TODO: 全角スペース もしくは 半角スペースで区切る処理が必要
     // submitContents(_data)
   }

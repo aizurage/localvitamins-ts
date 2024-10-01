@@ -8,25 +8,25 @@ interface Props {
 }
 
 export const Spoiler: FC<Props> = ({
-    children,
-    label,
-    hiddenLabel
+  children,
+  label,
+  hiddenLabel
 }) => {
-    const [isVisible, setIsVisible] = useState(false)
+  const [ isVisible, setIsVisible ] = useState(false)
 
-    const handleOnClick = () => {
-        setIsVisible(!isVisible)
-    }
+  const handleOnClick = () => {
+    setIsVisible(!isVisible)
+  }
 
-    return(
-        <div className={styles.spoilerContainer}>
-            <a 
-                className={styles.spoilerLink} 
-                onClick={handleOnClick}
-            >
-                {isVisible ? hiddenLabel : label}
-            </a>
-            {isVisible ?? <div className={styles.spoilerContent}>{children}</div>}
-        </div>
-    )
+  return(
+    <div className={styles.spoilerContainer}>
+      <a
+        className={styles.spoilerLink}
+        onClick={handleOnClick}
+      >
+        {isVisible ? hiddenLabel : label}
+      </a>
+      {isVisible ?? <div className={styles.spoilerContent}>{children}</div>}
+    </div>
+  )
 }

@@ -1,12 +1,12 @@
-import { useState, useEffect, FC } from "react";
-import styles from "./index.module.css";
-import { Dayjs } from "dayjs";
-import { EventTextDescriptionPanel } from "../EventTextDescriptionPanel";
-import { EventOwnerOptionPanel } from "../EventOwnerOptionPanel/view";
-import { downloadEventImage } from "../controller/downloadEventImage";
-import { EventButtonPanel } from "../EventButtonPanel";
-import { EventImagePanel } from "../EventImagePanel";
-import { supabase } from "../../../../../../supabaseClient";
+import { useState, useEffect, FC } from "react"
+import { Dayjs } from "dayjs"
+import { supabase } from "../../../../../../supabaseClient"
+import { EventButtonPanel } from "../EventButtonPanel"
+import { EventImagePanel } from "../EventImagePanel"
+import { EventOwnerOptionPanel } from "../EventOwnerOptionPanel/view"
+import { EventTextDescriptionPanel } from "../EventTextDescriptionPanel"
+import { downloadEventImage } from "../controller/downloadEventImage"
+import styles from "./index.module.css"
 
 interface Props {
   eventId: number;
@@ -25,13 +25,13 @@ export const EventCard: FC<Props> = ({
   description,
   plannerUniqueId,
 }) => {
-  const [eventPictureObjectUrl, setEventPictureObjectUrl] = useState("");
+  const [ eventPictureObjectUrl, setEventPictureObjectUrl ] = useState("")
   useEffect(() => {
     (async () => {
-      const fetchedObjectUrl = await downloadEventImage(eventPictureUrl);
-      setEventPictureObjectUrl(fetchedObjectUrl);
-    })();
-  }, [eventPictureUrl]);
+      const fetchedObjectUrl = await downloadEventImage(eventPictureUrl)
+      setEventPictureObjectUrl(fetchedObjectUrl)
+    })()
+  }, [ eventPictureUrl ])
 
   return (
     <div className={styles.card} key={eventId}>
@@ -53,5 +53,5 @@ export const EventCard: FC<Props> = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
