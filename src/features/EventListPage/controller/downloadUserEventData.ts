@@ -1,7 +1,9 @@
 import { EventPropsForDetailPage } from "../../../states"
 import { supabase } from "../../../supabaseClient"
 
-export const downloadMyEventData = async (userUniqueId: string): Promise<EventPropsForDetailPage[]> => {
+export const downloadUserEventData = async (
+  userUniqueId: string
+): Promise<EventPropsForDetailPage[]> => {
   try {
     const { data, error } = await supabase
       .from('EventTable')
@@ -12,7 +14,9 @@ export const downloadMyEventData = async (userUniqueId: string): Promise<EventPr
     if (data == null) return[]
 
     // WARNING: 以下のmap関数が正しく動くのか、検証する必要あり↓
-    const eventData: EventPropsForDetailPage[] = data[0].map((event: EventPropsForDetailPage) => {
+    const eventData: EventPropsForDetailPage[] = data[0].map((
+      event: EventPropsForDetailPage
+    ) => {
       return event
     })
     return eventData
