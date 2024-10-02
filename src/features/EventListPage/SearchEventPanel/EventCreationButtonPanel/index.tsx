@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { GoToEventMakePageButton } from "./GoToEventMakePageButton"
+import { EventCreationButton } from "./EventCreationButton"
 import { Popover } from "./Popover"
 
 export const EventCreationButtonPanel: FC = () => {
@@ -12,7 +12,7 @@ export const EventCreationButtonPanel: FC = () => {
         </p>
       }
     >
-      <GoToEventMakePageButton />
+      <EventCreationButton />
     </Popover>
   )
 }
