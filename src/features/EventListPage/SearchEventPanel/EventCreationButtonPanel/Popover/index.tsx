@@ -13,7 +13,7 @@ export const Popover: FC<Props> = ({ content, children }) => {
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
   const handleClick = () => {
-    if (supabase.auth.user() === null) setOpen(true)
+    if (supabase.auth.getUser() === null) setOpen(true)
     else setOpen(false)
   }
 
@@ -35,7 +35,11 @@ export const Popover: FC<Props> = ({ content, children }) => {
 
   return(
     <div className={styles.popoverContainer}>
-      <button className={styles.popoverTrigger} ref={buttonRef} onClick={handleClick}>
+      <button
+        className={styles.popoverTrigger}
+        ref={buttonRef}
+        onClick={handleClick}
+      >
         {children}
       </button>
       {open &&

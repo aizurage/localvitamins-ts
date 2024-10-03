@@ -2,13 +2,13 @@ import { FC, useEffect, useState } from "react"
 import dayjs from "dayjs"
 import { EventPropsForDetailPage } from "../../../states/"
 import { downloadEventData } from "../controller/downloadEventData"
-import { EventCard } from "./components/EventCard/view"
+import { EventCard } from "./EventCard"
 import styles from "./index.module.css"
 
 export const MainPanel: FC = () => {
-  const [ events, setEvents ] = useState<EventPropsForDetailPage[]>([])
+  const [events, setEvents] = useState<EventPropsForDetailPage[]>([])
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       await downloadEventData()
         .then((response) => {
           setEvents(response)
