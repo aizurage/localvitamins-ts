@@ -10,6 +10,7 @@ export interface Props {
     fieldname: string
     minRows: number
     register: UseFormRegister<FieldValues>
+    autoSize?: boolean
     icon?: ReactNode
 }
 
@@ -20,6 +21,7 @@ export const FormBaseTextarea: FC<Props> = ({
   fieldname,
   minRows,
   register,
+  autoSize,
   icon
 }) => {
   return(
@@ -30,6 +32,7 @@ export const FormBaseTextarea: FC<Props> = ({
       placeholder={placeholder}
       minRows={minRows}
       leftSection={icon}
+      autosize={autoSize}
       {...register(fieldname)}
     />
   )
