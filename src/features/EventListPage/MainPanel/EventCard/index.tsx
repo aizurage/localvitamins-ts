@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from "react"
 import { Dayjs } from "dayjs"
-import { supabase } from "../../../../supabaseClient"
+import { useAppSelector } from "../../../../app/hook"
 import { EventButtonPanel } from "./EventButtonPanel"
 import { EventImagePanel } from "./EventImagePanel"
 import { EventOwnerOptionPanel } from "./EventOwnerOptionPanel"
@@ -25,13 +25,14 @@ export const EventCard: FC<Props> = ({
   description,
   plannerUniqueId,
 }) => {
-  const [eventPictureObjectUrl, setEventPictureObjectUrl] = useState("")
+  const [ eventPictureObjectUrl, setEventPictureObjectUrl ] = useState("")
+  const user = useAppSelector(state => state.user.user)
   useEffect(() => {
-    ;(async () => {
+    (async () => {
       const fetchedObjectUrl = await downloadEventImage(eventPictureUrl)
       setEventPictureObjectUrl(fetchedObjectUrl)
     })()
-  }, [eventPictureUrl])
+  }, [ eventPictureUrl ])
 
   return (
     <div className={styles.card} key={eventId}>
@@ -48,7 +49,7 @@ export const EventCard: FC<Props> = ({
         open={() => {}}
       />
       <div>
-        {supabase.auth.getUser().id === plannerUniqueId && (
+        {user.id === plannerUniqueId && (
           <EventOwnerOptionPanel eventId={eventId} />
         )}
       </div>
