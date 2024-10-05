@@ -6,7 +6,9 @@ interface EventImagePanelProps {
     alt: string
 }
 
-export const EventImagePanel: FC<EventImagePanelProps> = ({ objectUrl, alt }) => {
+export const EventImagePanel: FC<EventImagePanelProps> = ({
+  objectUrl, alt
+}) => {
   return(
     <img
       src={objectUrl}

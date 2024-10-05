@@ -2,11 +2,15 @@ import { FC } from "react"
 import { Button } from "@mantine/core"
 import style from "./index.module.css"
 
-export const EventDeletionButton:FC = () => {
+interface Props {
+  onClick: () => void
+}
+
+export const EventDeletionButton: FC<Props> = ({ onClick }) => {
   return(
     <Button
       className={style.button}
-      onClick={() => setOpened(true)}
+      onClick={onClick}
     >
           消去
     </Button>

@@ -1,0 +1,11 @@
+.nameInput {
+    display: flex;
+    flex-direction: row;
+}
+
+.submitButton {
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    margin-top: 5rem;
+}
