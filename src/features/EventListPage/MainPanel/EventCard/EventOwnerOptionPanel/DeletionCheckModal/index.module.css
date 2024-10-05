@@ -1,0 +1,13 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10;
+}
+
+.executionButton {
+    background-color: red;
+}
+
+.cancelButton {
+    background-color: teal;
+}
