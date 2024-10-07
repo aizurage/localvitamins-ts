@@ -9,7 +9,11 @@ interface Props {
     register: UseFormRegister<FieldValues>
 }
 
-export const SearchInput: FC<Props> = ({ placeholder, fieldname, register }) => {
+export const SearchInput: FC<Props> = ({
+  placeholder,
+  fieldname,
+  register
+}) => {
   return(
     <TextInput
       className={styles.searchBar}

@@ -1,23 +1,25 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect } from "react"
 import dayjs from "dayjs"
-import { EventPropsForDetailPage } from "../../../states/"
+import { useAppDispatch, useAppSelector } from "../../../app/hook"
+import { setEventList } from "../../../app/slices/eventListSlice"
 import { downloadEventData } from "../controller/downloadEventData"
 import { EventCard } from "./EventCard"
 import styles from "./index.module.css"
 
 export const MainPanel: FC = () => {
-  const [ events, setEvents ] = useState<EventPropsForDetailPage[]>([])
+  const dispatch = useAppDispatch()
+  const events = useAppSelector(state => state.eventList).eventlist
   useEffect(() => {
     (async () => {
       await downloadEventData()
         .then((response) => {
-          setEvents(response)
+          dispatch(setEventList(response))
         })
         .catch((error) => {
           console.log(error)
         })
     })()
-  }, [])
+  }, [ dispatch ])
 
   return (
     <div className={styles.eventCards}>

@@ -1,7 +1,10 @@
+/* eslint-disable camelcase */
 import { EventPropsForDetailPage } from "../../../states"
 import { supabase } from "../../../supabaseClient"
 
-export const searchEvent = async (keywords: string[]): Promise<EventPropsForDetailPage[]> => {
+export const searchEvent = async (
+  keywords: string[]
+): Promise<EventPropsForDetailPage[]> => {
   try {
     const searchEventResults: EventPropsForDetailPage[] = []
     for (let i = 0; i < keywords.length; i++) {
