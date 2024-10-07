@@ -20,7 +20,7 @@ export const EventMakingPage: FC = () => {
     time,
     user
   } = useAppSelector(selectEventDetails)
-  const { register, handleSubmit, getValues } = useForm()
+  const { register, handleSubmit, getValues, setValue } = useForm()
   const [ active, setActive ] = useState(0)
   const navigate = useNavigate()
 
@@ -64,7 +64,7 @@ export const EventMakingPage: FC = () => {
             label="お手伝い情報入力"
             description="お手伝いの基本情報を入力してください。"
           >
-            <EventFormPanel register={register} />
+            <EventFormPanel register={register} setValue={setValue} />
           </Stepper.Step>
           <Stepper.Step
             label="お手伝い募集者情報入力"

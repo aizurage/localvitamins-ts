@@ -1,6 +1,7 @@
-import { FC } from "react"
+import { ChangeEvent, FC } from "react"
 import { useAppDispatch } from "../../../../app/hook"
-import { setEventRecruiterPicture } from "../../../../app/slices/eventRecruiterPictureSlice"
+import { setEventRecruiterPicture }
+  from "../../../../app/slices/eventRecruiterPictureSlice"
 import styles from "./index.module.css"
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 export const EventRecruiterPictureInput: FC<Props> = ({ disabled }) => {
   const dispatch = useAppDispatch()
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const picture = event.target.files?.[0]
     if (picture) dispatch(setEventRecruiterPicture(picture))
   }

@@ -1,7 +1,8 @@
 import { FC } from "react"
 import { useAppSelector } from "../../../../app/hook"
 import { DateTimeBlock } from "../../../../components/DateTimeBlock"
-import { HeadingDescriptionBlock } from "../../../../components/HeadingDescriptionBlock"
+import { HeadingDescriptionBlock }
+  from "../../../../components/HeadingDescriptionBlock"
 
 interface Props {
     event: {
@@ -20,7 +21,9 @@ interface Props {
 export const EventResultsPanel: FC<Props> = ({ event }) => {
   const date = useAppSelector(state => state.date)
   const time = useAppSelector(state => state.time)
-  const eventPictureObjectURL = useAppSelector(state => state.eventPicture.eventPictureObjectUrl)
+  const eventPictureObjectURL = useAppSelector(
+    state => state.eventPicture.eventPictureObjectUrl
+  )
 
   return(
     <div className='input_result'>

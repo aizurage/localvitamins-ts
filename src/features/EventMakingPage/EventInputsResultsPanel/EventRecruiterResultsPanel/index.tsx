@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { useAppSelector } from "../../../../app/hook"
-import { HeadingDescriptionBlock } from "../../../../components/HeadingDescriptionBlock"
+import { HeadingDescriptionBlock }
+  from "../../../../components/HeadingDescriptionBlock"
 import styles from "./index.module.css"
 
 interface Props {

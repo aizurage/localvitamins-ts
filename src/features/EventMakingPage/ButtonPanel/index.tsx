@@ -7,8 +7,12 @@ interface Props {
 }
 
 export const ButtonPanel: FC<Props> = ({ setActive }) => {
-  const nextStep = () => setActive(current => (current < 3 ? current + 1 : current))
-  const prevStep = () => setActive(current => (current > 0 ? current - 1 : current))
+  const nextStep = () => setActive(
+    current => (current < 3 ? current + 1 : current)
+  )
+  const prevStep = () => setActive(
+    current => (current > 0 ? current - 1 : current)
+  )
   return(
     <div className={styles.buttonPanel}>
       <Button className={styles.backButton} onClick={prevStep}>戻る</Button>

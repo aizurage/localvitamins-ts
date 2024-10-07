@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { ChangeEvent, FC } from "react"
 import { useAppDispatch } from "../../../../app/hook"
 import { setEventPicture } from "../../../../app/slices/eventPictureSlice"
 import styles from "./index.module.css"
@@ -9,7 +9,7 @@ interface Props {
 
 export const EventPictureInput: FC<Props> = ({ disabled }) => {
   const dispatch = useAppDispatch()
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const picture = event.target.files?.[0]
     if (picture) dispatch(setEventPicture(picture))
   }

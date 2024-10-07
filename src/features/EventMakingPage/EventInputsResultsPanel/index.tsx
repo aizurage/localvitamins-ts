@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { FC } from "react"
 import { UseFormGetValues, FieldValues } from "react-hook-form"
 import { EventRecruiterResultsPanel } from "./EventRecruiterResultsPanel"
@@ -37,7 +38,12 @@ export const EventInputsResultsPanel: FC<Props> = ({ getValues }) => {
   return(
     <>
       <h1>入力情報確認</h1>
-      <h3>入力した情報が表示されます。訂正がない場合は「次へ」ボタンを押してください。訂正事項がある場合は、お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。</h3>
+      <h3>
+        入力した情報が表示されます。
+        訂正がない場合は「次へ」ボタンを押してください。
+        訂正事項がある場合は、
+        お手伝い基本情報入力画面（ステップ１、ステップ２）に戻って訂正してください。
+      </h3>
       <EventResultsPanel event={event}/>
       <EventRecruiterResultsPanel recruiter={recruiter} />
     </>
