@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { Event, EventRecruiter } from "../../../states"
 import { supabase } from "../../../supabaseClient"
 
