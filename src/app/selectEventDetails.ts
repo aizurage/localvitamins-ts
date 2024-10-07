@@ -7,5 +7,6 @@ export const selectEventDetails = (state: RootState) => ({
         state.eventRecruiterPicture.eventRecruiterPictureUrl,
   date: state.date.date,
   time: state.time,
-  user: state.user.user
+  user: state.user.user,
+  eventList: state.eventList
 })
