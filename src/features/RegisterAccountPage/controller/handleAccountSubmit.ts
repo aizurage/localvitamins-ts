@@ -2,15 +2,19 @@ import { RegisteredAccount } from "../../../states/RegisteredAccount"
 import { supabase } from "../../../supabaseClient"
 
 
-export const handleAccountSubmit = async (values: RegisteredAccount): Promise<void> => {
+export const handleAccountSubmit = async (
+  values: RegisteredAccount
+): Promise<void> => {
   const { error } = await supabase.auth.signUp(
     {
       email: values.email,
       password: values.password,
-      data: {
-        username: values.username,
-        firstname: values.firstname,
-        familyname: values.familyname,
+      options: {
+        data: {
+          username: values.username,
+          firstname: values.firstname,
+          familyname: values.familyname,
+        }
       }
     }
   )
