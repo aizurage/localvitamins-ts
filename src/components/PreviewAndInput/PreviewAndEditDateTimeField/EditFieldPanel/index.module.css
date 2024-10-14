@@ -1,0 +1,12 @@
+.calendar {
+    margin-bottom: 10;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.cancelButton {
+    background-color: gray;
+}
