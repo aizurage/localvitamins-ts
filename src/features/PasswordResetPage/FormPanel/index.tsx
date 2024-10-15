@@ -7,7 +7,7 @@ import { handleNewPasswordSubmit } from "../controller/handleNewPasswordSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
 
@@ -21,20 +21,22 @@ export const FormPanel: FC = () => {
           パスワードの設定が完了したら、ログイン画面に自動で切り替わります。
           `
         )
-        navigate('/login')
-      }).catch(() => {
+        navigate("/login")
+      })
+      .catch(() => {
         alert(
           `
           パスワード再設定に失敗しました。
           お手伝い一覧画面のメニュー内にある、お問い合わせフォームにてご連絡ください。
           `
         )
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoading(false)
       })
   }
 
-  return(
+  return (
     <form onSubmit={handleSubmit(submit)}>
       <LoadingOverlay visible={loading} />
       <FormBaseInput
@@ -52,10 +54,10 @@ export const FormPanel: FC = () => {
         fieldname="conformedPassword"
       />
       <p className={styles.redChar}>
-            パスワードは忘れないようにメモし、大切に保管してください。
+        パスワードは忘れないようにメモし、大切に保管してください。
       </p>
       <Button className={styles.submitButton} type="submit">
-            提出する
+        提出する
       </Button>
     </form>
   )

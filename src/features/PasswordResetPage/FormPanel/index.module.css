@@ -1,9 +1,9 @@
 .submitButton {
-    justify-content: center;
-    align-items: center;
-    background-color: green;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
 }
 
 .redChar {
-    font-style: red;
+  font-style: red;
 }

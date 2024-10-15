@@ -4,7 +4,7 @@ import { LogoutConfirmationDialog } from "../../LogoutConfirmationDialog"
 import { MenuListItem } from "./MenuListItem"
 
 export const MenuList: FC = () => {
-  const [ dialogOpen, setDialogOpen ] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
   const navigate = useNavigate()
   return (
     <>
@@ -13,7 +13,7 @@ export const MenuList: FC = () => {
           <MenuListItem
             onClick={() => {
               navigate("/serviceTerms", {
-                state: { isAgreementNecessary: false }
+                state: { isAgreementNecessary: false },
               })
             }}
           >

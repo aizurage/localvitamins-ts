@@ -8,12 +8,12 @@ import { EventPictureInput } from "./EventPictureInput"
 import { EventSearchTagInput } from "./EventSearchTagInput"
 
 interface Props {
-    register: UseFormRegister<FieldValues>
-    setValue: UseFormSetValue<FieldValues>
+  register: UseFormRegister<FieldValues>
+  setValue: UseFormSetValue<FieldValues>
 }
 
 export const EventFormPanel: FC<Props> = ({ register, setValue }) => {
-  return(
+  return (
     <>
       <h1>お手伝い基本情報入力</h1>
       <FormBaseInput

@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react"
-import { HeadingDescriptionBlock } from
-  "../../../components/HeadingDescriptionBlock"
+import { HeadingDescriptionBlock } from "../../../components/HeadingDescriptionBlock"
 import { EventRecruiter } from "../../../states"
 import { downloadRecruiterImage } from "../controller/downloadRecruiterImage"
 import styles from "./index.module.css"
@@ -8,16 +7,15 @@ import styles from "./index.module.css"
 export const EventRecruiterPanel: FC<{ eventRecruiter: EventRecruiter }> = ({
   eventRecruiter,
 }) => {
-  const [ recruiterPictureObjectURL, setRecruiterPictureObjectURL ] =
-    useState("")
+  const [recruiterPictureObjectURL, setRecruiterPictureObjectURL] = useState("")
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const eventRecruiterPictureObjectUrl = await downloadRecruiterImage(
         eventRecruiter.imageUrl
       )
       setRecruiterPictureObjectURL(eventRecruiterPictureObjectUrl)
     })()
-  }, [ eventRecruiter.imageUrl ])
+  }, [eventRecruiter.imageUrl])
 
   return (
     <div className={styles.eventRecruiterPanelStyle}>

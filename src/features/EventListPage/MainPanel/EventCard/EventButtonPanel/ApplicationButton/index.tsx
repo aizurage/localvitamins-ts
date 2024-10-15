@@ -4,25 +4,25 @@ import dayjs, { Dayjs } from "dayjs"
 import styles from "./index.module.css"
 
 interface Props {
-    eventId: number
-    title: string
-    date: Dayjs
-    open: (eventId: number, title: string) => void
+  eventId: number
+  title: string
+  date: Dayjs
+  open: (eventId: number, title: string) => void
 }
 
 export const ApplicationButton: FC<Props> = ({
   eventId,
   title,
   date,
-  open
+  open,
 }) => {
-  return(
+  return (
     <Button
       className={styles.button}
       onClick={() => open(eventId, title)}
-      disabled={dayjs(new Date).isAfter( date )}
+      disabled={dayjs(new Date()).isAfter(date)}
     >
-            参加する
+      参加する
     </Button>
   )
 }

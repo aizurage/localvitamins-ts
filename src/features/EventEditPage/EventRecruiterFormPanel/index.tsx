@@ -1,11 +1,8 @@
 import { FC } from "react"
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form"
-import { PreviewAndEditField }
-  from "../../../components/PreviewAndInput/PreviewAndEditField"
-import { PreviewAndEditEventPictureField }
-  from "../../../components/PreviewAndInput/PreviewAndEditPictureField"
+import { PreviewAndEditField } from "../../../components/PreviewAndInput/PreviewAndEditField"
+import { PreviewAndEditEventPictureField } from "../../../components/PreviewAndInput/PreviewAndEditPictureField"
 import { EventRecruiter } from "../../../states"
-
 
 interface Props {
   eventRecruiter: EventRecruiter
@@ -16,7 +13,7 @@ interface Props {
 export const EventRecruiterFormPanel: FC<Props> = ({
   eventRecruiter,
   register,
-  setValue
+  setValue,
 }) => {
   const handlePictureChange = async () => {
     console.log("picture change")
@@ -26,7 +23,7 @@ export const EventRecruiterFormPanel: FC<Props> = ({
     console.log("cancel button click")
   }
 
-  return(
+  return (
     <>
       <h2>お手伝い募集者情報編集</h2>
       <PreviewAndEditField

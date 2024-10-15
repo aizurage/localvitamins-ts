@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface EventPictureState {
-    eventPictureUrl: string | null
-    eventPictureObjectUrl: string | null
-    eventPicture: File | null
+  eventPictureUrl: string | null
+  eventPictureObjectUrl: string | null
+  eventPicture: File | null
 }
 
 const initialState: EventPictureState = {
   eventPictureUrl: null,
   eventPictureObjectUrl: null,
-  eventPicture: null
+  eventPicture: null,
 }
 
 const eventPictureSlice = createSlice({
@@ -22,7 +22,7 @@ const eventPictureSlice = createSlice({
         throw new Error("You must select an image to upload.")
       }
       const file = picture.target.files[0]
-      const fileExt = file.name.split('.').pop()
+      const fileExt = file.name.split(".").pop()
       const filename = `${Math.random()}.${fileExt}`
       const filepath = `${filename}`
 
@@ -34,8 +34,8 @@ const eventPictureSlice = createSlice({
       state.eventPictureUrl = null
       state.eventPictureObjectUrl = null
       state.eventPicture = null
-    }
-  }
+    },
+  },
 })
 
 export const { setEventPicture, deleteEventPicture } = eventPictureSlice.actions

@@ -8,20 +8,19 @@ import { handleEmailSubmit } from "../controller/handleEmailSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
-  const [ submitted, setSubmitted ] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const { register, handleSubmit } = useForm()
 
   const submit = async (values: FieldValues) => {
     setSubmitted(true)
-    await handleEmailSubmit(values.email)
-      .catch(() => {
-        alert(
-          'メール送信に失敗しました。運営チーム (miraikuru0512@gmail.com) にお問い合わせください。',
-        )
-      })
+    await handleEmailSubmit(values.email).catch(() => {
+      alert(
+        "メール送信に失敗しました。運営チーム (miraikuru0512@gmail.com) にお問い合わせください。"
+      )
+    })
   }
 
-  return(
+  return (
     <>
       <form onSubmit={handleSubmit(submit)}>
         <p>アカウントに登録したメールアドレスを入力してください。</p>
@@ -34,7 +33,7 @@ export const FormPanel: FC = () => {
           icon={<At />}
         />
         <Button className={styles.submitButton} type="submit">
-                    送信する
+          送信する
         </Button>
       </form>
       {submitted && <WariningPanel />}

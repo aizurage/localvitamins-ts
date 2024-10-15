@@ -4,17 +4,17 @@ import { UseFormRegister, FieldValues } from "react-hook-form"
 import styles from "./index.module.css"
 
 interface Props {
-    placeholder: string
-    fieldname: string
-    register: UseFormRegister<FieldValues>
+  placeholder: string
+  fieldname: string
+  register: UseFormRegister<FieldValues>
 }
 
 export const SearchInput: FC<Props> = ({
   placeholder,
   fieldname,
-  register
+  register,
 }) => {
-  return(
+  return (
     <TextInput
       className={styles.searchBar}
       placeholder={placeholder}

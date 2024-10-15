@@ -5,8 +5,9 @@ export const deleteEventRecruiterPicture = async (
 ) => {
   const { error } = await supabase.storage
     .from("recruiter-images")
-    .remove([ recruiterPictureUrl ])
-  if(error) throw new Error(
-    "Deleting event recruiter picture from database storage in failed"
-  )
+    .remove([recruiterPictureUrl])
+  if (error)
+    throw new Error(
+      "Deleting event recruiter picture from database storage in failed"
+    )
 }

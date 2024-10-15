@@ -3,18 +3,18 @@ import { Button } from "@mantine/core"
 import styles from "./index.module.css"
 
 interface Props {
-    setOpen: (arg: boolean) => void
+  setOpen: (arg: boolean) => void
 }
 
 export const LogOutButton: FC<Props> = ({ setOpen }) => {
-  return(
+  return (
     <Button
       className={styles.button}
       onClick={() => {
         setOpen(true)
       }}
     >
-            ログアウト
+      ログアウト
     </Button>
   )
 }

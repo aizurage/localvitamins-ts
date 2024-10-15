@@ -1,11 +1,10 @@
 import { ChangeEvent, FC } from "react"
 import { useAppDispatch } from "../../../../app/hook"
-import { setEventRecruiterPicture }
-  from "../../../../app/slices/eventRecruiterPictureSlice"
+import { setEventRecruiterPicture } from "../../../../app/slices/eventRecruiterPictureSlice"
 import styles from "./index.module.css"
 
 interface Props {
-    disabled: boolean
+  disabled: boolean
 }
 
 export const EventRecruiterPictureInput: FC<Props> = ({ disabled }) => {
@@ -15,7 +14,7 @@ export const EventRecruiterPictureInput: FC<Props> = ({ disabled }) => {
     if (picture) dispatch(setEventRecruiterPicture(picture))
   }
 
-  return(
+  return (
     <>
       <h4>お手伝いイメージ画像の選択</h4>
       <input

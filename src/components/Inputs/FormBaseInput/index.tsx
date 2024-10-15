@@ -4,12 +4,12 @@ import { FieldValues, UseFormRegister } from "react-hook-form"
 import style from "./index.module.css"
 
 export interface FormBaseInputProps {
-    required: boolean
-    label?: string
-    placeholder: string
-    fieldname: string
-    register: UseFormRegister<FieldValues>
-    icon?: ReactNode
+  required: boolean
+  label?: string
+  placeholder: string
+  fieldname: string
+  register: UseFormRegister<FieldValues>
+  icon?: ReactNode
 }
 
 export const FormBaseInput: FC<FormBaseInputProps> = ({
@@ -18,9 +18,9 @@ export const FormBaseInput: FC<FormBaseInputProps> = ({
   placeholder,
   fieldname,
   register,
-  icon
+  icon,
 }) => {
-  return(
+  return (
     <TextInput
       className={style.FormBaseInputBasicStyle}
       required={required}

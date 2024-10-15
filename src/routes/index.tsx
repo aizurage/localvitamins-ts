@@ -4,8 +4,7 @@ import { EventDetailPage } from "../features/EventDetailPage"
 import { EventEditPage } from "../features/EventEditPage"
 import { EventListPage } from "../features/EventListPage"
 import { EventMakingPage } from "../features/EventMakingPage"
-import { EventParticipantsListPage }
-  from "../features/EventParticipantsListPage"
+import { EventParticipantsListPage } from "../features/EventParticipantsListPage"
 import { ServiceTermsPage } from "../features/ServiceTermsPage"
 
 const PAGES = [
@@ -37,15 +36,13 @@ const PAGES = [
 
 const createRoutes = (
   pages: readonly {
-        readonly path: string,
-        readonly element: ReactNode
-    }[]
+    readonly path: string
+    readonly element: ReactNode
+  }[]
 ) => {
-  return(
-    pages.map((page, i) => (
-      <Route key={i} path={page.path} element={page.element} />
-    ))
-  )
+  return pages.map((page, i) => (
+    <Route key={i} path={page.path} element={page.element} />
+  ))
 }
 
 export { PAGES, createRoutes }

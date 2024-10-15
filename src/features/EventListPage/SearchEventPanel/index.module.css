@@ -1,5 +1,5 @@
 .searchEventPanel {
-    display: flexbox;
-    flex-direction: row;
-    gap: 2vw;
+  display: flexbox;
+  flex-direction: row;
+  gap: 2vw;
 }

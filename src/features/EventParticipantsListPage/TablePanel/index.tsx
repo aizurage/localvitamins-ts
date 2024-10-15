@@ -6,10 +6,10 @@ import { TableBody } from "./TableBody"
 import { TableHeader } from "./TableHeader"
 
 export const TablePanel: FC<{ eventID: number }> = ({ eventID }) => {
-  const [ participants, setParticipants ] = useState<Participant[]>([])
+  const [participants, setParticipants] = useState<Participant[]>([])
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       try {
         const participants = await fetchParticipants(eventID)
         setParticipants(participants)
@@ -17,7 +17,7 @@ export const TablePanel: FC<{ eventID: number }> = ({ eventID }) => {
         console.error("Error fetching participants:", error)
       }
     })()
-  }, [ eventID ])
+  }, [eventID])
 
   return (
     <Table>

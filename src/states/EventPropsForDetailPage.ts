@@ -5,10 +5,10 @@ import { Dayjs } from "dayjs"
  * イベントの型にはたくさんのプロパティがあるため、過剰なプロパティ渡しを防ぐ
  */
 export interface EventPropsForDetailPage {
-    title: string
-    eventID: number
-    content: string
-    date: Dayjs
-    event_picture: string
-    planner_uniqueID: string
+  title: string
+  eventID: number
+  content: string
+  date: Dayjs
+  event_picture: string
+  planner_uniqueID: string
 }

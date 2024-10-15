@@ -5,8 +5,8 @@ import { Back2HomeButton } from "./Back2HomeButton"
 import { MenuList } from "./MenuList"
 
 interface Props {
-    open: boolean;
-    setOpen: (arg0: boolean) => void;
+  open: boolean
+  setOpen: (arg0: boolean) => void
 }
 
 export const Drawer: FC<Props> = ({ open, setOpen }) => {

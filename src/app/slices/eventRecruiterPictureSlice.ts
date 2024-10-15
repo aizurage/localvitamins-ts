@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface EventRecruiterPictureState {
-    eventRecruiterPictureUrl: string | null
-    eventRecruiterPictureObjectUrl: string | null
-    eventRecruiterPicture: File | null
+  eventRecruiterPictureUrl: string | null
+  eventRecruiterPictureObjectUrl: string | null
+  eventRecruiterPicture: File | null
 }
 
 const initialState: EventRecruiterPictureState = {
   eventRecruiterPictureUrl: null,
   eventRecruiterPictureObjectUrl: null,
-  eventRecruiterPicture: null
+  eventRecruiterPicture: null,
 }
 
 const eventRecruiterPictureSlice = createSlice({
@@ -22,7 +22,7 @@ const eventRecruiterPictureSlice = createSlice({
         throw new Error("You must select an image to upload.")
       }
       const file = picture.target.files[0]
-      const fileExt = file.name.split('.').pop()
+      const fileExt = file.name.split(".").pop()
       const filename = `${Math.random()}.${fileExt}`
       const filepath = `${filename}`
 
@@ -34,12 +34,10 @@ const eventRecruiterPictureSlice = createSlice({
       state.eventRecruiterPictureUrl = null
       state.eventRecruiterPictureObjectUrl = null
       state.eventRecruiterPicture = null
-    }
-  }
+    },
+  },
 })
 
-export const {
-  setEventRecruiterPicture,
-  deleteEventRecruiterPicture
-} = eventRecruiterPictureSlice.actions
+export const { setEventRecruiterPicture, deleteEventRecruiterPicture } =
+  eventRecruiterPictureSlice.actions
 export const eventRecruiterPictureReducer = eventRecruiterPictureSlice.reducer

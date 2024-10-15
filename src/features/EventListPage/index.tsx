@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import { MainPanel } from './MainPanel'
-import { SearchEventPanel } from './SearchEventPanel'
+import { FC } from "react"
+import { MainPanel } from "./MainPanel"
+import { SearchEventPanel } from "./SearchEventPanel"
 
 export const EventListPage: FC = () => {
   return (

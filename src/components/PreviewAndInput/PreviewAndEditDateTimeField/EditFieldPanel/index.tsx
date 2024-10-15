@@ -1,15 +1,15 @@
 import { FC } from "react"
 import { Button } from "@mantine/core"
-import { Calendar } from '@mantine/dates'
-import { useDispatch } from 'react-redux'
-import { setDate } from '../../../../app/slices/dateSlice'
+import { Calendar } from "@mantine/dates"
+import { useDispatch } from "react-redux"
+import { setDate } from "../../../../app/slices/dateSlice"
 import { EndTimeInputPanel } from "./EndTimeInputPanel"
 import { StartTimeInputPanel } from "./StartTimeInputPanel"
 import styles from "./index.module.css"
 
 export const EditFieldPanel: FC = () => {
   const dispatch = useDispatch()
-  return(
+  return (
     <>
       <Calendar
         className={styles.calendar}
@@ -22,7 +22,6 @@ export const EditFieldPanel: FC = () => {
         <Button
           className={styles.cancelButton}
           onClick={() => {
-
             // TODO: 処理の内容を書くこと
             console.log("キャンセル")
           }}
@@ -35,7 +34,6 @@ export const EditFieldPanel: FC = () => {
         <Button
           className={styles.cancelButton}
           onClick={() => {
-
             // TODO: 処理の内容を書くこと
             console.log("キャンセル")
           }}

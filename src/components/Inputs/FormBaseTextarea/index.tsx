@@ -4,14 +4,14 @@ import { FieldValues, UseFormRegister } from "react-hook-form"
 import styles from "./index.module.css"
 
 export interface Props {
-    required: boolean
-    label?: string
-    placeholder: string
-    fieldname: string
-    minRows: number
-    register: UseFormRegister<FieldValues>
-    autoSize?: boolean
-    icon?: ReactNode
+  required: boolean
+  label?: string
+  placeholder: string
+  fieldname: string
+  minRows: number
+  register: UseFormRegister<FieldValues>
+  autoSize?: boolean
+  icon?: ReactNode
 }
 
 export const FormBaseTextarea: FC<Props> = ({
@@ -22,9 +22,9 @@ export const FormBaseTextarea: FC<Props> = ({
   minRows,
   register,
   autoSize,
-  icon
+  icon,
 }) => {
-  return(
+  return (
     <Textarea
       className={styles.textarea}
       required={required}

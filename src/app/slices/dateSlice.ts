@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface DateState {
-    date: string
+  date: string
 }
 
 const initialState: DateState = {
-  date: ""
+  date: "",
 }
 
 const dateSlice = createSlice({
@@ -14,8 +14,8 @@ const dateSlice = createSlice({
   reducers: {
     setDate: (state, action: PayloadAction<string>) => {
       state.date = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setDate } = dateSlice.actions

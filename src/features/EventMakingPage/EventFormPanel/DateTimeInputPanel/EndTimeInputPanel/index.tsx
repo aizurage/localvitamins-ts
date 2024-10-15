@@ -13,7 +13,7 @@ export const EndTimeInputPanel: FC = () => {
     dispatch(setEndMinute(arg))
   }
 
-  return(
+  return (
     <>
       <h4>終了時刻</h4>
       <TimeInputPanel

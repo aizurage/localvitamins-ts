@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 export interface UserState {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    user: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any
 }
 
 const initialState: UserState = {
-  user: null
+  user: null,
 }
 
 const userSlice = createSlice({
@@ -18,8 +18,8 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.user = null
-    }
-  }
+    },
+  },
 })
 
 export const { login, logout } = userSlice.actions

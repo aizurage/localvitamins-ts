@@ -25,14 +25,14 @@ export const EventCard: FC<Props> = ({
   description,
   plannerUniqueId,
 }) => {
-  const [ eventPictureObjectUrl, setEventPictureObjectUrl ] = useState("")
-  const user = useAppSelector(state => state.user.user)
+  const [eventPictureObjectUrl, setEventPictureObjectUrl] = useState("")
+  const user = useAppSelector((state) => state.user.user)
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const fetchedObjectUrl = await downloadEventImage(eventPictureUrl)
       setEventPictureObjectUrl(fetchedObjectUrl)
     })()
-  }, [ eventPictureUrl ])
+  }, [eventPictureUrl])
 
   return (
     <div className={styles.card} key={eventId}>

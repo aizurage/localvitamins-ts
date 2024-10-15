@@ -1,5 +1,5 @@
 export const TableHeader = () => {
-  return(
+  return (
     <thead>
       <tr>
         <th>イベントID</th>

@@ -6,8 +6,8 @@ import { logout as supabaseLogout } from "../controller/logout"
 import styles from "./index.module.css"
 
 interface Props {
-    open: boolean
-    setOpen: (arg: boolean) => void
+  open: boolean
+  setOpen: (arg: boolean) => void
 }
 
 export const LogoutConfirmationDialog: FC<Props> = ({ open, setOpen }) => {
@@ -30,7 +30,7 @@ export const LogoutConfirmationDialog: FC<Props> = ({ open, setOpen }) => {
       })
   }
 
-  return(
+  return (
     <Dialog
       opened={open}
       onClose={() => {
@@ -46,7 +46,7 @@ export const LogoutConfirmationDialog: FC<Props> = ({ open, setOpen }) => {
             setOpen(false)
           }}
         >
-                    はい
+          はい
         </Button>
         <Button
           className={styles.noButton}
@@ -54,7 +54,7 @@ export const LogoutConfirmationDialog: FC<Props> = ({ open, setOpen }) => {
             setOpen(false)
           }}
         >
-                    いいえ
+          いいえ
         </Button>
       </div>
     </Dialog>

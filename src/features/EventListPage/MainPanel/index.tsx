@@ -8,9 +8,9 @@ import styles from "./index.module.css"
 
 export const MainPanel: FC = () => {
   const dispatch = useAppDispatch()
-  const events = useAppSelector(state => state.eventList).eventlist
+  const events = useAppSelector((state) => state.eventList).eventlist
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       await downloadEventData()
         .then((response) => {
           dispatch(setEventList(response))
@@ -19,7 +19,7 @@ export const MainPanel: FC = () => {
           console.log(error)
         })
     })()
-  }, [ dispatch ])
+  }, [dispatch])
 
   return (
     <div className={styles.eventCards}>

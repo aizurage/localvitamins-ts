@@ -1,7 +1,9 @@
 import { FC } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../../app/hook"
-import { setStartHour, setStartMinute }
-  from "../../../../../app/slices/timeSlice"
+import {
+  setStartHour,
+  setStartMinute,
+} from "../../../../../app/slices/timeSlice"
 import { TimeInputPanel } from "../TimeInputPanel"
 
 export const StartTimeInputPanel: FC = () => {
@@ -14,7 +16,7 @@ export const StartTimeInputPanel: FC = () => {
     dispatch(setStartMinute(arg))
   }
 
-  return(
+  return (
     <>
       <h4>開始時刻</h4>
       <TimeInputPanel

@@ -12,12 +12,13 @@ export default function Contact() {
   const submit = async (values: FieldValues) => {
     const contactFormValues: ContactForm = {
       title: values.title,
-      main: values.main
+      main: values.main,
     }
     await submitContactForm(contactFormValues)
       .then(() => {
         alert("フォームの送信に成功しました。このタブを閉じてください。")
-      }).catch (() => {
+      })
+      .catch(() => {
         alert(
           "フォームの送信に失敗しました。運営チーム (miraikuru0512@gmail.com) に直接メールにてお問い合わせください。"
         )

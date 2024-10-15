@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import { Center } from '@mantine/core'
-import { FormPanel } from './FormPanel'
+import { FC } from "react"
+import { Center } from "@mantine/core"
+import { FormPanel } from "./FormPanel"
 
 export const RegisterAccountPage: FC = () => {
   return (

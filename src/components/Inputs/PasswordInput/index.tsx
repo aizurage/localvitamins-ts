@@ -4,7 +4,7 @@ import { FormBaseInputProps } from "../FormBaseInput"
 import styles from "./index.module.css"
 
 interface PasswordInputProps extends FormBaseInputProps {
-    description: string
+  description: string
 }
 
 export const PasswordInput: FC<PasswordInputProps> = ({
@@ -13,9 +13,9 @@ export const PasswordInput: FC<PasswordInputProps> = ({
   placeholder,
   fieldname,
   register,
-  description
+  description,
 }) => {
-  return(
+  return (
     <MantinePasswordInput
       className={styles.PasswordInputStyle}
       required={required}

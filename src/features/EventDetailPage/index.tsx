@@ -1,37 +1,37 @@
-import { useState, useEffect, FC } from 'react'
-import { useParams } from 'react-router-dom'
-import { Container } from '@mantine/core'
-import { Event, EventRecruiter } from '../../states'
-import { EventPanel } from './EventPanel'
-import { EventRecruiterPanel } from './EventRecruiterPanel'
-import { downloadEventData } from './controller/downloadEventData'
+import { useState, useEffect, FC } from "react"
+import { useParams } from "react-router-dom"
+import { Container } from "@mantine/core"
+import { Event, EventRecruiter } from "../../states"
+import { EventPanel } from "./EventPanel"
+import { EventRecruiterPanel } from "./EventRecruiterPanel"
+import { downloadEventData } from "./controller/downloadEventData"
 
 export const EventDetailPage: FC = () => {
   const params = useParams()
-  const [ event, setEvent ] = useState<Event>()
-  const [ eventRecruiter, setEventRecruiter ] = useState<EventRecruiter>()
+  const [event, setEvent] = useState<Event>()
+  const [eventRecruiter, setEventRecruiter] = useState<EventRecruiter>()
 
   useEffect(() => {
-    (async() => {
+    ;(async () => {
       await downloadEventData(Number(params.eventNumber))
         .then((response) => {
           setEvent(response.event)
           setEventRecruiter(response.eventRecruiter)
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error)
         })
     })()
-  }, [ params.eventNumber ])
+  }, [params.eventNumber])
 
   return (
     <Container>
       {event ? <EventPanel event={event} /> : <p>Loading event...</p>}
-      {
-        eventRecruiter ?
-          <EventRecruiterPanel eventRecruiter={eventRecruiter} /> :
-          <p>Loading recruiter...</p>
-      }
+      {eventRecruiter ? (
+        <EventRecruiterPanel eventRecruiter={eventRecruiter} />
+      ) : (
+        <p>Loading recruiter...</p>
+      )}
     </Container>
   )
 }

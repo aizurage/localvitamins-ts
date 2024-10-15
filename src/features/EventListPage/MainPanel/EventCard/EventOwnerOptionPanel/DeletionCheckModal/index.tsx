@@ -12,13 +12,14 @@ interface Props {
 export const DeletionCheckModal: FC<Props> = ({
   opened,
   setOpened,
-  eventId
+  eventId,
 }) => {
   const handleClickEventDeletionButton = async () => {
     await deleteEvent(eventId)
       .then(() => {
         alert("お手伝いの削除に成功しました")
-      }).catch(() => {
+      })
+      .catch(() => {
         alert(
           `
             イベントのデータ消去に失敗しました。
@@ -29,7 +30,7 @@ export const DeletionCheckModal: FC<Props> = ({
       })
   }
 
-  return(
+  return (
     <Modal
       opened={opened}
       onClose={() => setOpened(false)}
@@ -45,13 +46,13 @@ export const DeletionCheckModal: FC<Props> = ({
             setOpened(false)
           }}
         >
-                  消去する
+          消去する
         </Button>
         <Button
           className={styles.cancelButton}
           onClick={() => setOpened(false)}
         >
-                  キャンセル
+          キャンセル
         </Button>
       </div>
     </Modal>

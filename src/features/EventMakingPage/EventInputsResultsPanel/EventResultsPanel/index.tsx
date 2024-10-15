@@ -1,38 +1,38 @@
 import { FC } from "react"
 import { useAppSelector } from "../../../../app/hook"
 import { DateTimeBlock } from "../../../../components/DateTimeBlock"
-import { HeadingDescriptionBlock }
-  from "../../../../components/HeadingDescriptionBlock"
+import { HeadingDescriptionBlock } from "../../../../components/HeadingDescriptionBlock"
 
 interface Props {
-    event: {
-        title: string
-        region: string
-        target: string
-        content: string
-        belongings: string
-        clothes: string
-        reward: string
-        site: string
-        inquiry: string
-    }
+  event: {
+    title: string
+    region: string
+    target: string
+    content: string
+    belongings: string
+    clothes: string
+    reward: string
+    site: string
+    inquiry: string
+  }
 }
 
 export const EventResultsPanel: FC<Props> = ({ event }) => {
-  const date = useAppSelector(state => state.date)
-  const time = useAppSelector(state => state.time)
+  const date = useAppSelector((state) => state.date)
+  const time = useAppSelector((state) => state.time)
   const eventPictureObjectURL = useAppSelector(
-    state => state.eventPicture.eventPictureObjectUrl
+    (state) => state.eventPicture.eventPictureObjectUrl
   )
 
-  return(
-    <div className='input_result'>
-      <img src={eventPictureObjectURL ?? ""} alt="お手伝いのイメージ画像" width={400}/>
-      <h1>{event.title}</h1>
-      <HeadingDescriptionBlock
-        heading="開催場所"
-        description={event.region}
+  return (
+    <div className="input_result">
+      <img
+        src={eventPictureObjectURL ?? ""}
+        alt="お手伝いのイメージ画像"
+        width={400}
       />
+      <h1>{event.title}</h1>
+      <HeadingDescriptionBlock heading="開催場所" description={event.region} />
       <DateTimeBlock
         heading="開催日時"
         date={date.date}
@@ -51,18 +51,9 @@ export const EventResultsPanel: FC<Props> = ({ event }) => {
         heading="持ち物"
         description={event.belongings}
       />
-      <HeadingDescriptionBlock
-        heading="服装"
-        description={event.clothes}
-      />
-      <HeadingDescriptionBlock
-        heading="お礼"
-        description={event.reward}
-      />
-      <HeadingDescriptionBlock
-        heading="集合場所"
-        description={event.site}
-      />
+      <HeadingDescriptionBlock heading="服装" description={event.clothes} />
+      <HeadingDescriptionBlock heading="お礼" description={event.reward} />
+      <HeadingDescriptionBlock heading="集合場所" description={event.site} />
       <HeadingDescriptionBlock
         heading="お問い合わせ先"
         description={event.inquiry}

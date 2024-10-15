@@ -2,8 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit"
 import { dateReducer } from "./slices/dateSlice"
 import { eventListReducer } from "./slices/eventListSlice"
 import { eventPictureReducer } from "./slices/eventPictureSlice"
-import { eventRecruiterPictureReducer }
-  from "./slices/eventRecruiterPictureSlice"
+import { eventRecruiterPictureReducer } from "./slices/eventRecruiterPictureSlice"
 import { timeReducer } from "./slices/timeSlice"
 import { userReducer } from "./slices/userSlice"
 
@@ -13,7 +12,7 @@ const rootReducer = combineReducers({
   time: timeReducer,
   eventPicture: eventPictureReducer,
   eventRecruiterPicture: eventRecruiterPictureReducer,
-  eventList: eventListReducer
+  eventList: eventListReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

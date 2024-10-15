@@ -4,21 +4,16 @@ import { ApplicationButton } from "./ApplicationButton"
 import { TransitionToDetailPageButton } from "./TransitionToDetailPageButton"
 
 interface Props {
-    eventId: number
-    title: string
-    date: Dayjs
-    open: (eventId: number, title: string) => void
+  eventId: number
+  title: string
+  date: Dayjs
+  open: (eventId: number, title: string) => void
 }
 
-export const EventButtonPanel: FC<Props> = ({
-  eventId,
-  title,
-  date,
-  open
-}) => {
-  return(
+export const EventButtonPanel: FC<Props> = ({ eventId, title, date, open }) => {
+  return (
     <div>
-      <TransitionToDetailPageButton eventId={eventId}/>
+      <TransitionToDetailPageButton eventId={eventId} />
       <ApplicationButton
         eventId={eventId}
         title={title}

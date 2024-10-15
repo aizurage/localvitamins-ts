@@ -1,53 +1,53 @@
-h3.warning{
-    color: red;
+h3.warning {
+  color: red;
 }
 
-form.editform{
-    display: flex;
-    width: 1500px;
+form.editform {
+  display: flex;
+  width: 1500px;
 }
 
-.form_body{
-    width: 50%;
+.form_body {
+  width: 50%;
 }
 
-.recruiter_space{
-    position: relative;
-    width: 30%;
+.recruiter_space {
+  position: relative;
+  width: 30%;
 }
 
-.recruiter{
-    background-color:mistyrose;
-    position: absolute;
-    width: 100%;
-    top: 135px;
+.recruiter {
+  background-color: mistyrose;
+  position: absolute;
+  width: 100%;
+  top: 135px;
 }
 
-.right_side{
-    right: 10;
-    width: 20%;
+.right_side {
+  right: 10;
+  width: 20%;
 }
 
-.tracking_option{
-    background-color: rgb(204, 238, 11);
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0px;
-    left: 100px;
-    height: 300px;
-    border-radius: 40%;
+.tracking_option {
+  background-color: rgb(204, 238, 11);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  left: 100px;
+  height: 300px;
+  border-radius: 40%;
 }
 
-.tracking_option p{
-    text-align: center;/*左右中央*/
+.tracking_option p {
+  text-align: center; /*左右中央*/
 }
 
-.submit{
-    left: 10%;
-    width: 80%;
+.submit {
+  left: 10%;
+  width: 80%;
 }
 
-.reset{
-    left: 10%;
-    width: 80%;
+.reset {
+  left: 10%;
+  width: 80%;
 }

@@ -2,13 +2,17 @@
 import { Event, EventRecruiter } from "../../../states"
 import { supabase } from "../../../supabaseClient"
 
-export const downloadEventData = async (eventID: number): Promise<{
-    event: Event,
-    eventRecruiter: EventRecruiter
+export const downloadEventData = async (
+  eventID: number
+): Promise<{
+  event: Event
+  eventRecruiter: EventRecruiter
 }> => {
   try {
     const { data, error } = await supabase
-      .from('EventTable').select().eq("id", eventID)
+      .from("EventTable")
+      .select()
+      .eq("id", eventID)
     if (error) throw new Error("Fetching whole event data in failed!")
     const {
       recruiter_name,
@@ -21,14 +25,14 @@ export const downloadEventData = async (eventID: number): Promise<{
       name: recruiter_name,
       introduction: recruiter_introduction,
       imageUrl: recruiter_picture,
-      comment: recruiter_comment
+      comment: recruiter_comment,
     }
     return {
       event: eventData as Event,
-      eventRecruiter: eventRecruiterData
+      eventRecruiter: eventRecruiterData,
     }
   } catch (error) {
-    console.log('Error fetching event data')
+    console.log("Error fetching event data")
     alert(
       `
             イベントのダウンロードに失敗しました。
@@ -37,7 +41,7 @@ export const downloadEventData = async (eventID: number): Promise<{
     )
     return {
       event: {} as Event,
-      eventRecruiter: {} as EventRecruiter
+      eventRecruiter: {} as EventRecruiter,
     }
   }
 }

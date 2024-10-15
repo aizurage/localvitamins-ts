@@ -12,7 +12,7 @@ import { handleLoginDataSubmit } from "../controller/handleLoginDataSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -21,13 +21,14 @@ export const FormPanel: FC = () => {
     setLoading(true)
     const loginData: LoginData = {
       email: values.email,
-      password: values.password
+      password: values.password,
     }
     await handleLoginDataSubmit(loginData)
       .then((response) => {
         dispatch(login(response))
         navigate("/")
-      }).catch(() => {
+      })
+      .catch(() => {
         alert(
           `
           ログイン処理に失敗しました。
@@ -36,12 +37,13 @@ export const FormPanel: FC = () => {
           運営チームmiraikuru0512@gmail.comまでお問い合わせください。
           `
         )
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoading(false)
       })
   }
 
-  return(
+  return (
     <form onSubmit={handleSubmit(submit)}>
       <LoadingOverlay visible={loading} />
       <FormBaseInput

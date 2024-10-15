@@ -2,9 +2,9 @@ import { FC } from "react"
 import { Participant } from "../../../../../states/"
 
 export const TableBodyItem: FC<{ participant: Participant }> = ({
-  participant
+  participant,
 }) => {
-  return(
+  return (
     <tr key={participant.id}>
       <td>{participant.eventID}</td>
       <td>{participant.eventTitle}</td>

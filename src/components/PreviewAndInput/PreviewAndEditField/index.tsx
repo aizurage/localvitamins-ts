@@ -4,13 +4,13 @@ import { EditFieldPanel } from "./EditFieldPanel"
 import { PreviewPanel } from "./PreviewPanel"
 
 interface Props {
-    title: string
-    content: string
-    placeholder: string
-    fieldname: string
-    register: UseFormRegister<FieldValues>
-    setValue: UseFormSetValue<FieldValues>
-    icon?: ReactNode
+  title: string
+  content: string
+  placeholder: string
+  fieldname: string
+  register: UseFormRegister<FieldValues>
+  setValue: UseFormSetValue<FieldValues>
+  icon?: ReactNode
 }
 
 export const PreviewAndEditField: FC<Props> = ({
@@ -20,9 +20,9 @@ export const PreviewAndEditField: FC<Props> = ({
   fieldname,
   register,
   setValue,
-  icon
+  icon,
 }) => {
-  return(
+  return (
     <>
       <PreviewPanel title={title} content={content} />
       <EditFieldPanel

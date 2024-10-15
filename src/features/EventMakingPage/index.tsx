@@ -1,27 +1,22 @@
-import { FC, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Container, Stepper } from '@mantine/core'
-import dayjs from 'dayjs'
-import { useForm } from 'react-hook-form'
-import { useAppSelector } from '../../app/hook'
-import { selectEventDetails } from '../../app/selectEventDetails'
-import { ButtonPanel } from './ButtonPanel'
-import { EventFormPanel } from './EventFormPanel'
-import { EventInputsResultsPanel } from './EventInputsResultsPanel'
-import { EventMakingCompletionPanel } from './EventMakingCompletionPanel'
-import { EventRecruiterFormPanel } from './EventRecruiterFormPanel'
-import { handleEventInfoSubmit } from './controller/handleEventInfoSubmit'
+import { FC, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Container, Stepper } from "@mantine/core"
+import dayjs from "dayjs"
+import { useForm } from "react-hook-form"
+import { useAppSelector } from "../../app/hook"
+import { selectEventDetails } from "../../app/selectEventDetails"
+import { ButtonPanel } from "./ButtonPanel"
+import { EventFormPanel } from "./EventFormPanel"
+import { EventInputsResultsPanel } from "./EventInputsResultsPanel"
+import { EventMakingCompletionPanel } from "./EventMakingCompletionPanel"
+import { EventRecruiterFormPanel } from "./EventRecruiterFormPanel"
+import { handleEventInfoSubmit } from "./controller/handleEventInfoSubmit"
 
 export const EventMakingPage: FC = () => {
-  const {
-    eventPictureUrl,
-    eventRecruiterPictureUrl,
-    date,
-    time,
-    user
-  } = useAppSelector(selectEventDetails)
+  const { eventPictureUrl, eventRecruiterPictureUrl, date, time, user } =
+    useAppSelector(selectEventDetails)
   const { register, handleSubmit, getValues, setValue } = useForm()
-  const [ active, setActive ] = useState(0)
+  const [active, setActive] = useState(0)
   const navigate = useNavigate()
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,7 +32,7 @@ export const EventMakingPage: FC = () => {
       belongings: values.belongings,
       clothes: values.clothes,
       event_picture: eventPictureUrl,
-      date: dayjs(date).format('YYYY-MM-DD'),
+      date: dayjs(date).format("YYYY-MM-DD"),
       start_time: `${time.start.hour}:${time.start.minute}:00`,
       end_time: `${time.end.hour}:${time.end.minute}:00`,
       planner_uniqueID: user.id,
@@ -54,7 +49,7 @@ export const EventMakingPage: FC = () => {
       .catch(() => alert("イベントを登録できませんでした。"))
   }
 
-  return(
+  return (
     <Container>
       <h1>お手伝い新規作成</h1>
       <ButtonPanel setActive={setActive} />

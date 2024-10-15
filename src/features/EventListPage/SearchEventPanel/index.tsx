@@ -11,26 +11,27 @@ import styles from "./index.module.css"
 
 export const SearchEventPanel = () => {
   const dispatch = useAppDispatch()
-  const [ isEventFilterd, setIsEventFilterd ] = useState(false)
-  const user = useAppSelector(state => state.user.user)
-  return(
+  const [isEventFilterd, setIsEventFilterd] = useState(false)
+  const user = useAppSelector((state) => state.user.user)
+  return (
     <div className={styles.SearchEventPanel}>
       <SearchBar />
       <div>
-        {
-          isEventFilterd ?
-            <UnfilteringEventButton
-              onClick={() => {
-                setIsEventFilterd(false)
-                dispatch(setEventList(downloadEventData()))
-              }}/> :
-            <FilteringOwnersEventButton
-              onClick={() => {
-                setIsEventFilterd(true)
-                dispatch(setEventList(downloadUserEventData(user.id)))
-              }}
-            />
-        }
+        {isEventFilterd ? (
+          <UnfilteringEventButton
+            onClick={() => {
+              setIsEventFilterd(false)
+              dispatch(setEventList(downloadEventData()))
+            }}
+          />
+        ) : (
+          <FilteringOwnersEventButton
+            onClick={() => {
+              setIsEventFilterd(true)
+              dispatch(setEventList(downloadUserEventData(user.id)))
+            }}
+          />
+        )}
       </div>
       <EventCreationButtonPanel />
     </div>

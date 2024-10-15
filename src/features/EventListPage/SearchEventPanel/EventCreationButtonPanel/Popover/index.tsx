@@ -3,12 +3,12 @@ import { supabase } from "../../../../../supabaseClient"
 import styles from "./index.module.css"
 
 interface Props {
-    content: ReactNode
-    children: ReactNode
+  content: ReactNode
+  children: ReactNode
 }
 
 export const Popover: FC<Props> = ({ content, children }) => {
-  const [ open, setOpen ] = useState(false)
+  const [open, setOpen] = useState(false)
   const popoverRef = useRef<HTMLDivElement | null>(null)
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -18,22 +18,22 @@ export const Popover: FC<Props> = ({ content, children }) => {
   }
 
   const handleClickOutside = (event: MouseEvent) => {
-    if(
+    if (
       popoverRef.current &&
-            !popoverRef.current.contains(event.target as Node) &&
-            !buttonRef.current?.contains(event.target as Node)
+      !popoverRef.current.contains(event.target as Node) &&
+      !buttonRef.current?.contains(event.target as Node)
     )
       setOpen(false)
   }
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside)
-    return() => {
+    return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
   }, [])
 
-  return(
+  return (
     <div className={styles.popoverContainer}>
       <button
         className={styles.popoverTrigger}
@@ -42,11 +42,11 @@ export const Popover: FC<Props> = ({ content, children }) => {
       >
         {children}
       </button>
-      {open &&
-                <div className={styles.popoverContent} ref={popoverRef}>
-                  {content}
-                </div>
-      }
+      {open && (
+        <div className={styles.popoverContent} ref={popoverRef}>
+          {content}
+        </div>
+      )}
     </div>
   )
 }

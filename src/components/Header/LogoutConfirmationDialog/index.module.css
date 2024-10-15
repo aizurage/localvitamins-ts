@@ -1,15 +1,15 @@
 .dialog {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: "10%";
-    left: "80%";
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: "10%";
+  left: "80%";
 }
 
 .yesButton {
-    background-color: red;
+  background-color: red;
 }
 
 .noButton {
-    background-color: blue;
+  background-color: blue;
 }

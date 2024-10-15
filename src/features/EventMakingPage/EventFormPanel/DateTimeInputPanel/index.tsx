@@ -1,7 +1,7 @@
 import { FC } from "react"
-import { Calendar } from '@mantine/dates'
-import { useDispatch } from 'react-redux'
-import { setDate } from '../../../../app/slices/dateSlice'
+import { Calendar } from "@mantine/dates"
+import { useDispatch } from "react-redux"
+import { setDate } from "../../../../app/slices/dateSlice"
 import { EndTimeInputPanel } from "./EndTimeInputPanel"
 import { StartTimeInputPanel } from "./StartTimeInputPanel"
 import styles from "./index.module.css"
@@ -9,7 +9,7 @@ import styles from "./index.module.css"
 export const DateTimeInputPanel: FC = () => {
   const dispatch = useDispatch()
 
-  return(
+  return (
     <>
       <h4>日時</h4>
       <Calendar

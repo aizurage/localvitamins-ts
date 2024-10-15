@@ -3,8 +3,7 @@ import { Button, Modal } from "@mantine/core"
 import { FieldValues, useForm } from "react-hook-form"
 import { At } from "tabler-icons-react"
 import { FormBaseInput } from "../../../../../components/Inputs/FormBaseInput"
-import { FormBaseTextarea }
-  from "../../../../../components/Inputs/FormBaseTextarea"
+import { FormBaseTextarea } from "../../../../../components/Inputs/FormBaseTextarea"
 import { Event, EventApplicationForm } from "../../../../../states"
 import { sendEventApplication } from "../controller/sendEventApplication"
 import styles from "./index.module.css"
@@ -28,12 +27,13 @@ export const EventApplicationModal: FC<Props> = ({
       firstName: values.firstName,
       familyName: values.familyName,
       email: values.email,
-      question: values.question
+      question: values.question,
     }
     await sendEventApplication(formValue)
       .then(() => {
-        alert('参加申請が完了しました。このタブを閉じてください。')
-      }).catch(() => {
+        alert("参加申請が完了しました。このタブを閉じてください。")
+      })
+      .catch(() => {
         alert(
           `
             参加申請処理に失敗しました。

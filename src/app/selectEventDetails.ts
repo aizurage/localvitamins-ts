@@ -4,9 +4,9 @@ import { RootState } from "./rootReducer"
 export const selectEventDetails = (state: RootState) => ({
   eventPictureUrl: state.eventPicture.eventPictureUrl,
   eventRecruiterPictureUrl:
-        state.eventRecruiterPicture.eventRecruiterPictureUrl,
+    state.eventRecruiterPicture.eventRecruiterPictureUrl,
   date: state.date.date,
   time: state.time,
   user: state.user.user,
-  eventList: state.eventList
+  eventList: state.eventList,
 })

@@ -7,12 +7,9 @@ interface Props {
 }
 
 export const EventDeletionButton: FC<Props> = ({ onClick }) => {
-  return(
-    <Button
-      className={style.button}
-      onClick={onClick}
-    >
-          消去
+  return (
+    <Button className={style.button} onClick={onClick}>
+      消去
     </Button>
   )
 }

@@ -8,18 +8,11 @@ interface Props {
 }
 
 export const EditPicturePanel: FC<Props> = ({ onChange, onClick }) => {
-  return(
+  return (
     <div className={styles.field}>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={onChange}
-      />
-      <Button
-        className={styles.cancelButton}
-        onClick={onClick}
-      >
-              キャンセル
+      <input type="file" accept="image/*" onChange={onChange} />
+      <Button className={styles.cancelButton} onClick={onClick}>
+        キャンセル
       </Button>
     </div>
   )

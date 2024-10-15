@@ -8,12 +8,12 @@ interface Props {
   end: string
 }
 
-export const PreviewAndEditDateTimeField:FC<Props> = ({
+export const PreviewAndEditDateTimeField: FC<Props> = ({
   date,
   start,
-  end
+  end,
 }) => {
-  return(
+  return (
     <>
       <PreviewPanel date={date} start={start} end={end} />
       <EditFieldPanel />

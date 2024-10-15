@@ -8,7 +8,7 @@ import { handleAccountSubmit } from "../controller/handleAccountSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { register, handleSubmit } = useForm()
 
   const submit = async (data: FieldValues) => {
@@ -40,12 +40,13 @@ export const FormPanel: FC = () => {
             miraikuru0512@gmail.comにお問い合わせください。
           `
         )
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoading(false)
       })
   }
 
-  return(
+  return (
     <form onSubmit={handleSubmit(submit)}>
       <LoadingOverlay visible={loading} />
       <FormBaseInput
@@ -85,7 +86,7 @@ export const FormPanel: FC = () => {
         register={register}
       />
       <Button className={styles.submitButton} type="submit">
-                登録する
+        登録する
       </Button>
     </form>
   )

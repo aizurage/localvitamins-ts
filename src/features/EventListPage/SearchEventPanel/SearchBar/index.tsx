@@ -16,16 +16,11 @@ export const SearchBar: FC = () => {
     dispatch(setEventList(events))
   }
 
-  return(
+  return (
     <>
       <p>キーワードは最大３つまで入力できます。</p>
-      <p>
-        複数のキーワードで検索をかけるときは、スペースで区切ってください。
-      </p>
-      <form
-        className={styles.searchForm}
-        onSubmit={handleSubmit(submit)}
-      >
+      <p>複数のキーワードで検索をかけるときは、スペースで区切ってください。</p>
+      <form className={styles.searchForm} onSubmit={handleSubmit(submit)}>
         <SearchInput
           placeholder="キーワードを入力"
           fieldname="keyWords"

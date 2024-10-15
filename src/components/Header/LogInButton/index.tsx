@@ -6,14 +6,14 @@ import styles from "./index.module.css"
 export const LogInButton: FC = () => {
   const navigate = useNavigate()
 
-  return(
+  return (
     <Button
       className={styles.button}
       onClick={() => {
         navigate("/login")
       }}
     >
-            ログイン
+      ログイン
     </Button>
   )
 }

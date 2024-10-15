@@ -1,12 +1,9 @@
 import { FC } from "react"
 import { FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form"
 import { At } from "tabler-icons-react"
-import { PreviewAndEditDateTimeField }
-  from "../../../components/PreviewAndInput/PreviewAndEditDateTimeField"
-import { PreviewAndEditField }
-  from "../../../components/PreviewAndInput/PreviewAndEditField"
-import { PreviewAndEditEventPictureField }
-  from "../../../components/PreviewAndInput/PreviewAndEditPictureField"
+import { PreviewAndEditDateTimeField } from "../../../components/PreviewAndInput/PreviewAndEditDateTimeField"
+import { PreviewAndEditField } from "../../../components/PreviewAndInput/PreviewAndEditField"
+import { PreviewAndEditEventPictureField } from "../../../components/PreviewAndInput/PreviewAndEditPictureField"
 import type { Event } from "./../../../states"
 
 interface Props {
@@ -17,13 +14,11 @@ interface Props {
 
 export const EventFormPanel: FC<Props> = ({ event, register, setValue }) => {
   const handlePictureChange = async () => {
-
     // TODO: 処理の内容を書くこと
     console.log("picture change")
   }
 
   const handleCancelButtonClick = async () => {
-
     // TODO: 処理の内容を書くこと
     console.log("cancel button click")
   }

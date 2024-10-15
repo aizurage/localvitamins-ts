@@ -2,8 +2,8 @@ import { supabase } from "../../../../../supabaseClient"
 
 export const deleteEventParticipants = async (eventId: number) => {
   const { error } = await supabase
-    .from('Participants')
+    .from("Participants")
     .delete()
-    .eq('eventID', eventId)
+    .eq("eventID", eventId)
   if (error) throw error
 }

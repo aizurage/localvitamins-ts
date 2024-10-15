@@ -1,8 +1,8 @@
 .field {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .cancelButton {
-    background-color: gray;
+  background-color: gray;
 }

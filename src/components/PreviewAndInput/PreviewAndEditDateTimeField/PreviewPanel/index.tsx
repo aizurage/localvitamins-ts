@@ -7,10 +7,12 @@ interface Props {
 }
 
 export const PreviewPanel: FC<Props> = ({ date, start, end }) => {
-  return(
+  return (
     <>
       <h3>日付: {date}</h3>
-      <p>時間: {start} ~ {end}</p>
+      <p>
+        時間: {start} ~ {end}
+      </p>
     </>
   )
 }

@@ -1,4 +1,4 @@
 export interface ContactForm {
-    title: string;
-    main: string;
+  title: string
+  main: string
 }

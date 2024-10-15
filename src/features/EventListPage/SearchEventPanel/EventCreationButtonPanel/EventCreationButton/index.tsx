@@ -5,14 +5,14 @@ import styles from "./index.module.css"
 
 export const EventCreationButton: FC = () => {
   const navigate = useNavigate()
-  return(
+  return (
     <Button
       className={styles.makeEvent}
       onClick={() => {
         navigate("/eventMaker")
       }}
     >
-            お手伝い作成
+      お手伝い作成
     </Button>
   )
 }

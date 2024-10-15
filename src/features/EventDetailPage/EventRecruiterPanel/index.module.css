@@ -1,8 +1,8 @@
-.eventRecruiterPanelStyle{
-    background-color: "pink"
+.eventRecruiterPanelStyle {
+  background-color: "pink";
 }
 
-.eventRecruiterImageStyle{
-    border-radius: 10rem;
-    min-height: 20vh;
+.eventRecruiterImageStyle {
+  border-radius: 10rem;
+  min-height: 20vh;
 }

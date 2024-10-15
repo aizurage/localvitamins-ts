@@ -10,8 +10,8 @@ export const TableBody: FC<{ participants: Participant[] }> = ({
       {participants.length === 0
         ? "参加者がまだいません。"
         : participants.map((participant) => (
-          <TableBodyItem participant={participant} />
-        ))}
+            <TableBodyItem participant={participant} />
+          ))}
     </tbody>
   )
 }

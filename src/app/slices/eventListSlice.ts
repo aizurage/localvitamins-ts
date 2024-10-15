@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 import { EventPropsForDetailPage } from "../../states"
 
 export interface EventListState {
-    eventlist: EventPropsForDetailPage[]
+  eventlist: EventPropsForDetailPage[]
 }
 
 const initialState: EventListState = {
-  eventlist: []
+  eventlist: [],
 }
 
 const eventListSlice = createSlice({
@@ -15,8 +15,8 @@ const eventListSlice = createSlice({
   reducers: {
     setEventList: (state, action) => {
       state.eventlist = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setEventList } = eventListSlice.actions

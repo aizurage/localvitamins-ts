@@ -6,14 +6,14 @@ import styles from "./index.module.css"
 export const SignUpButton: FC = () => {
   const navigate = useNavigate()
 
-  return(
+  return (
     <Button
       className={styles.button}
       onClick={() => {
         navigate("/serviceTerms_agree")
       }}
     >
-            新規登録
+      新規登録
     </Button>
   )
 }

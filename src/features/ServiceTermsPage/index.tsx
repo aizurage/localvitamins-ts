@@ -7,12 +7,14 @@ interface Props {
 }
 
 export const ServiceTermsPage: FC<Props> = ({ isAgreementNecessary }) => {
-  return(
+  return (
     <>
       <h1>利用規約</h1>
       <ul>
         <li>収集する個人情報について</li>
-        <li className={styles.martList}>ユーザーの氏名、及びメールアドレスを収集します。</li>
+        <li className={styles.martList}>
+          ユーザーの氏名、及びメールアドレスを収集します。
+        </li>
         <li>個人情報使用範囲について</li>
         <li className={styles.martList}>
           イベント企画者が、イベント参加者の情報を確認する際に使用されます。それ以外の用途では使用しません。
@@ -33,7 +35,8 @@ export const ServiceTermsPage: FC<Props> = ({ isAgreementNecessary }) => {
         <li>お問い合わせ先について</li>
         <li className={styles.martList}>
           個人情報の取扱で質問がある場合は、運営チームにメールでお問い合わせください。
-          <br/>メールアドレス:miraikuru0512@gmail.com
+          <br />
+          メールアドレス:miraikuru0512@gmail.com
         </li>
       </ul>
       {isAgreementNecessary && <AgreementConfirmationPanel />}

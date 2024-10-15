@@ -4,7 +4,7 @@ import { setEventPicture } from "../../../../app/slices/eventPictureSlice"
 import styles from "./index.module.css"
 
 interface Props {
-    disabled: boolean
+  disabled: boolean
 }
 
 export const EventPictureInput: FC<Props> = ({ disabled }) => {
@@ -14,7 +14,7 @@ export const EventPictureInput: FC<Props> = ({ disabled }) => {
     if (picture) dispatch(setEventPicture(picture))
   }
 
-  return(
+  return (
     <>
       <h4>お手伝いイメージ画像の選択</h4>
       <input

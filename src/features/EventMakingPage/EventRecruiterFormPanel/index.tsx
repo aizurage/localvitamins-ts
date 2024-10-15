@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const EventRecruiterFormPanel: FC<Props> = ({ register }) => {
-  return(
+  return (
     <>
       <h1>お手伝い募集者情報入力</h1>
       <FormBaseInput
