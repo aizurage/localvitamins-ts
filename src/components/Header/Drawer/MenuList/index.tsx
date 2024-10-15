@@ -12,7 +12,9 @@ export const MenuList: FC = () => {
         <ul>
           <MenuListItem
             onClick={() => {
-              navigate("/serviceTerms", { state: { isAgreementNecessary: false } })
+              navigate("/serviceTerms", {
+                state: { isAgreementNecessary: false }
+              })
             }}
           >
             利用規約(個人情報の取り扱いについて)
