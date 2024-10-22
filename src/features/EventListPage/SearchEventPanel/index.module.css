@@ -1,5 +1,8 @@
 .searchEventPanel {
-  display: flexbox;
-  flex-direction: row;
-  gap: 2vw;
+  display: flex;
+  justify-content: row;
+  align-items: flex-end;
+  button:not(.searchButton){
+    margin: 0 1rem;
+  }
 }

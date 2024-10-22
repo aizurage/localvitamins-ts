@@ -14,7 +14,7 @@ export const SearchEventPanel = () => {
   const [isEventFilterd, setIsEventFilterd] = useState(false)
   const user = useAppSelector((state) => state.user.user)
   return (
-    <div className={styles.SearchEventPanel}>
+    <div className={styles.searchEventPanel}>
       <SearchBar />
       <div>
         {isEventFilterd ? (

@@ -9,7 +9,7 @@ export const EventCreationButton: FC = () => {
     <Button
       className={styles.makeEvent}
       onClick={() => {
-        navigate("/eventMaker")
+        navigate("/eventMaking")
       }}
     >
       お手伝い作成

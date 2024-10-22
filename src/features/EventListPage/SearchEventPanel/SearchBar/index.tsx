@@ -17,9 +17,12 @@ export const SearchBar: FC = () => {
   }
 
   return (
-    <>
-      <p>キーワードは最大３つまで入力できます。</p>
-      <p>複数のキーワードで検索をかけるときは、スペースで区切ってください。</p>
+    <div className={styles.layout}>
+      <p>
+        キーワードは最大３つまで入力できます。
+        <br />
+        複数のキーワードで検索をかけるときは、スペースで区切ってください。
+      </p>
       <form className={styles.searchForm} onSubmit={handleSubmit(submit)}>
         <SearchInput
           placeholder="キーワードを入力"
@@ -28,6 +31,6 @@ export const SearchBar: FC = () => {
         />
         <SearchButton />
       </form>
-    </>
+    </div>
   )
 }
