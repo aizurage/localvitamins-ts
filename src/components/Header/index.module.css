@@ -1,28 +1,19 @@
 .header {
   color: white;
   background-color: olive;
-  height: 100px;
-  display: -webkit-flex;
+  height: 7rem;
   display: flex;
-  -webkit-justify-content: space-around;
   justify-content: space-around;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0%;
-  z-index: 20;
+  align-items: center;
 }
 
 .title {
-  width: 70%;
-  font-size: 50px;
-  text-align: center;
-  top: 50%;
+  font-size: 4rem;
 }
 
 .headerRight {
-  margin-top: 20px;
-  -webkit-justify-content: space-between;
-  justify-content: space-between;
+  display: flex;
+  gap: 1rem;
 }
 
 @media screen and (max-width: 450px) {
