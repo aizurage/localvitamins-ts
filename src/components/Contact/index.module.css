@@ -1,6 +1,12 @@
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+
 .formSubmit {
   color: white;
   background-color: #808000;
-  justify-content: center;
-  align-items: center;
+  margin-top: 1rem;
+  width: 25%;
+  align-self: center;
 }

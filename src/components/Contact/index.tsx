@@ -26,7 +26,7 @@ export default function Contact() {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit(submit)} className={styles.contact}>
       <h3>お問い合わせフォーム</h3>
       <FormBaseInput
         required

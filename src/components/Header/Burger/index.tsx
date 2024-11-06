@@ -7,5 +7,11 @@ interface Props {
 }
 
 export const Burger: FC<Props> = ({ setOpen }) => {
-  return <_Burger onClick={() => setOpen(!open)} className={styles.burger} />
+  return(
+    <_Burger
+      size="xl"
+      onClick={() => setOpen(!open)}
+      className={styles.burger}
+    />
+  )
 }
