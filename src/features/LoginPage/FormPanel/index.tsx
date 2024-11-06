@@ -12,7 +12,7 @@ import { handleLoginDataSubmit } from "../controller/handleLoginDataSubmit"
 import styles from "./index.module.css"
 
 export const FormPanel: FC = () => {
-  const [loading, setLoading] = useState(false)
+  const [ loading, setLoading ] = useState(false)
   const { register, handleSubmit } = useForm()
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -44,7 +44,7 @@ export const FormPanel: FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <form onSubmit={handleSubmit(submit)} className={styles.loginFormPanel}>
       <LoadingOverlay visible={loading} />
       <FormBaseInput
         required={true}
