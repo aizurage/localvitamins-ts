@@ -1,12 +1,12 @@
 import { FC } from "react"
-import { Center } from "@mantine/core"
+import { CenterLayout } from "../../components/Layout/CenterLayout"
 import { FormPanel } from "./FormPanel"
 
 export const RegisterAccountPage: FC = () => {
   return (
-    <Center>
+    <CenterLayout>
       <h1>アカウント登録</h1>
       <FormPanel />
-    </Center>
+    </CenterLayout>
   )
 }
