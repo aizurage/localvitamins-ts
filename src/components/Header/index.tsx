@@ -1,26 +1,36 @@
 import { useState } from "react"
-import { supabase } from "../../supabaseClient"
+import { useNavigate } from "react-router-dom"
+import { useAppSelector } from "../../app/hook"
 import { Burger } from "./Burger"
 import { Drawer } from "./Drawer"
 import { LogInButton } from "./LogInButton"
 import { LogOutButton } from "./LogOutButton"
 import { LogoutConfirmationDialog } from "./LogoutConfirmationDialog"
+import { SignUpButton } from "./SignUpButton"
 import styles from "./index.module.css"
 
 export function Header() {
-  const [dialogOpen, setDialogOpen] = useState(false)
-  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [ dialogOpen, setDialogOpen ] = useState(false)
+  const [ drawerOpen, setDrawerOpen ] = useState(false)
+  const user = useAppSelector(state => state.user).user
+  const navigate = useNavigate()
 
   return (
     <header className={styles.header}>
-      <Burger setOpen={setDrawerOpen} />
-      <p className={styles.title}>Local Vitamins</p>
+      <Burger setOpen={() => setDrawerOpen(true)} />
+      <div
+        onClick={() => navigate("/")}
+        className={styles.title}
+      >
+        Local Vitamins
+      </div>
       <div className={styles.headerRight}>
-        {supabase.auth.getUser() === null ? (
+        {user === null ? (
           <LogInButton />
         ) : (
           <LogOutButton setOpen={setDialogOpen} />
         )}
+        <SignUpButton />
       </div>
       <Drawer open={drawerOpen} setOpen={setDrawerOpen} />
       <LogoutConfirmationDialog open={dialogOpen} setOpen={setDialogOpen} />
