@@ -41,6 +41,7 @@ export default function Contact() {
         placeholder="本文"
         minRows={5}
         fieldname="main"
+        autoSize
         register={register}
       />
       <Button className={styles.formSubmit} type="submit">
