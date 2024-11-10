@@ -10,7 +10,7 @@ export const SignUpButton: FC = () => {
     <Button
       className={styles.button}
       onClick={() => {
-        navigate("/serviceTerms_agree")
+        navigate("/signUp")
       }}
     >
       新規登録
