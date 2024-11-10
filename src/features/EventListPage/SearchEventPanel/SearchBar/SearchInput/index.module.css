@@ -1,3 +1,4 @@
 .searchBar {
   width: 40vw;
+  flex-grow: 1;
 }

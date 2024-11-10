@@ -1,8 +1,3 @@
-.layout {
-  display: flex;
-  flex-direction: column;
-}
-
 .searchForm {
   display: flex;
 }

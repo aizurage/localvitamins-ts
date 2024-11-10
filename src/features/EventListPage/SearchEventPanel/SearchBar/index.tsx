@@ -17,12 +17,12 @@ export const SearchBar: FC = () => {
   }
 
   return (
-    <div className={styles.layout}>
-      <p>
+    <div>
+      <div>
         キーワードは最大３つまで入力できます。
         <br />
         複数のキーワードで検索をかけるときは、スペースで区切ってください。
-      </p>
+      </div>
       <form className={styles.searchForm} onSubmit={handleSubmit(submit)}>
         <SearchInput
           placeholder="キーワードを入力"
